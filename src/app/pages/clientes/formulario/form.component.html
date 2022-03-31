@@ -1,0 +1,345 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+
+<div class="card bg-dark text-white my-2">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+    <form #clienteForm="ngForm">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2 mb-3">Nombre</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.nombre"
+            name="nombre"
+            #nombre="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+          >
+            <div *ngIf="nombre.errors?.['required']">
+              El nombre es requerido
+            </div>
+            <div *ngIf="nombre.errors?.['minlength']">
+              El nombre debe tener al menos 5 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="tipo_documento" class="col-form-label col-sm-2 mb-3"
+          >Tipo Documento</label
+        >
+        <div class="col-sm-4">
+          <select
+            [compareWith]="compararTipoDocumento"
+            class="form-control"
+            [(ngModel)]="cliente.tipo_documento"
+            name="tipo_documento"
+          >
+            <option [ngValue]="undefined">Seleccione un Tipo Documento</option>
+            <option
+              *ngFor="let tipo_documento of tipos_documentos"
+              [ngValue]="tipo_documento"
+            >
+              {{ tipo_documento.nombre }}
+            </option>
+          </select>
+        </div>
+        <label for="documento" class="col-form-label col-sm-2 mb-3"
+          >Documento</label
+        >
+        <div class="col-sm-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.documento"
+            name="documento"
+            #documento="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="documento.invalid && (documento.dirty || documento.touched)"
+          >
+            <div *ngIf="documento.errors?.['required']">
+              El documento es requerido
+            </div>
+            <div *ngIf="documento.errors?.['minlength']">
+              El documento debe tener solo numeros
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="contacto" class="col-form-label col-sm-2 mb-3"
+          >Contacto</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.contacto"
+            name="contacto"
+            #contacto="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="contacto.invalid && (contacto.dirty || contacto.touched)"
+          >
+            <div *ngIf="contacto.errors?.['required']">
+              El contacto es requerido
+            </div>
+            <div *ngIf="contacto.errors?.['minlength']">
+              El contacto debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="cargo" class="col-form-label col-sm-2 mb-3">Cargo</label>
+        <div class="col-sm-4">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.cargo"
+            name="cargo"
+            #cargo="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="cargo.invalid && (cargo.dirty || cargo.touched)"
+          >
+            <div *ngIf="cargo.errors?.['required']">El cargo es requerido</div>
+            <div *ngIf="cargo.errors?.['minlength']">
+              El cargo debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+        <label for="ciudad" class="col-form-label col-sm-2 mb-3">Ciudad</label>
+        <div class="col-sm-3">
+          <select
+            [compareWith]="compararCiudad"
+            class="form-control"
+            [(ngModel)]="cliente.ciudad"
+            name="ciudad"
+          >
+            <option [ngValue]="undefined">Seleccione una Ciudad</option>
+            <option *ngFor="let ciudad of ciudades" [ngValue]="ciudad">
+              {{ ciudad.nombre }}
+            </option>
+          </select>
+        </div>
+        <!--<div class="col-sm-3">
+            <mat-form-field>
+              <input
+              type="text"
+              matInput
+              [formControl]="autocompleteControl"
+              [matAutocomplete]="auto"
+            />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                [displayWith]="mostrarNombre"
+                (optionSelected)="seleccionarCiudad($event)"
+              >
+                <mat-option
+                  *ngFor="let ciudad of ciudadesFiltrados | async"
+                  [value]="ciudad"
+                >
+                  {{ ciudad.ciudad }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>-->
+      </div>
+
+      <div class="form-group row">
+        <label for="direccion" class="col-form-label col-sm-2 mb-3"
+          >Direccion</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.direccion"
+            name="direccion"
+            #direccion="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)"
+          >
+            <div *ngIf="direccion.errors?.['required']">
+              La direccion es requerido
+            </div>
+            <div *ngIf="direccion.errors?.['minlength']">
+              La direccion debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="telefono" class="col-form-label col-sm-2 mb-3"
+          >Telefono 1</label
+        >
+        <div class="col-sm-4">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.telefono"
+            name="telefono"
+            #telefono="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)"
+          >
+            <div *ngIf="telefono.errors?.['required']">
+              El telefono es requerido
+            </div>
+            <div *ngIf="telefono.errors?.['minlength']">
+              El telefono debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+        <label for="telefono1" class="col-form-label col-sm-2 mb-3"
+          >Telefono 2</label
+        >
+        <div class="col-sm-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.telefono1"
+            name="telefono1"
+            #telefono1="ngModel"
+          />
+          <!--required minlength="4"-->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="celular" class="col-form-label col-sm-2 mb-3"
+          >Celular</label
+        >
+        <div class="col-sm-4">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.celular"
+            name="celular"
+            #celular="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="celular.invalid && (celular.dirty || celular.touched)"
+          >
+            <div *ngIf="celular.errors?.['required']">
+              El celular es requerido
+            </div>
+            <div *ngIf="celular.errors?.['minlength']">
+              El celular debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+        <label for="createAt" class="col-form-label col-sm-2 mb-3"
+          >Fecha Ingreso</label
+        >
+        <div class="col-sm-4">
+          <input
+            matInput
+            [matDatepicker]="miDatepicker"
+            class="form-control"
+            [(ngModel)]="cliente.fecha_ingreso"
+            name="fecha_ingreso"
+            style="display: inline; width: 210px"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="miDatepicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #miDatepicker></mat-datepicker>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="email" class="col-form-label col-sm-2 mb-3">Email</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.email"
+            name="email"
+            #email="ngModel"
+          />
+          <!--required minlength="4"-->
+          <div
+            class="alert alert-danger"
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+          >
+            <div *ngIf="email.errors?.['required']">El email es requerido</div>
+            <div *ngIf="email.errors?.['minlength']">
+              El email debe tener un formato valido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="observaciones" class="col-form-label col-sm-2 mb-3"
+          >Observaciones</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.observaciones"
+            name="observaciones"
+            #observaciones="ngModel"
+          />
+          <!--required minlength="4"-->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="observaciones" class="col-form-label col-sm-2 mb-3"></label>
+        <div class="col-sm-9 d-grid gap-2">
+          <button
+            class="btn btn-success"
+            role="button"
+            (click)="create()"
+            *ngIf="!cliente.id; else elseBlock"
+            [disabled]="!clienteForm.form.valid"
+          >
+            Crear
+          </button>
+          <ng-template #elseBlock>
+            <button
+              class="btn btn-success"
+              role="button"
+              (click)="update()"
+              [disabled]="!clienteForm.form.valid"
+            >
+              Editar
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
