@@ -4,12 +4,12 @@ import { ClienteService } from './cliente.service';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
-import { ModalService } from '../../modal.service';
+import { ModalService } from '../../../modal.service';
 //import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'ngx-clientes',
-  template: `<router-outlet></router-outlet>`,
+  templateUrl: './clientes.component.html',
 })
 export class ClientesComponent implements OnInit {
 

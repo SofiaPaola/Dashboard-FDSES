@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import { Ciudad } from '../../ciudad';
-import { TipoDocumento } from '../../tipo_documento';
-import { Clima } from '../../clima';
+import { Ciudad } from '../../../ciudad';
+import { TipoDocumento } from '../../../tipo_documento';
+import { Clima } from '../../../clima';
 
 @Injectable({
   providedIn: 'root',

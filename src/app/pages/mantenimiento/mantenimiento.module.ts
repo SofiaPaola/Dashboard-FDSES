@@ -1,4 +1,8 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   NbActionsModule,
@@ -21,9 +25,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { ClientesComponent } from './clientes.component';
-import { DetalleComponent } from './detalle/detalle.component';
-import { FormComponent } from './formulario/form.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { DetalleComponent } from './clientes/detalle/detalle.component';
+import { FormComponent } from './clientes/formulario/form.component';
+import { MantenimientoComponent } from './mantenimiento.component';
+import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
 
 @NgModule({
   imports: [
@@ -35,6 +41,7 @@ import { FormComponent } from './formulario/form.component';
     NbActionsModule,
     NbRadioModule,
     NbSelectModule,
+    NbUserModule,
     NbListModule,
     NbIconModule,
     NbButtonModule,
@@ -45,13 +52,15 @@ import { FormComponent } from './formulario/form.component';
     MatInputModule,
     MatFormFieldModule,
     AngularEmojisModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MantenimientoRoutingModule
   ],
   declarations: [
+    MantenimientoComponent,
     ClientesComponent,
     FormComponent,
-    DetalleComponent
+    DetalleComponent,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
-export class ClientesModule {}
+export class MantenimientoModule {}

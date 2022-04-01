@@ -2,14 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from '../../../modal.service';
+import { ModalService } from '../../../../modal.service';
 /*import { AuthService } from '../../usuarios/auth.service';
 import { FacturaService } from '../../facturas/services/factura.service';
 import { Factura } from '../../facturas/models/factura';*/
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'ngx-detalle-cliente',
+  selector: 'detalle-cliente',
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.css']
 })

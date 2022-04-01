@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MENU_ITEMS } from './pages-menu';
 
 @Component({
-  selector: 'app-pages',
+  selector: 'ngx-pages',
   styleUrls: ['pages.component.scss'],
   template: `
     <ngx-one-column-layout>

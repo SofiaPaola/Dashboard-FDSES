@@ -11,9 +11,9 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: 'clientes',
-      loadChildren: () => import('./clientes/clientes.module')
-        .then(m => m.ClientesModule),
+      path: 'mantenimiento',
+      loadChildren: () => import('./mantenimiento/mantenimiento.module')
+        .then(m => m.MantenimientoModule),
     },
   ],
 }];

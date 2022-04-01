@@ -6,9 +6,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'settings-2-outline',
     children: [
       {
-        title: 'Cliente',
+        title: 'Clientes',
         icon: 'people-outline',
-        link: '/pages/clientes'
+        link: '/pages/mantenimiento/clientes'
       }
     ]
   },
