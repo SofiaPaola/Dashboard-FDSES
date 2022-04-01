@@ -1,0 +1,52 @@
+<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
+  <div style="display: block" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">{{ titulo }}</h3>
+          <button
+            (click)="cerrarModal()"
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <ul *ngIf="vendedor" class="list-group text-dark mb-3">
+                  <li class="list-group-item active">{{ vendedor.nombre }}</li>
+                  <li class="list-group-item">{{vendedor.tipo_documento.nombre}}</li>
+                  <li class="list-group-item">{{vendedor.documento}}</li>
+                  <li class="list-group-item">{{vendedor.direccion}}</li>
+                  <li class="list-group-item">{{vendedor.telefono}}</li>
+                  <li class="list-group-item">{{vendedor.celular}}</li>
+                  <li class="list-group-item">{{vendedor.email}}</li>
+                  <li class="list-group-item">{{vendedor.fecha_ingreso | date: "fullDate"}}</li>
+                  <li class="list-group-item">{{vendedor.ciudad.nombre}}</li>
+                  <li class="list-group-item">
+                    Ciudad: {{ vendedor.ciudad.nombre }},
+                    Departamento: {{ vendedor.ciudad.departamento.departamento }},
+                    Clima: {{ vendedor.ciudad.clima.nombre }},
+                    Altitud: {{ vendedor.ciudad.altitud}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              (click)="cerrarModal()"
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

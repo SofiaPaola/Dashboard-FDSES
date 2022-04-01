@@ -30,6 +30,8 @@ import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { FormComponent } from './clientes/formulario/form.component';
 import { MantenimientoComponent } from './mantenimiento.component';
 import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { VendedoresComponent } from './vendedores/vendedores.component';
 
 @NgModule({
   imports: [
@@ -60,6 +62,8 @@ import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
     ClientesComponent,
     FormComponent,
     DetalleComponent,
+    ProveedoresComponent,
+    VendedoresComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

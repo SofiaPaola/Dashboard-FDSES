@@ -1,0 +1,102 @@
+<nb-card>
+  <detalles-vendedor
+    *ngIf="vendedorSeleccionado"
+    [vendedor]="vendedorSeleccionado"
+  ></detalles-vendedor>
+  <nb-card-body>
+    <h2 class="card-title" style="text-align: center">Listado de Vendedores</h2>
+    <div class="my-2 text-left">
+      <button
+        class="btn btn-rounded btn-primary"
+        type="button"
+        [routerLink]="['/vendedores/formVendedor']"
+      >
+        Crear Vendedor
+      </button>
+    </div>
+    <div *ngIf="vendedores?.length == 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <table class="table" *ngIf="vendedores?.length > 0">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Documento</th>
+          <th>Email</th>
+          <th>Telefono 1</th>
+          <th>Celular</th>
+          <th>Direccion</th>
+          <th>Crear Factura</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let vendedor of vendedores
+              | paginate: { itemsPerPage: 8, currentPage: page }
+          "
+        >
+          <td>
+            <button
+              type="button"
+              name="ver"
+              (click)="abrirModal(vendedor)"
+              class="btn btn-primary btn-sm"
+            >
+              {{ vendedor.id }}
+            </button>
+          </td>
+          <td>{{ vendedor.nombre }}</td>
+          <td>{{ vendedor.documento }}</td>
+          <td>{{ vendedor.email }}</td>
+          <td>{{ vendedor.telefono }}</td>
+          <td>{{ vendedor.celular }}</td>
+          <td>{{ vendedor.direccion }}</td>
+          <td>
+            <button
+              
+              type="button"
+              name="crear Factura"
+              class="btn btn-sm"
+            >
+              <angular-emojis
+                [name]="'page_facing_up'"
+                size="20"
+              ></angular-emojis>
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              name="editar"
+              [routerLink]="['/vendedores/formVendedor', vendedor.id]"
+              class="btn btn-sm"
+            >
+              <angular-emojis [name]="'pencil2'" size="20"></angular-emojis>
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              name="eliminar"
+              (click)="delete(vendedor)"
+              class="btn btn-sm"
+            >
+              <angular-emojis [name]="'wastebasket'" size="20"></angular-emojis>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+    >
+    </pagination-controls>
+  </nb-card-body>
+</nb-card>

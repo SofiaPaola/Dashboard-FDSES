@@ -5,11 +5,13 @@ import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { ModalService } from '../../../modal.service';
+import { LocalDataSource } from 'ng2-smart-table';
 //import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'ngx-clientes',
   templateUrl: './clientes.component.html',
+  styleUrls: ['./clientes.component.scss']
 })
 export class ClientesComponent implements OnInit {
 
@@ -46,6 +48,8 @@ export class ClientesComponent implements OnInit {
       });
     });
   }
+
+  source: LocalDataSource = new LocalDataSource();
 
   delete(cliente: Cliente): void {
     const swalfire = swal.mixin({
