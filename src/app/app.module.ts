@@ -1,8 +1,11 @@
 import {
   NgModule,
+  LOCALE_ID,
   CUSTOM_ELEMENTS_SCHEMA,
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +31,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 
+registerLocaleData(localeES, 'es');
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -55,7 +59,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularEmojisModule,
     NgxPaginationModule,
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' },],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

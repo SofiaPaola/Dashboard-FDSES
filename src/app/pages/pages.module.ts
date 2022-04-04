@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NbMenuModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
@@ -7,6 +7,10 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { AngularEmojisModule } from 'angular-emojis';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es';
+
+registerLocaleData(localeES, 'es');
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -15,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AngularEmojisModule,
     NgxPaginationModule
   ],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' },],
   declarations: [PagesComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]
 })

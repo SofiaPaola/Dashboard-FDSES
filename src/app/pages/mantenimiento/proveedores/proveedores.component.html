@@ -12,7 +12,7 @@
       <button
         class="btn btn-rounded btn-primary"
         type="button"
-        [routerLink]="['/proveedores/formProveedor']"
+        [routerLink]="['/proveedores/formulario/formProveedor']"
       >
         Crear Proveedor
       </button>
@@ -20,76 +20,80 @@
     <div *ngIf="proveedores?.length == 0" class="alert alert-info">
       No hay registros en la base de datos!
     </div>
-    <table class="table" *ngIf="proveedores?.length > 0">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Documento</th>
-          <th>Email</th>
-          <th>Telefono 1</th>
-          <th>Celular</th>
-          <th>Direccion</th>
-          <!--<th *ngIf="authService.hasRole('ROLE_ADMIN')">Crear Factura</th>
+    <ng2-smart-table [source]="source">
+      <table class="table" *ngIf="proveedores?.length > 0">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Celular</th>
+            <th>Direccion</th>
+            <!--<th *ngIf="authService.hasRole('ROLE_ADMIN')">Crear Factura</th>
                     <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
                     <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>-->
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="
-            let proveedor of proveedores
-              | paginate: { itemsPerPage: 8, currentPage: page }
-          "
-        >
-          <td>
-            <button
-              type="button"
-              name="ver"
-              (click)="abrirModal(proveedor)"
-              class="btn btn-primary btn-sm"
-            >
-              {{ proveedor.id }}
-            </button>
-          </td>
-          <td>{{ proveedor.nombre }}</td>
-          <td>{{ proveedor.documento }}</td>
-          <td>{{ proveedor.email }}</td>
-          <td>{{ proveedor.telefono }}</td>
-          <td>{{ proveedor.celular }}</td>
-          <td>{{ proveedor.direccion }}</td>
-          <td>
-            <button type="button" name="" class="btn btn-sm">
-              <angular-emojis
-                [name]="'page_facing_up'"
-                size="20"
-              ></angular-emojis>
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              name="editar"
-              [routerLink]="['/proveedores/formProveedor', proveedor.id]"
-              class="btn btn-sm"
-            >
-              <angular-emojis [name]="'pencil2'" size="20"></angular-emojis>
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              name="eliminar"
-              (click)="delete(proveedor)"
-              class="btn btn-sm"
-            >
-              <angular-emojis [name]="'wastebasket'" size="20"></angular-emojis>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let proveedor of proveedores
+                | paginate: { itemsPerPage: 8, currentPage: page }
+            "
+          >
+            <td>
+              <button
+                type="button"
+                name="ver"
+                (click)="abrirModal(proveedor)"
+                class="btn btn-primary btn-sm"
+              >
+                {{ proveedor.id }}
+              </button>
+            </td>
+            <td>{{ proveedor.nombre }}</td>
+            <td>{{ proveedor.documento }}</td>
+            <td>{{ proveedor.email }}</td>
+            <td>{{ proveedor.telefono }}</td>
+            <td>{{ proveedor.celular }}</td>
+            <td>{{ proveedor.direccion }}</td>
+            <td>
+              <button type="button" name="" class="btn btn-sm">
+                <angular-emojis
+                  [name]="'page_facing_up'"
+                  size="20"
+                ></angular-emojis>
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                name="editar"
+                [routerLink]="['/proveedores/formProveedor', proveedor.id]"
+                class="btn btn-sm"
+              >
+                <angular-emojis [name]="'pencil2'" size="20"></angular-emojis>
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                name="eliminar"
+                (click)="delete(proveedor)"
+                class="btn btn-sm"
+              >
+                <angular-emojis
+                  [name]="'wastebasket'"
+                  size="20"
+                ></angular-emojis>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng2-smart-table>
     <pagination-controls
       (pageChange)="page = $event"
       previousLabel="Anterior"

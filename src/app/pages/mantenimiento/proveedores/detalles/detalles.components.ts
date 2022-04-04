@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Proveedor } from '../proveedor';
 import { ProveedorService } from '../proveedor.service';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from '../../../modal.service';
+import { ModalService } from '../../../../modal.service';
 
 @Component({
   selector: 'detalle-proveedor',
@@ -11,7 +11,7 @@ import { ModalService } from '../../../modal.service';
 })
 export class DetallesComponents implements OnInit {
 
-  @Input() proveedor: Proveedor;
+  @Input() proveedor!: Proveedor;
   titulo: string = "Detalle del Proveedor";
 
   constructor(private proveedorService: ProveedorService,

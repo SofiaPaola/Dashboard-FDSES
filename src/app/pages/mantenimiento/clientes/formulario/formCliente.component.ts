@@ -9,16 +9,18 @@ import { Cliente } from '../cliente';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';*/
+import { Departamento } from '../../../../departamento';
 
 @Component({
   selector: 'ngx-from',
-  templateUrl: './form.component.html',
+  templateUrl: './formCliente.component.html',
 })
-export class FormComponent implements OnInit {
+export class FormClienteComponent implements OnInit {
   public cliente: Cliente = new Cliente();
 
   ciudades!: Ciudad[];
   tipos_documentos!: TipoDocumento[];
+  departamentos!: Departamento[];
   titulo: string = 'Crear Cliente';
 
   //autocompleteControl = new FormControl();
@@ -45,11 +47,16 @@ export class FormComponent implements OnInit {
     this.clienteService
       .getCiudades()
       .subscribe((ciudades) => (this.ciudades = ciudades));
+
     this.clienteService
       .getTipoDocumento()
       .subscribe(
         (tipos_documentos) => (this.tipos_documentos = tipos_documentos)
       );
+
+    this.clienteService.getDepartamento().subscribe(
+      (departamentos) => (this.departamentos = departamentos)
+    );
 
     /*this.ciudadesFiltrados = this.autocompleteControl.valueChanges.pipe(
       map(value => typeof value === 'string' ? value : value.nombre),

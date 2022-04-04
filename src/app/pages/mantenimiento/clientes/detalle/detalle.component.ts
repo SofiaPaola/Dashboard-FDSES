@@ -3,9 +3,9 @@ import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute } from '@angular/router';
 import { ModalService } from '../../../../modal.service';
-/*import { AuthService } from '../../usuarios/auth.service';
+//import { AuthService } from '../../usuarios/auth.service';
 import { FacturaService } from '../../facturas/services/factura.service';
-import { Factura } from '../../facturas/models/factura';*/
+import { Factura } from '../../facturas/models/factura';
 import swal from 'sweetalert2';
 
 @Component({
@@ -23,16 +23,16 @@ export class DetalleComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     //private authService:AuthService,
     public modalService: ModalService,
-    //public facturaService: FacturaService
+    public facturaService: FacturaService
     ) { }
 
   ngOnInit(): void { }
 
-  cerrarModal() {
+  cerrarModalDetalle() {
     this.modalService.cerrarModal();
   }
 
-  /*delete(factura: Factura): void{
+  delete(factura: Factura): void{
     const swalfire = swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -66,7 +66,7 @@ export class DetalleComponent implements OnInit {
         )
       }
     });
-  }*/
+  }
 
 }
 

@@ -5,7 +5,7 @@
         <div class="modal-header">
           <h3 class="modal-title">{{ titulo }}</h3>
           <button
-            (click)="cerrarModal()"
+            (click)="cerrarModalDetalle()"
             type="button"
             class="close"
             data-dismiss="modal"
@@ -34,7 +34,7 @@
                   </li>
                   <li class="list-group-item">
                     Ciudad: {{ cliente.ciudad.nombre }},
-                    Departamento: {{ cliente.ciudad.id_departamento.departamento }},
+                    Departamento: {{ cliente.ciudad.id_departamento.nombre }},
                     Clima: {{ cliente.ciudad.clima.nombre }},
                     Altitud: {{cliente.ciudad.altitud}}
                   </li>
@@ -73,7 +73,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!--<tr *ngFor="let factura of cliente.facturas">
+                    <tr *ngFor="let factura of cliente.facturas">
                       <td>{{ factura.id }}</td>
                       <td>{{ factura.descripcion }}</td>
                       <td>{{ factura.createAt }}</td>
@@ -87,7 +87,7 @@
                           Ver
                         </button>
                       </td>
-                      <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                      <td>
                         <button
                           class="btn btn-danger btn-sm"
                           type="button"
@@ -96,7 +96,7 @@
                           Eliminar
                         </button>
                       </td>
-                    </tr>-->
+                    </tr>
                   </tbody>
                 </table>
               </div>

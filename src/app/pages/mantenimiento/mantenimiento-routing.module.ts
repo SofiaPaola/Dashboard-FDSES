@@ -1,5 +1,6 @@
 import {
   NgModule,
+  LOCALE_ID, 
   CUSTOM_ELEMENTS_SCHEMA,
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
@@ -8,6 +9,14 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { MantenimientoComponent } from './mantenimiento.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { VendedoresComponent } from './vendedores/vendedores.component';
+import { FormProveedorComponent } from './proveedores/formulario/formProveedor.component';
+import { FormVendedorComponent } from './vendedores/formulario/formVendedor.component';
+
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es';
+import { FormClienteComponent } from './clientes/formulario/formCliente.component';
+
+registerLocaleData(localeES, 'es');
 
 const routes: Routes = [
   {
@@ -17,15 +26,33 @@ const routes: Routes = [
       {
         path: 'clientes',
         component: ClientesComponent,
+        children: [
+          {
+            path: 'formulario/formCliente',
+            component: FormClienteComponent,
+          },
+        ],
       },
       {
         path: 'proveedores',
-        component: ProveedoresComponent
+        component: ProveedoresComponent,
+        children: [
+          {
+            path: 'formproveedor',
+            component: FormProveedorComponent
+          }
+        ]
       },
       {
         path: 'vendedores',
         component: VendedoresComponent,
-      }
+        children: [
+          {
+            path: 'formvendedor',
+            component: FormVendedorComponent
+          }
+        ]
+      },
     ],
   },
 ];
@@ -33,6 +60,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' },],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class MantenimientoRoutingModule {}

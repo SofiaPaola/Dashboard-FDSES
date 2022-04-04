@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import {
   NbAuthComponent,
@@ -8,6 +8,10 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es';
+
+registerLocaleData(localeES, 'es');
 
 export const routes: Routes = [
   {
@@ -55,6 +59,7 @@ const config: ExtraOptions = {
 
 
 @NgModule({
+  providers: [{ provide: LOCALE_ID, useValue: 'es' },],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]

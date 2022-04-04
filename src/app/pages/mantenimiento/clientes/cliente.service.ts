@@ -7,6 +7,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { Ciudad } from '../../../ciudad';
 import { TipoDocumento } from '../../../tipo_documento';
 import { Clima } from '../../../clima';
+import { Departamento } from '../../../departamento';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,10 @@ export class ClienteService {
 
   getClima(): Observable<Clima[]> {
     return this.http.get<Clima[]>(this.urlEndPoint + '/climas');
+  }
+
+  getDepartamento(): Observable<Departamento[]> {
+    return this.http.get<Departamento[]>(this.urlEndPoint + '/departamento');
   }
 
   getClientes(): Observable<Cliente[]> {
@@ -75,7 +80,7 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
       catchError((e) => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/clientes']);
+          this.router.navigate(['/mantenimeineto/clientes']);
           console.error(e.error.mensaje);
         }
         return throwError(e);

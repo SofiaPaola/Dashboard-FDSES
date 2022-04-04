@@ -10,7 +10,7 @@
         <button
           class="btn btn-rounded btn-primary"
           type="button"
-          [routerLink]="['pagaes/mantenimiento/clientes/formulario/form']"
+          [routerLink]="['formulario/formCliente']"
         >
           Crear Cliente
         </button>
@@ -41,14 +41,14 @@
           <tr
             *ngFor="
               let cliente of clientes
-                | paginate: { itemsPerPage: 4, currentPage: page }
+                | paginate: { itemsPerPage: 10, currentPage: page }
             "
           >
             <td>
               <button
                 type="button"
                 name="ver"
-                (click)="abrirModal(cliente)"
+                (click)="abrirModalDetalle(cliente)"
                 class="btn btn-primary btn-sm"
               >
                 {{ cliente.id }}
