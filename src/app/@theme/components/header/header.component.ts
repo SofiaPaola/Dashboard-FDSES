@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Log out' } ];
+  userMenu = [ { title: 'Cerrar Sesion' } ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -90,5 +90,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  logout(): void{
+    //let username = this.authService.usuario.nombre;
+    //this.authService.logout();
+    //swal.fire('Logout', `Adios ${username}, has cerrado sesion correctamente`, 'success');
+    //this.router.navigate(['/login']);
   }
 }

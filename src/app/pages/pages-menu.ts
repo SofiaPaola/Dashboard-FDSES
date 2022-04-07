@@ -8,14 +8,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Clientes',
         icon: 'people-outline',
-        link: '/pages/mantenimiento/clientes',
-        //children: [
-        //  {
-        //    title: 'Nuevo Cliente',
-        //    icon: 'person-add-outline',
-        //    link: '/pages/mantenimiento/clientes/formualrio/form'
-        //  }
-        //]
+        link: '/pages/mantenimiento/clientes',       
       },
       {
         title: 'Proveedores',
@@ -23,7 +16,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/mantenimiento/proveedores'
       },
       {
-        title: `Vendedores`,
+        title: 'Vendedores',
         icon: 'shopping-cart-outline',
         link: '/pages/mantenimiento/vendedores'
       }

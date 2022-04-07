@@ -25,8 +25,6 @@ const routes: Routes = [{
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    AngularEmojisModule,
-    NgxPaginationModule
   ],
   exports: [ RouterModule ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' },],

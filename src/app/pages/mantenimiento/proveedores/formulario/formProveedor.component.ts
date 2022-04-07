@@ -3,8 +3,8 @@ import { Proveedor } from '../proveedor';
 import swal from 'sweetalert2';
 import { ProveedorService } from '../proveedor.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Ciudad } from '../../../../ciudad';
-import { TipoDocumento } from '../../../../tipo_documento';
+import { Ciudad } from '../../ciudad';
+import { TipoDocumento } from '../../tipo_documento';
 
 @Component({
   selector: 'app-from',

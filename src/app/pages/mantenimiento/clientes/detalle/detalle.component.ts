@@ -1,19 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from '../../../../modal.service';
+import { ModalService } from '../../modal.service';
 //import { AuthService } from '../../usuarios/auth.service';
 import { FacturaService } from '../../facturas/services/factura.service';
 import { Factura } from '../../facturas/models/factura';
 import swal from 'sweetalert2';
+import { NbDialogRef } from '@nebular/theme';
 
 @Component({
   selector: 'detalle-cliente',
   templateUrl: './detalle.component.html',
-  styleUrls: ['./detalle.component.css']
+  styleUrls: ['./detalle.component.scss']
 })
-export class DetalleComponent implements OnInit {
+export class DetalleComponent {
 
   @Input() cliente!: Cliente;
   titulo: string = "Detalle del Cliente";
@@ -23,7 +24,8 @@ export class DetalleComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     //private authService:AuthService,
     public modalService: ModalService,
-    public facturaService: FacturaService
+    public facturaService: FacturaService,
+    protected ref: NbDialogRef<DetalleComponent>
     ) { }
 
   ngOnInit(): void { }
@@ -67,6 +69,16 @@ export class DetalleComponent implements OnInit {
       }
     });
   }
+
+  //constructor(protected ref: NbDialogRef<DetalleComponent>) {}
+
+  dismiss() {
+    this.ref.close();
+  }
+
+  //submit(name: string) {
+  //  this.ref.close(name);
+  //}
 
 }
 

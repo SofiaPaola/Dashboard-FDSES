@@ -13,8 +13,8 @@ import {
   NbUserModule,
   NbRadioModule,
   NbSelectModule,
-  NbListModule,
   NbIconModule,
+  NbListModule,
 } from '@nebular/theme';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';

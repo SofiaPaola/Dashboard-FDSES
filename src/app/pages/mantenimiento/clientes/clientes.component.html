@@ -1,4 +1,6 @@
 <nb-card>
+  <!--<ngx-form *ngIf="nuevoCliente" [clientes]="nuevoCliente"></ngx-form>-->
+
   <detalle-cliente
     *ngIf="clienteSeleccionado"
     [cliente]="clienteSeleccionado"
@@ -7,22 +9,18 @@
   <nb-card-body>
     <h2 class="card-title" style="text-align: center">Listado de Clientes</h2>
     <div class="my-2 text-left">
-        <button
-          class="btn btn-rounded btn-primary"
-          type="button"
-          [routerLink]="['formulario/formCliente']"
-        >
-          Crear Cliente
-        </button>
+      <nb-icon
+        icon="plus-outline"
+        type="button"
+        [routerLink]="['formulario/formCliente']"
+        ><!-- [routerLink]="['formCliente']" (click)="abrirModalNuevoCliente(clientes)"-->
+      </nb-icon>
     </div>
     <div *ngIf="clientes?.length == 0" class="alert alert-info">
       No hay registros en la base de datos!
     </div>
-    <ng2-smart-table [source]="source">
-      <table
-        class="table"
-        *ngIf="clientes?.length > 0"
-      >
+    <ng2-smart-table  [source]="source">
+      <table class="table" *ngIf="clientes?.length > 0">
         <thead>
           <tr>
             <th>Id</th>
@@ -45,11 +43,8 @@
             "
           >
             <td>
-              <button
-                type="button"
-                name="ver"
-                (click)="abrirModalDetalle(cliente)"
-                class="btn btn-primary btn-sm"
+              <button nbButton
+              (click)="open()"
               >
                 {{ cliente.id }}
               </button>
@@ -61,40 +56,33 @@
             <td>{{ cliente.celular }}</td>
             <td>{{ cliente.direccion }}</td>
             <td>
-              <button
+              <nb-icon
+                icon="file-add-outline"
                 type="button"
                 name=""
                 [routerLink]="['/facturas/form', cliente.id]"
-                class="btn btn-sm"
+                class="factura"
               >
-                <angular-emojis
-                  [name]="'page_facing_up'"
-                  size="20"
-                ></angular-emojis>
-              </button>
+              </nb-icon>
             </td>
             <td>
-              <button
+              <nb-icon
+                icon="edit-2-outline"
                 type="button"
                 name="editar"
-                [routerLink]="['/clientes/form', cliente.id]"
-                class="btn btn-sm"
+                [routerLink]="['formulario/formCliente/:id', cliente.id]"
+                class="editar"
               >
-                <angular-emojis [name]="'pencil2'" size="20"></angular-emojis>
-              </button>
+              </nb-icon>
             </td>
             <td>
-              <button
+              <nb-icon
+                icon="trash-outline"
                 type="button"
                 name="eliminar"
                 (click)="delete(cliente)"
-                class="btn btn-sm"
-              >
-                <angular-emojis
-                  [name]="'wastebasket'"
-                  size="20"
-                ></angular-emojis>
-              </button>
+                class="eliminar"
+              ></nb-icon>
             </td>
           </tr>
         </tbody>

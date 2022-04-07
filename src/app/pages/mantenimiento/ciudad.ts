@@ -4,7 +4,7 @@ import { Departamento } from './departamento';
 export class Ciudad {
     id!: number;
     nombre!: string;
-    id_departamento!: Departamento;
+    departamento!: Departamento;
     altitud!: string;
     clima!: Clima;
 }

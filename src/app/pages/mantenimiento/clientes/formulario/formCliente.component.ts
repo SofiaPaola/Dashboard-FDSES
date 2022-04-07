@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
-import { ClienteService } from '../cliente.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Ciudad } from '../../../../ciudad';
-import { TipoDocumento } from '../../../../tipo_documento';
-import { Cliente } from '../cliente';
+import { Ciudad } from '../../ciudad';
+import { TipoDocumento } from '../../tipo_documento';
 /*import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';*/
-import { Departamento } from '../../../../departamento';
-
+import { Departamento } from '../../departamento';
+import { ModalService } from '../../modal.service';
+import { LocalDataSource } from 'ng2-smart-table';
+import { ClienteService } from '../cliente.service';
+import { Cliente } from '../cliente';
 @Component({
-  selector: 'ngx-from',
+  selector: 'ngx-form',
   templateUrl: './formCliente.component.html',
+  styleUrls: ['./formCliente.component.scss']
 })
 export class FormClienteComponent implements OnInit {
   public cliente: Cliente = new Cliente();
@@ -31,8 +33,15 @@ export class FormClienteComponent implements OnInit {
   constructor(
     private clienteService: ClienteService,
     private router: Router,
+    public modalService: ModalService,
     private activatedRoute: ActivatedRoute
   ) {}
+
+  cerrarModalNuevoCliente() {
+    this.modalService.cerrarModalNuevo();
+  }
+
+  source: LocalDataSource = new LocalDataSource();
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: any) => {
@@ -95,7 +104,7 @@ export class FormClienteComponent implements OnInit {
     console.log(this.cliente);
     this.clienteService.create(this.cliente).subscribe(
       (cliente) => {
-        this.router.navigate(['/clientes']);
+        this.router.navigate(['/pages/mantenimiento/clientes']);
         swal.fire(
           'Nuevo cliente',
           `El cliente ${cliente.nombre} ha sido creado con éxito`,
@@ -115,7 +124,7 @@ export class FormClienteComponent implements OnInit {
     //this.cliente.facturas = null;
     this.clienteService.update(this.cliente).subscribe(
       (json) => {
-        this.router.navigate(['/clientes']);
+        this.router.navigate(['/pages/matenimiento/clientes']);
         swal.fire(
           'Cliente Actualizado',
           `${json.mensaje}: ${json.cliente.nombre}`,

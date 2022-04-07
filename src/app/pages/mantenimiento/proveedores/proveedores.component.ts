@@ -4,7 +4,7 @@ import { ProveedorService } from './proveedor.service';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
-import { ModalService } from '../../../modal.service';
+import { ModalService } from '../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
 //import { AuthService } from '../usuarios/auth.service';
 

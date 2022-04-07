@@ -1,5 +1,5 @@
-import { TipoDocumento } from "../../../tipo_documento";
-import { Ciudad } from "../../../ciudad";
+import { TipoDocumento } from "../tipo_documento";
+import { Ciudad } from "../ciudad";
 export class Vendedor {
     id!: number;
     documento!: string;
@@ -10,8 +10,8 @@ export class Vendedor {
     email!: string;
     fecha_ingreso!: string;
     activo!: string;
-    ciudad!: Ciudad;
-    tipo_documento!: TipoDocumento;
+    id_ciudad!: Ciudad;
+    id_tipo_documento!: TipoDocumento;
     observaciones!: string;
 
 }

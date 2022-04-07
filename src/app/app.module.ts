@@ -18,6 +18,8 @@ import {
   NbDialogModule,
   NbWindowModule,
   NbToastrModule,
+  NbCardModule,
+  NbListModule,
   NbChatModule,
 } from '@nebular/theme';
 import { CoreModule } from './@core/core.module';
@@ -38,6 +40,8 @@ registerLocaleData(localeES, 'es');
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NbCardModule,
+    NbListModule,
     AppRoutingModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

@@ -1,29 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
-import { ModalService } from '../../../modal.service';
+import { ModalService } from '../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
 //import { AuthService } from '../usuarios/auth.service';
+import { DetalleComponent } from './detalle/detalle.component';
+import { NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-clientes',
   templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.scss']
+  styleUrls: ['./clientes.component.scss'],
 })
 export class ClientesComponent implements OnInit {
-
   clientes: any = Cliente;
   page!: number;
   clienteSeleccionado!: Cliente;
+  nuevoCliente!: Cliente;
 
   constructor(
     private clienteService: ClienteService,
     private activatedRoute: ActivatedRoute,
     //public authService: AuthService,
-    public modalService: ModalService
+    public modalService: ModalService,
+    private dialogService: NbDialogService
   ) {}
 
   ngOnInit(): void {
@@ -40,13 +43,22 @@ export class ClientesComponent implements OnInit {
       .subscribe((clientes) => (this.clientes = clientes));
 
     this.modalService.notificarUpload.subscribe((cliente) => {
-      this.clientes = this.clientes.map((clienteOriginal: { id: any; }) => {
+      this.clientes = this.clientes.map((clienteOriginal: { id: any }) => {
         if (cliente.id == clienteOriginal.id) {
           clienteOriginal.id = cliente.id;
         }
         return clienteOriginal;
       });
     });
+
+    //this.modalService.notificarNew.subscribe((cliente) => {
+    //  this.clientes = this.clientes.map((clienteNuevo: { id: any }) => {
+    //    if (cliente.id == clienteNuevo.id) {
+    //      clienteNuevo.id = cliente.id;
+    //    }
+    //    return clienteNuevo;
+    //  });
+    //});
   }
 
   source: LocalDataSource = new LocalDataSource();
@@ -75,7 +87,9 @@ export class ClientesComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           this.clienteService.delete(cliente.id).subscribe((response) => {
-            this.clientes = this.clientes.filter((cli: Cliente) => cli !== cliente);
+            this.clientes = this.clientes.filter(
+              (cli: Cliente) => cli !== cliente
+            );
             swal.fire(
               'Cliente Eliminado',
               `Cliente ${cliente.nombre} eliminado con éxito.`,
@@ -86,8 +100,19 @@ export class ClientesComponent implements OnInit {
       });
   }
 
-  abrirModalDetalle(cliente: Cliente) {
-    this.clienteSeleccionado = cliente;
-    this.modalService.abrirModal();
+  abrirModalNuevoCliente(clientes: Cliente) {
+    this.nuevoCliente = clientes;
+    this.modalService.abrirModalNuevo();
   }
+
+  
+
+  open() {
+    this.dialogService.open(DetalleComponent, {
+      context: {
+        titulo: 'Detalle Cliente',
+      },
+    });
+  }
+
 }

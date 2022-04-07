@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Vendedor } from '../vendedor';
 import { VendedorService } from '../vendedor.service';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from '../../../../modal.service';
+import { ModalService } from '../../modal.service';
 //import { AuthService } from '../../../usuarios/auth.service';
 
 @Component({

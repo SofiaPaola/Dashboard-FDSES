@@ -4,24 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import { Ciudad } from '../../../ciudad';
-import { TipoDocumento } from '../../../tipo_documento';
-import { Clima } from '../../../clima';
-import { Departamento } from '../../../departamento';
+import { Ciudad } from '../ciudad';
+import { TipoDocumento } from '../tipo_documento';
+import { Clima } from '../clima';
+import { Departamento } from '../departamento';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClienteService {
-  
+
   private urlEndPoint: string = 'http://localhost:8080/api/clientes';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   getTipoDocumento(): Observable<TipoDocumento[]> {
-    return this.http.get<TipoDocumento[]>(
-      this.urlEndPoint + '/tipos_documentos'
-    );
+    return this.http.get<TipoDocumento[]>(this.urlEndPoint + '/tipos_documentos');
   }
 
   getCiudades(): Observable<Ciudad[]> {
@@ -33,7 +31,7 @@ export class ClienteService {
   }
 
   getDepartamento(): Observable<Departamento[]> {
-    return this.http.get<Departamento[]>(this.urlEndPoint + '/departamento');
+    return this.http.get<Departamento[]>(this.urlEndPoint + '/departamentos');
   }
 
   getClientes(): Observable<Cliente[]> {
@@ -80,7 +78,7 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
       catchError((e) => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/mantenimeineto/clientes']);
+          this.router.navigate(['/pages/matenimiento/clientes']);
           console.error(e.error.mensaje);
         }
         return throwError(e);
