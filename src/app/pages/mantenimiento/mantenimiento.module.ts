@@ -39,7 +39,7 @@ import { DetallesComponents } from './proveedores/detalles/detalles.components';
 
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
-import { FormClienteComponent } from './clientes/formulario/formCliente.component';
+import { FormClienteComponent } from './clientes/formCliente.component';
 
 registerLocaleData(localeES, 'es');
 @NgModule({

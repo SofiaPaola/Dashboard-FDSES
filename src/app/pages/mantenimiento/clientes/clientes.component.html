@@ -12,7 +12,7 @@
       <nb-icon
         icon="plus-outline"
         type="button"
-        [routerLink]="['formulario/formCliente']"
+        [routerLink]="['/clientes/form']"
         ><!-- [routerLink]="['formCliente']" (click)="abrirModalNuevoCliente(clientes)"-->
       </nb-icon>
     </div>
@@ -43,8 +43,11 @@
             "
           >
             <td>
-              <button nbButton
-              (click)="open()"
+              <button 
+              nbButton
+              name="ver"
+              (click)="abrirModalDetalle(cliente)"
+              class="btn btn-primary btn-sm"
               >
                 {{ cliente.id }}
               </button>

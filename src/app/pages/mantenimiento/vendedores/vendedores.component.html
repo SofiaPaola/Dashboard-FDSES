@@ -6,13 +6,11 @@
   <nb-card-body>
     <h2 class="card-title" style="text-align: center">Listado de Vendedores</h2>
     <div class="my-2 text-left">
-      <button
-        class="btn btn-rounded btn-primary"
+      <nb-icon
+        icon="plus-outline"
         type="button"
         [routerLink]="['/vendedores/formulario/formVendedor']"
-      >
-        Crear Vendedor
-      </button>
+      ></nb-icon>
     </div>
     <div *ngIf="vendedores?.length == 0" class="alert alert-info">
       No hay registros en la base de datos!
@@ -57,35 +55,33 @@
             <td>{{ vendedor.celular }}</td>
             <td>{{ vendedor.direccion }}</td>
             <td>
-              <button type="button" name="crear Factura" class="btn btn-sm">
-                <angular-emojis
-                  [name]="'page_facing_up'"
-                  size="20"
-                ></angular-emojis>
-              </button>
+              <nb-icon
+                icon="file-add-outline"
+                type="button"
+                name=""
+                [routerLink]="['/facturas/form', vendedor.id]"
+                class="factura"
+              >
+              </nb-icon>
             </td>
             <td>
-              <button
+              <nb-icon
+                icon="edit-2-outline"
                 type="button"
                 name="editar"
                 [routerLink]="['/vendedores/formVendedor', vendedor.id]"
-                class="btn btn-sm"
+                class="editar"
               >
-                <angular-emojis [name]="'pencil2'" size="20"></angular-emojis>
-              </button>
+              </nb-icon>
             </td>
             <td>
-              <button
+              <nb-icon
+                icon="trash-outline"
                 type="button"
                 name="eliminar"
                 (click)="delete(vendedor)"
-                class="btn btn-sm"
-              >
-                <angular-emojis
-                  [name]="'wastebasket'"
-                  size="20"
-                ></angular-emojis>
-              </button>
+                class="eliminar"
+              ></nb-icon>
             </td>
           </tr>
         </tbody>

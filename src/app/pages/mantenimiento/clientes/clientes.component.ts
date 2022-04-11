@@ -26,7 +26,7 @@ export class ClientesComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     //public authService: AuthService,
     public modalService: ModalService,
-    private dialogService: NbDialogService
+    //private dialogService: NbDialogService
   ) {}
 
   ngOnInit(): void {
@@ -51,14 +51,14 @@ export class ClientesComponent implements OnInit {
       });
     });
 
-    //this.modalService.notificarNew.subscribe((cliente) => {
-    //  this.clientes = this.clientes.map((clienteNuevo: { id: any }) => {
-    //    if (cliente.id == clienteNuevo.id) {
-    //      clienteNuevo.id = cliente.id;
-    //    }
-    //    return clienteNuevo;
-    //  });
-    //});
+    this.modalService.notificarNew.subscribe((cliente) => {
+      this.clientes = this.clientes.map((clienteNuevo: { id: any }) => {
+        if (cliente.id == clienteNuevo.id) {
+          clienteNuevo.id = cliente.id;
+        }
+        return clienteNuevo;
+      });
+    });
   }
 
   source: LocalDataSource = new LocalDataSource();
@@ -105,14 +105,17 @@ export class ClientesComponent implements OnInit {
     this.modalService.abrirModalNuevo();
   }
 
-  
-
-  open() {
-    this.dialogService.open(DetalleComponent, {
-      context: {
-        titulo: 'Detalle Cliente',
-      },
-    });
+  abrirModalDetalle(cliente: Cliente) {
+    this.clienteSeleccionado = cliente;
+    this.modalService.abrirModal();
   }
+
+  //open() {
+  //  this.dialogService.open(DetalleComponent, {
+  //    context: {
+  //      titulo: 'Detalle Cliente',
+  //    },
+  //  });
+  //}
 
 }

@@ -7,7 +7,7 @@ import { ModalService } from '../../modal.service';
 @Component({
   selector: 'detalle-proveedor',
   templateUrl: './detalles.components.html',
-  styleUrls: ['./detalles.components.css']
+  styleUrls: ['./detalles.components.scss']
 })
 export class DetallesComponents implements OnInit {
 

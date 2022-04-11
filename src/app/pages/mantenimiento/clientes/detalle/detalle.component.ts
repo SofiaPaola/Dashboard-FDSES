@@ -25,7 +25,7 @@ export class DetalleComponent {
     //private authService:AuthService,
     public modalService: ModalService,
     public facturaService: FacturaService,
-    protected ref: NbDialogRef<DetalleComponent>
+    //protected ref: NbDialogRef<DetalleComponent>
     ) { }
 
   ngOnInit(): void { }
@@ -70,15 +70,11 @@ export class DetalleComponent {
     });
   }
 
-  //constructor(protected ref: NbDialogRef<DetalleComponent>) {}
-
-  dismiss() {
-    this.ref.close();
-  }
-
-  //submit(name: string) {
-  //  this.ref.close(name);
+  //dismiss() {
+  //  this.ref.close();
   //}
+
+  
 
 }
 
