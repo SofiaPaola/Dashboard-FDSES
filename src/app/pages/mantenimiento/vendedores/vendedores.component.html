@@ -35,16 +35,11 @@
           <tr
             *ngFor="
               let vendedor of vendedores
-                | paginate: { itemsPerPage: 8, currentPage: page }
+                | paginate: { itemsPerPage: 10, currentPage: page }
             "
           >
             <td>
-              <button
-                type="button"
-                name="ver"
-                (click)="abrirModal(vendedor)"
-                class="btn btn-primary btn-sm"
-              >
+              <button nbButton name="ver" (click)="abrirModal(vendedor)">
                 {{ vendedor.id }}
               </button>
             </td>

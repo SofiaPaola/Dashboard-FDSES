@@ -1,5 +1,5 @@
 <nb-card>
-  <!--<ngx-form *ngIf="nuevoCliente" [clientes]="nuevoCliente"></ngx-form>-->
+  <!--<ngx-formCliente *ngIf="nuevoCliente" [clientes]="nuevoCliente"></ngx-formCliente>-->
 
   <detalle-cliente
     *ngIf="clienteSeleccionado"
@@ -12,7 +12,7 @@
       <nb-icon
         icon="plus-outline"
         type="button"
-        [routerLink]="['/clientes/form']"
+        [routerLink]="['formulario/formCliente']"
         ><!-- [routerLink]="['formCliente']" (click)="abrirModalNuevoCliente(clientes)"-->
       </nb-icon>
     </div>
@@ -47,7 +47,6 @@
               nbButton
               name="ver"
               (click)="abrirModalDetalle(cliente)"
-              class="btn btn-primary btn-sm"
               >
                 {{ cliente.id }}
               </button>

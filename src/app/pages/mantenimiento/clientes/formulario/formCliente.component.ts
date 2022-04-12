@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Ciudad } from '../ciudad';
-import { TipoDocumento } from '../tipo_documento';
+import { Ciudad } from '../../ciudad';
+import { TipoDocumento } from '../../tipo_documento';
 /*import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';*/
-import { Departamento } from '../departamento';
-import { ModalService } from '../modal.service';
+import { Departamento } from '../../departamento';
+import { ModalService } from '../../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
-import { ClienteService } from './cliente.service';
-import { Cliente } from './cliente';
+import { ClienteService } from '../cliente.service';
+import { Cliente } from '../cliente';
 @Component({
-  selector: 'ngx-form',
+  selector: 'ngx-formCliente',
   templateUrl: './formCliente.component.html',
   styleUrls: ['./formCliente.component.scss']
 })
