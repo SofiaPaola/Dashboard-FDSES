@@ -100,11 +100,6 @@ export class ClientesComponent implements OnInit {
       });
   }
 
-  abrirModalNuevoCliente(clientes: Cliente) {
-    this.nuevoCliente = clientes;
-    this.modalService.abrirModalNuevo();
-  }
-
   abrirModalDetalle(cliente: Cliente) {
     this.clienteSeleccionado = cliente;
     this.modalService.abrirModal();

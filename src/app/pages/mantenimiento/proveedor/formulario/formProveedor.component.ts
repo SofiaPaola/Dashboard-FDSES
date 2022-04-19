@@ -50,7 +50,7 @@ export class FormProveedorComponent implements OnInit {
     console.log(this.proveedor);
     this.proveedorService.create(this.proveedor).subscribe(
       (proveedor) => {
-        this.router.navigate(['/proveedores']);
+        this.router.navigate(['/pages/mantenimiento/proveedores']);
         swal.fire(
           'Nuevo proveedor',
           `El proveedor ${proveedor.nombre} ha sido creado con éxito`,
@@ -70,7 +70,7 @@ export class FormProveedorComponent implements OnInit {
     //this.cliente.facturas = null;
     this.proveedorService.update(this.proveedor).subscribe(
       json => {
-        this.router.navigate(['/proveedores']);
+        this.router.navigate(['/pages/mantenimiento/proveedores']);
         swal.fire(
           'Proveedor Actualizado',
           `${json.mensaje}: ${json.proveedor.nombre}`,

@@ -25,7 +25,9 @@ const routes: Routes = [
   {
     path: 'formCliente/:id',
     component: FormClienteComponent
-  }
+  },
+  { path: '', redirectTo: 'clientes', pathMatch: 'full' },
+  { path: '**', redirectTo: 'clientes' },
 ];
 
 @NgModule({

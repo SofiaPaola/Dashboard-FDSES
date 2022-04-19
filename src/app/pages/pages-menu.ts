@@ -24,7 +24,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Laboratorio',
-    icon: 'flask',
+    icon: 'info-outline',
     link: '/pages/laboratorio',
   },
 ];

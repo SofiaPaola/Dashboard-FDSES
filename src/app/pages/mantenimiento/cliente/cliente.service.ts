@@ -78,7 +78,7 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
       catchError((e) => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/pages/matenimiento/clientes']);
+          this.router.navigate(['/clientes']);
           console.error(e.error.mensaje);
         }
         return throwError(e);

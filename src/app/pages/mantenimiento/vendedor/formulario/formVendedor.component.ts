@@ -88,7 +88,7 @@ export class FormVendedorComponent implements OnInit {
     console.log(this.vendedor);
     this.vendedorService.create(this.vendedor).subscribe(
       (vendedor) => {
-        this.router.navigate(['/vendedores']);
+        this.router.navigate(['/pages/mantenimiento/vendedores']);
         swal.fire(
           'Nuevo vendedor',
           `El vendedor ${vendedor.nombre} ha sido creado con éxito`,
@@ -108,7 +108,7 @@ export class FormVendedorComponent implements OnInit {
     //this.cliente.facturas = null;
     this.vendedorService.update(this.vendedor).subscribe(
       (json) => {
-        this.router.navigate(['/vendedores']);
+        this.router.navigate(['/pages/mantenimiento/vendedores']);
         swal.fire(
           'Vendedor Actualizado',
           `${json.mensaje}: ${json.vendedor.nombre}`,

@@ -124,7 +124,7 @@ export class FormClienteComponent implements OnInit {
     //this.cliente.facturas = null;
     this.clienteService.update(this.cliente).subscribe(
       (json) => {
-        this.router.navigate(['/pages/matenimiento/clientes']);
+        this.router.navigate(['/pages/mantenimiento/clientes']);
         swal.fire(
           'Cliente Actualizado',
           `${json.mensaje}: ${json.cliente.nombre}`,
