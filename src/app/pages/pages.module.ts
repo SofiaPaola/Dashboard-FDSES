@@ -1,5 +1,5 @@
 import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NbCardModule, NbListModule, NbMenuModule } from '@nebular/theme';
+import { NbCardModule, NbListModule, NbMenuModule, NbDialogModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -17,7 +17,8 @@ registerLocaleData(localeES, 'es');
     NbMenuModule,
     NgxPaginationModule,
     NbListModule,
-    NbCardModule
+    NbCardModule,
+    NbDialogModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' },],
   declarations: [PagesComponent],

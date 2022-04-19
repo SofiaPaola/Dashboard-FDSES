@@ -15,6 +15,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbListModule,
+  NbDialogModule,
 } from '@nebular/theme';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -25,20 +26,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { ClientesComponent } from './clientes/clientes.component';
-import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { MantenimientoComponent } from './mantenimiento.component';
 import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { VendedoresComponent } from './vendedores/vendedores.component';
-import { FormProveedorComponent } from './proveedores/formulario/formProveedor.component';
-import { DetallesComponent } from './vendedores/detalles/detalles.component';
-import { FormVendedorComponent } from './vendedores/formulario/formVendedor.component';
-import { DetallesComponents } from './proveedores/detalles/detalles.components';
 
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
-import { FormClienteComponent } from './clientes/formulario/formCliente.component';
+import { ClienteModule } from './cliente/cliente.module';
+import { ProveedorModule } from './proveedor/proveedor.module';
+import { VendedorModule } from './vendedor/vendedor.module';
 
 registerLocaleData(localeES, 'es');
 @NgModule({
@@ -51,6 +46,7 @@ registerLocaleData(localeES, 'es');
     NbActionsModule,
     NbRadioModule,
     NbSelectModule,
+    NbDialogModule,
     NbUserModule,
     NbListModule,
     NbIconModule,
@@ -63,20 +59,15 @@ registerLocaleData(localeES, 'es');
     MatFormFieldModule,
     NgxPaginationModule,
     MantenimientoRoutingModule,
+    ClienteModule,
+    ProveedorModule,
+    VendedorModule
   ],
   declarations: [
-    MantenimientoComponent,
-    ClientesComponent,
-    FormClienteComponent,
-    DetalleComponent,
-    ProveedoresComponent,
-    FormProveedorComponent,
-    DetallesComponent,
-    VendedoresComponent,
-    FormVendedorComponent,
-    DetallesComponents,
+    MantenimientoComponent
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  exports: [MantenimientoRoutingModule]
 })
 export class MantenimientoModule {}

@@ -2,8 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { AngularEmojisModule } from 'angular-emojis';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';

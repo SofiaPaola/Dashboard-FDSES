@@ -1,0 +1,100 @@
+<nb-card>
+  <detalle-proveedor
+    *ngIf="proveedorSeleccionado"
+    [proveedor]="proveedorSeleccionado"
+  ></detalle-proveedor>
+
+  <nb-card-body>
+    <h2 class="card-title" style="text-align: center">
+      Listado de Proveedores
+    </h2>
+    <div class="my-2 text-left">
+      <nb-icon
+        icon="plus-outline"
+        type="button"
+        [routerLink]="['./formProveedor']"
+      ></nb-icon>
+    </div>
+    <div *ngIf="proveedores?.length == 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <ng2-smart-table [source]="source">
+      <table class="table" *ngIf="proveedores?.length > 0">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Celular</th>
+            <th>Direccion</th>
+            <th>Crear Factura</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let proveedor of proveedores
+                | paginate: { itemsPerPage: 8, currentPage: page }
+            "
+          >
+            <td>
+              <button
+                type="button"
+                name="ver"
+                (click)="abrirModal(proveedor)"
+                class="btn btn-primary btn-sm"
+              >
+                {{ proveedor.id }}
+              </button>
+            </td>
+            <td>{{ proveedor.nombre }}</td>
+            <td>{{ proveedor.documento }}</td>
+            <td>{{ proveedor.email }}</td>
+            <td>{{ proveedor.telefono }}</td>
+            <td>{{ proveedor.celular }}</td>
+            <td>{{ proveedor.direccion }}</td>
+            <td>
+              <nb-icon
+                icon="file-add-outline"
+                type="button"
+                name=""
+                [routerLink]="['/facturas/form', proveedor.id]"
+                class="factura"
+              >
+              </nb-icon>
+            </td>
+            <td>
+              <nb-icon
+                icon="edit-2-outline"
+                type="button"
+                name="editar"
+                [routerLink]="['/proveedores/formProveedor', proveedor.id]"
+                class="editar"
+              >
+              </nb-icon>
+            </td>
+            <td>
+              <nb-icon
+                icon="trash-outline"
+                type="button"
+                name="eliminar"
+                (click)="delete(proveedor)"
+                class="eliminar"
+              ></nb-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng2-smart-table>
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+    >
+    </pagination-controls>
+  </nb-card-body>
+</nb-card>
