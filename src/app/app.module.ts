@@ -8,7 +8,7 @@ import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -32,8 +32,12 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { TokenInterceptor } from './auth/interceptors/token.interceptor';
+import { NbAuthModule } from '@nebular/auth';
 
 registerLocaleData(localeES, 'es');
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -44,6 +48,7 @@ registerLocaleData(localeES, 'es');
     NbListModule,
     AppRoutingModule,
     NbSidebarModule.forRoot(),
+    NbAuthModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
@@ -61,7 +66,11 @@ registerLocaleData(localeES, 'es');
     AngularEmojisModule,
     NgxPaginationModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' },],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

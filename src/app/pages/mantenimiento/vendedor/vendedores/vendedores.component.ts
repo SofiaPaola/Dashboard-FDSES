@@ -6,7 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { ModalService } from '../../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
-//import { AuthService } from '../usuarios/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
+
 
 @Component({
   selector: 'app-vendedores',
@@ -23,7 +24,7 @@ export class VendedoresComponent implements OnInit {
   constructor(
     private vendedorService: VendedorService,
     private activatedRoute: ActivatedRoute,
-    //public authService: AuthService,
+    public authService: AuthService,
     public modalService: ModalService
   ) {}
 

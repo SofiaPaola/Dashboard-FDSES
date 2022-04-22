@@ -10,6 +10,8 @@ import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { FormProveedorComponent } from './formulario/formProveedor.component';
+import { AuthGuard } from 'src/app/auth/guards/auth.guard';
+import { RoleGuard } from 'src/app/auth/guards/role.guard';
 
 registerLocaleData(localeES, 'es');
 
@@ -21,10 +23,12 @@ const routes: Routes = [
   {
     path: 'formProveedor',
     component: FormProveedorComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
   },
   {
     path: 'formProveedor/:id',
     component: FormProveedorComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
   },
   { path: '', redirectTo: 'proveedor', pathMatch: 'full' },
   { path: '**', redirectTo: 'proveedor' },

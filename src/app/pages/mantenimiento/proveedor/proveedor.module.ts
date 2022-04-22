@@ -32,6 +32,10 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { DetallesComponents } from './detalles/detalles.components';
 import { FormProveedorComponent } from './formulario/formProveedor.component';
 import { ProveedorRoutingModule } from './proveedor-routing.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProveedorService } from './proveedor.service';
+import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
+import { TokenInterceptor } from 'src/app/auth/interceptors/token.interceptor';
 
 registerLocaleData(localeES, 'es');
 
@@ -60,10 +64,19 @@ registerLocaleData(localeES, 'es');
     MatInputModule,
     MatFormFieldModule,
     NgxPaginationModule,
-    ProveedorRoutingModule
+    ProveedorRoutingModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
-  declarations: [ProveedoresComponent, DetallesComponents, FormProveedorComponent],
+  providers: [
+    ProveedorService,
+    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  declarations: [
+    ProveedoresComponent,
+    DetallesComponents,
+    FormProveedorComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class ProveedorModule {}

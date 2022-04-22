@@ -32,6 +32,10 @@ import { ClienteRoutingModule } from './cliente-routing.module';
 import { ClientesComponent } from './clientes/clientes.component';
 import { DetalleComponent } from './detalle/detalle.component';
 import { FormClienteComponent } from './formulario/formCliente.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ClienteService } from './cliente.service';
+import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
+import { TokenInterceptor } from 'src/app/auth/interceptors/token.interceptor';
 
 registerLocaleData(localeES, 'es');
 
@@ -60,9 +64,14 @@ registerLocaleData(localeES, 'es');
     MatInputModule,
     MatFormFieldModule,
     NgxPaginationModule,
-    ClienteRoutingModule
+    ClienteRoutingModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
+  providers: [
+    ClienteService,
+    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   declarations: [ClientesComponent, FormClienteComponent, DetalleComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

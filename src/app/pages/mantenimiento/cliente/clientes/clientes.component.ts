@@ -6,9 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { ModalService } from '../../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
-//import { AuthService } from '../usuarios/auth.service';
 import { DetalleComponent } from '../detalle/detalle.component';
 import { NbDialogService } from '@nebular/theme';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'ngx-clientes',
@@ -24,7 +24,7 @@ export class ClientesComponent implements OnInit {
   constructor(
     private clienteService: ClienteService,
     private activatedRoute: ActivatedRoute,
-    //public authService: AuthService,
+    public authService: AuthService,
     public modalService: ModalService,
     private dialogService: NbDialogService
   ) {}

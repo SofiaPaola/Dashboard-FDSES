@@ -29,13 +29,17 @@ import {
 } from './pipes';
 import {
   OneColumnLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { Routes } from '@angular/router';
+import { LoginComponent } from '../auth/login/login.component';
+
+const routes: Routes = [
+  {path: 'auth/login', component: LoginComponent}
+];
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -55,8 +59,6 @@ const COMPONENTS = [
   HeaderComponent,
   FooterComponent,
   OneColumnLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
 ];
 const PIPES = [
   CapitalizePipe,

@@ -10,6 +10,8 @@ import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { VendedoresComponent } from './vendedores/vendedores.component';
 import { FormVendedorComponent } from './formulario/formVendedor.component';
+import { AuthGuard } from 'src/app/auth/guards/auth.guard';
+import { RoleGuard } from 'src/app/auth/guards/role.guard';
 
 registerLocaleData(localeES, 'es');
 
@@ -21,10 +23,12 @@ const routes: Routes = [
   {
     path: 'formVendedor',
     component: FormVendedorComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
   },
   {
     path: 'formVendedor/:id',
     component: FormVendedorComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
   },
   { path: '', redirectTo: 'vendedor', pathMatch: 'full' },
   { path: '**', redirectTo: 'vendedor' },

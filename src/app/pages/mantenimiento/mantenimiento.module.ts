@@ -61,7 +61,7 @@ registerLocaleData(localeES, 'es');
     MantenimientoRoutingModule,
     ClienteModule,
     ProveedorModule,
-    VendedorModule
+    VendedorModule,
   ],
   declarations: [
     MantenimientoComponent

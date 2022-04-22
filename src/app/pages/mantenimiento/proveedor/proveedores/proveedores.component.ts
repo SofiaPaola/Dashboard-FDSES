@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProveedorService } from '../proveedor.service';
 import { ModalService } from '../../modal.service';
-//import { AuthService } from '../usuarios/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-proveedores',
@@ -22,7 +22,7 @@ export class ProveedoresComponent implements OnInit {
 
   constructor(private proveedorService: ProveedorService, 
     private activatedRoute: ActivatedRoute, 
-    //public authService:AuthService,
+    public authService:AuthService,
     public modalService: ModalService) { }
 
   ngOnInit()  {
