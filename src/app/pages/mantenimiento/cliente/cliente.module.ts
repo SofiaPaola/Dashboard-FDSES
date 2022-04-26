@@ -17,6 +17,7 @@ import {
   NbUserModule,
   NbInputModule,
   NbOptionModule,
+  NbDatepickerModule,
 } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -55,6 +56,7 @@ registerLocaleData(localeES, 'es');
     NbIconModule,
     NbInputModule,
     NbSelectModule,
+    NbDatepickerModule.forRoot(),
     NbOptionModule,
     NbButtonModule,
     MatDatepickerModule,

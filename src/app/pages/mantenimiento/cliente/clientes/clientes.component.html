@@ -1,24 +1,18 @@
 <nb-card>
 
-  <ngx-detalle-cliente
-    *ngIf="clienteSeleccionado"
-    [cliente]="clienteSeleccionado"
-  ></ngx-detalle-cliente>
+  <ngx-detalle-cliente *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></ngx-detalle-cliente>
 
   <nb-card-body>
     <h2 class="card-title" style="text-align: center">Listado de Clientes</h2>
     <div class="my-2 text-left">
-      <nb-icon
-        icon="plus-outline"
-        type="button"
-        [routerLink]="['./formCliente']"
-        >
+      <nb-icon *ngIf="authService.hasRole('ROLE_ADMIN')" icon="plus-outline" type="button"
+        [routerLink]="['./formCliente']">
       </nb-icon>
     </div>
     <div *ngIf="clientes?.length == 0" class="alert alert-info">
       No hay registros en la base de datos!
     </div>
-    <ng2-smart-table  [source]="source">
+    <ng2-smart-table [source]="source">
       <table class="table" *ngIf="clientes?.length > 0">
         <thead>
           <tr>
@@ -35,18 +29,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="
+          <tr *ngFor="
               let cliente of clientes
                 | paginate: { itemsPerPage: 10, currentPage: page }
-            "
-          >
+            ">
             <td>
-              <button 
-              nbButton
-              name="ver"
-              (click)="open(cliente)"
-              >
+              <button nbButton name="ver" (click)="open(cliente)">
                 {{ cliente.id }}
               </button>
             </td>
@@ -57,42 +45,23 @@
             <td>{{ cliente.celular }}</td>
             <td>{{ cliente.direccion }}</td>
             <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-              <nb-icon
-                icon="file-add-outline"
-                type="button"
-                name=""
-                [routerLink]="['/facturas/form', cliente.id]"
-                class="factura"
-              >
+              <nb-icon icon="file-add-outline" type="button" name="" [routerLink]="['/facturas/form', cliente.id]"
+                class="factura">
               </nb-icon>
             </td>
             <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-              <nb-icon
-                icon="edit-2-outline"
-                type="button"
-                name="editar"
-                [routerLink]="['./formCliente', cliente.id]"
-                class="editar"
-              >
+              <nb-icon icon="edit-2-outline" type="button" name="editar" [routerLink]="['./formCliente', cliente.id]"
+                class="editar">
               </nb-icon>
             </td>
             <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-              <nb-icon
-                icon="trash-outline"
-                type="button"
-                name="eliminar"
-                (click)="delete(cliente)"
-                class="eliminar"
-              ></nb-icon>
+              <nb-icon icon="trash-outline" type="button" name="eliminar" (click)="delete(cliente)" class="eliminar">
+              </nb-icon>
             </td>
           </tr>
         </tbody>
       </table>
-      <pagination-controls
-        (pageChange)="page = $event"
-        previousLabel="Anterior"
-        nextLabel="Siguiente"
-      >
+      <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
       </pagination-controls>
     </ng2-smart-table>
   </nb-card-body>

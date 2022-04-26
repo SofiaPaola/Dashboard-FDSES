@@ -15,7 +15,7 @@ import { Cliente } from '../clientes/cliente';
 @Component({
   selector: 'ngx-formCliente',
   templateUrl: './formCliente.component.html',
-  styleUrls: ['./formCliente.component.scss']
+  styleUrls: ['./formCliente.component.scss'],
 })
 export class FormClienteComponent implements OnInit {
   public cliente: Cliente = new Cliente();
@@ -63,9 +63,9 @@ export class FormClienteComponent implements OnInit {
         (tipos_documentos) => (this.tipos_documentos = tipos_documentos)
       );
 
-    this.clienteService.getDepartamento().subscribe(
-      (departamentos) => (this.departamentos = departamentos)
-    );
+    this.clienteService
+      .getDepartamento()
+      .subscribe((departamentos) => (this.departamentos = departamentos));
 
     /*this.ciudadesFiltrados = this.autocompleteControl.valueChanges.pipe(
       map(value => typeof value === 'string' ? value : value.nombre),
