@@ -1,6 +1,6 @@
-import { TipoDocumento } from "../../tipo_documento";
-import { Ciudad } from "../../ciudad";
-import { Factura } from "../../factura/models/factura";
+import { TipoDocumento } from "../tipo_documento";
+import { Ciudad } from "../ciudad";
+import { Factura } from "../factura/models/factura";
 
 export class Cliente {
     id!: number;

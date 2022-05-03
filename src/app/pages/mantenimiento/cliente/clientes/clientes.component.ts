@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Cliente } from './cliente';
+import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -103,11 +103,6 @@ export class ClientesComponent implements OnInit {
   abrirModalDetalle(cliente: Cliente) {
     this.clienteSeleccionado = cliente;
     this.modalService.abrirModal();
-  }
-
-  open(cliente: Cliente) {
-    this.clienteSeleccionado = cliente;
-    this.dialogService.open(DetalleComponent);
   }
 
 }

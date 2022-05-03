@@ -11,7 +11,6 @@ import { Proveedor } from '../proveedores/proveedor';
   templateUrl: './formProveedor.component.html',
 })
 export class FormProveedorComponent implements OnInit {
-
   public proveedor: Proveedor = new Proveedor();
 
   ciudades!: Ciudad[];
@@ -69,7 +68,7 @@ export class FormProveedorComponent implements OnInit {
     console.log(this.proveedor);
     //this.cliente.facturas = null;
     this.proveedorService.update(this.proveedor).subscribe(
-      json => {
+      (json) => {
         this.router.navigate(['/pages/mantenimiento/proveedores']);
         swal.fire(
           'Proveedor Actualizado',
@@ -85,24 +84,20 @@ export class FormProveedorComponent implements OnInit {
     );
   }
 
-  compararCiudad(o1: Ciudad, o2: Ciudad): boolean {
-    if (o1 === undefined && o2 === undefined) {
+  compararTipoDocumento(v1: TipoDocumento, v2: TipoDocumento): boolean {
+    if (v1 === undefined && v2 === undefined) {
       return true;
     }
 
-    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
-      ? false
-      : o1.id === o2.id;
+    return v1 === null || v2 === null || v1 === undefined || v2 === undefined ? false : v1.id === v2.id;
+    
   }
 
-  compararTipoDocumento(o1: TipoDocumento, o2: TipoDocumento): boolean {
-    if (o1 === undefined && o2 === undefined) {
+  compararCiudad(v1: Ciudad, v2: Ciudad): boolean {
+    if (v1 === undefined && v2 === undefined) {
       return true;
     }
 
-    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
-      ? false
-      : o1.id === o2.id;
+    return v1 === null || v2 === null || v1 === undefined || v2 === undefined ? false : v1.id === v2.id;
   }
-
 }

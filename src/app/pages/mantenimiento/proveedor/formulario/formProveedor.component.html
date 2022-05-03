@@ -4,481 +4,304 @@
   </li>
 </ul>
 
-<div class="card bg-dark text-white my-2">
-  <div class="card-header">{{ titulo }}</div>
-  <div class="card-body">
-    <form #proveedorForm="ngForm">
-      <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-2 mb-3">Nombre</label>
-        <div class="col-sm-9">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.nombre"
-            name="nombre"
-            #nombre="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
-          >
-            <div *ngIf="nombre.errors?.['required']">
-              El nombre es requerido
-            </div>
-            <div *ngIf="nombre.errors?.['minlength']">
-              El nombre debe tener al menos 5 caracteres
+<div class="row">
+  <nb-card>
+    <nb-card-header>{{ titulo }}</nb-card-header>
+    <nb-card-body>
+      <form #proveedorForm="ngForm">
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-2 mb-3">Nombre</label>
+          <div class="col-sm-9">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.nombre" name="nombre"
+              #nombre="ngModel" />
+            <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div *ngIf="nombre.errors?.['required']">
+                El nombre es requerido
+              </div>
+              <div *ngIf="nombre.errors?.['minlength']">
+                El nombre debe tener al menos 5 caracteres
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="tipo_documento" class="col-form-label col-sm-2 mb-3"
-          >Tipo Documento</label
-        >
-        <div class="col-sm-4">
-          <select
-            [compareWith]="compararTipoDocumento"
-            class="form-control"
-            [(ngModel)]="proveedor.tipo_documento"
-            name="tipo_documento"
-          >
-            <option [ngValue]="undefined">Seleccione un Tipo Documento</option>
-            <option
-              *ngFor="let tipo_documento of tipos_documentos"
-              [ngValue]="tipo_documento"
-            >
-              {{ tipo_documento.nombre }}
-            </option>
-          </select>
-        </div>
-        <label for="documento" class="col-form-label col-sm-2 mb-3"
-          >Documento</label
-        >
-        <div class="col-sm-3">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.documento"
-            name="documento"
-            #documento="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="documento.invalid && (documento.dirty || documento.touched)"
-          >
-            <div *ngIf="documento.errors?.['required']">
-              El documento es requerido
-            </div>
-            <div *ngIf="documento.errors?.['minlength']">
-              El documento debe tener solo numeros
+        <div class="form-group row">
+          <label for="tipo_documento" class="col-form-label col-sm-2 mb-3">Tipo Documento</label>
+          <div class="col-sm-4">
+            <nb-select [compareWith]="compararTipoDocumento" fullWidth [(ngModel)]="proveedor.tipo_documento"
+              name="tipo_documento" placeholder="Seleccione un Tipo Documento">
+              <!-- <nb-option [value]="undefined">Seleccione un Tipo Documento</nb-option> -->
+              <nb-option *ngFor="let tipo_documento of tipos_documentos" [value]="tipo_documento">
+                {{ tipo_documento.nombre }}
+              </nb-option>
+            </nb-select>
+          </div>
+          <label for="documento" class="col-form-label col-sm-2 mb-3">Documento</label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.documento" name="documento"
+              #documento="ngModel" />
+            <div class="alert alert-danger" *ngIf="documento.invalid && (documento.dirty || documento.touched)">
+              <div *ngIf="documento.errors?.['required']">
+                El documento es requerido
+              </div>
+              <div *ngIf="documento.errors?.['minlength']">
+                El documento debe tener solo numeros
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="contacto" class="col-form-label col-sm-2 mb-3"
-          >Contacto</label
-        >
-        <div class="col-sm-9">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.contacto"
-            name="contacto"
-            #contacto="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="contacto.invalid && (contacto.dirty || contacto.touched)"
-          >
-            <div *ngIf="contacto.errors?.['required']">
-              El contacto es requerido
-            </div>
-            <div *ngIf="contacto.errors?.['minlength']">
-              El contacto debe tener al menos 4 caracteres
+        <div class="form-group row">
+          <label for="contacto" class="col-form-label col-sm-2 mb-3">Contacto</label>
+          <div class="col-sm-9">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.contacto" name="contacto"
+              #contacto="ngModel" />
+            <div class="alert alert-danger" *ngIf="contacto.invalid && (contacto.dirty || contacto.touched)">
+              <div *ngIf="contacto.errors?.['required']">
+                El contacto es requerido
+              </div>
+              <div *ngIf="contacto.errors?.['minlength']">
+                El contacto debe tener al menos 4 caracteres
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="cargo" class="col-form-label col-sm-2 mb-3">Cargo</label>
-        <div class="col-sm-4">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.cargo"
-            name="cargo"
-            #cargo="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="cargo.invalid && (cargo.dirty || cargo.touched)"
-          >
-            <div *ngIf="cargo.errors?.['required']">El cargo es requerido</div>
-            <div *ngIf="cargo.errors?.['minlength']">
-              El cargo debe tener al menos 4 caracteres
+        <div class="form-group row">
+          <label for="ciudad" class="col-form-label col-sm-2 mb-3">Ciudad</label>
+          <div class="col-sm-4">
+            <nb-select [compareWith]="compararCiudad" [(ngModel)]="proveedor.ciudad"  name="ciudad"
+              placeholder="Seleccione una Ciudad" fullWidth>
+              <!-- <nb-option [value]="undefined">Seleccione una Ciudad</nb-option> -->
+              <nb-option *ngFor="let ciudad of ciudades" [value]="ciudad">
+                {{ ciudad.nombre }}
+              </nb-option>
+            </nb-select>
+          </div>
+          <label for="cargo" class="col-form-label col-sm-2 mb-3">Cargo</label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.cargo" name="cargo"
+              #cargo="ngModel" />
+            <div class="alert alert-danger" *ngIf="cargo.invalid && (cargo.dirty || cargo.touched)">
+              <div *ngIf="cargo.errors?.['required']">El cargo es requerido</div>
+              <div *ngIf="cargo.errors?.['minlength']">
+                El cargo debe tener al menos 4 caracteres
+              </div>
             </div>
           </div>
         </div>
-        <label for="ciudad" class="col-form-label col-sm-2 mb-3">Ciudad</label>
-        <div class="col-sm-3">
-          <select
-            [compareWith]="compararCiudad"
-            class="form-control"
-            [(ngModel)]="proveedor.ciudad"
-            name="ciudad"
-          >
-            <option [ngValue]="undefined">Seleccione una Ciudad</option>
-            <option *ngFor="let ciudad of ciudades" [ngValue]="ciudad">
-              {{ ciudad.nombre }}
-            </option>
-          </select>
-        </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="direccion" class="col-form-label col-sm-2 mb-3"
-          >Direccion</label
-        >
-        <div class="col-sm-9">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.direccion"
-            name="direccion"
-            #direccion="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)"
-          >
-            <div *ngIf="direccion.errors?.['required']">
-              La direccion es requerido
-            </div>
-            <div *ngIf="direccion.errors?.['minlength']">
-              La direccion debe tener al menos 4 caracteres
+        <div class="form-group row">
+          <label for="direccion" class="col-form-label col-sm-2 mb-3">Direccion</label>
+          <div class="col-sm-9">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.direccion" name="direccion"
+              #direccion="ngModel" />
+            <div class="alert alert-danger" *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
+              <div *ngIf="direccion.errors?.['required']">
+                La direccion es requerido
+              </div>
+              <div *ngIf="direccion.errors?.['minlength']">
+                La direccion debe tener al menos 4 caracteres
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="telefono" class="col-form-label col-sm-2 mb-3"
-          >Telefono</label
-        >
-        <div class="col-sm-4">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.telefono"
-            name="telefono"
-            #telefono="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)"
-          >
-            <div *ngIf="telefono.errors?.['required']">
-              El telefono es requerido
+        <div class="form-group row">
+          <label for="telefono" class="col-form-label col-sm-2 mb-3">Telefono</label>
+          <div class="col-sm-4">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.telefono" name="telefono"
+              #telefono="ngModel" />
+            <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+              <div *ngIf="telefono.errors?.['required']">
+                El telefono es requerido
+              </div>
+              <div *ngIf="telefono.errors?.['minlength']">
+                El telefono debe tener al menos 4 caracteres
+              </div>
             </div>
-            <div *ngIf="telefono.errors?.['minlength']">
-              El telefono debe tener al menos 4 caracteres
+          </div>
+          <label for="celular" class="col-form-label col-sm-2 mb-3">Celular</label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.celular" name="celular"
+              #celular="ngModel" />
+            <div class="alert alert-danger" *ngIf="celular.invalid && (celular.dirty || celular.touched)">
+              <div *ngIf="celular.errors?.['required']">
+                El celular es requerido
+              </div>
+              <div *ngIf="celular.errors?.['minlength']">
+                El celular debe tener al menos 4 caracteres
+              </div>
             </div>
           </div>
         </div>
-        <label for="celular" class="col-form-label col-sm-2 mb-3"
-          >Celular</label
-        >
-        <div class="col-sm-3">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.celular"
-            name="celular"
-            #celular="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="celular.invalid && (celular.dirty || celular.touched)"
-          >
-            <div *ngIf="celular.errors?.['required']">
-              El celular es requerido
-            </div>
-            <div *ngIf="celular.errors?.['minlength']">
-              El celular debe tener al menos 4 caracteres
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="activo" class="col-form-label col-sm-2 mb-3">
-          Activo
-        </label>
-        <div class="col-sm-4">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.activo"
-            name="activo"
-            #activo="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="activo.invalid && (activo.dirty || activo.touched)"
-          >
-            <div *ngIf="activo.errors?.['required']">
-              El activo es requerido
+        <div class="form-group row">
+          <label for="activo" class="col-form-label col-sm-2 mb-3">
+            Activo
+          </label>
+          <div class="col-sm-4">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.activo" name="activo"
+              #activo="ngModel" />
+            <div class="alert alert-danger" *ngIf="activo.invalid && (activo.dirty || activo.touched)">
+              <div *ngIf="activo.errors?.['required']">
+                El activo es requerido
+              </div>
+              <div *ngIf="activo.errors?.['minlength']">
+                El activo debe ser 1(Si) o 0(No)
+              </div>
             </div>
-            <div *ngIf="activo.errors?.['minlength']">
-              El activo debe ser 1(Si) o 0(No)
+          </div>
+          <label for="fecha_ingreso" class="col-form-label col-sm-2 mb-3">
+            Fecha Ingreso
+          </label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth matInput [matDatepicker]="miDatepicker" class="form-control"
+              [(ngModel)]="proveedor.fecha_ingreso" name="fecha_ingreso" style="display: inline; width: 180px" />
+            <mat-datepicker-toggle matSuffix [for]="miDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #miDatepicker></mat-datepicker>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="email" class="col-form-label col-sm-2 mb-3">Email</label>
+          <div class="col-sm-9">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.email" name="email"
+              #email="ngModel" />
+            <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div *ngIf="email.errors?.['required']">El email es requerido</div>
+              <div *ngIf="email.errors?.['minlength']">
+                El email debe tener un formato valido
+              </div>
             </div>
           </div>
         </div>
-        <label for="createAt" class="col-form-label col-sm-2 mb-3">
-          Fecha Ingreso
-        </label>
-        <div class="col-sm-4">
-          <input
-            matInput
-            [matDatepicker]="miDatepicker"
-            class="form-control"
-            [(ngModel)]="proveedor.fecha_ingreso"
-            name="fecha_ingreso"
-            style="display: inline; width: 210px"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="miDatepicker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #miDatepicker></mat-datepicker>
-        </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="email" class="col-form-label col-sm-2 mb-3">Email</label>
-        <div class="col-sm-9">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.email"
-            name="email"
-            #email="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="email.invalid && (email.dirty || email.touched)"
-          >
-            <div *ngIf="email.errors?.['required']">El email es requerido</div>
-            <div *ngIf="email.errors?.['minlength']">
-              El email debe tener un formato valido
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="contratista" class="col-form-label col-sm-2 mb-3"
-          >Contratista</label
-        >
-        <div class="col-sm-4">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.contratista"
-            name="contratista"
-            #contratista="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="
+        <div class="form-group row">
+          <label for="contratista" class="col-form-label col-sm-2 mb-3">Contratista</label>
+          <div class="col-sm-4">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.contratista"
+              name="contratista" #contratista="ngModel" />
+            <div class="alert alert-danger" *ngIf="
               contratista.invalid && (contratista.dirty || contratista.touched)
-            "
-          >
-            <div *ngIf="contratista.errors?.['required']">
-              El contratista es requerido
-            </div>
-            <div *ngIf="contratista.errors?.['minlength']">
-              El contratista debe ser Si o No
+            ">
+              <div *ngIf="contratista.errors?.['required']">
+                El contratista es requerido
+              </div>
+              <div *ngIf="contratista.errors?.['minlength']">
+                El contratista debe ser Si o No
+              </div>
             </div>
           </div>
-        </div>
-        <label for="disponibilidad" class="col-form-label col-sm-2 mb-3"
-          >Disponibilidad</label
-        >
-        <div class="col-sm-3">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.disponibilidad"
-            name="disponibilidad"
-            #disponibilidad="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="
+          <label for="disponibilidad" class="col-form-label col-sm-2 mb-3">Disponibilidad</label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.disponibilidad"
+              name="disponibilidad" #disponibilidad="ngModel" />
+            <div class="alert alert-danger" *ngIf="
               disponibilidad.invalid &&
               (disponibilidad.dirty || disponibilidad.touched)
-            "
-          >
-            <div *ngIf="disponibilidad.errors?.['required']">
-              El disponibilidad es requerido
-            </div>
-            <div *ngIf="disponibilidad.errors?.['minlength']">
-              El disponibilidad debe ser 1(Si) o 0(No)
+            ">
+              <div *ngIf="disponibilidad.errors?.['required']">
+                El disponibilidad es requerido
+              </div>
+              <div *ngIf="disponibilidad.errors?.['minlength']">
+                El disponibilidad debe ser 1(Si) o 0(No)
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="critico" class="col-form-label col-sm-2 mb-3"
-          >Critico</label
-        >
-        <div class="col-sm-4">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.critico"
-            name="critico"
-            #critico="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="critico.invalid && (critico.dirty || critico.touched)"
-          >
-            <div *ngIf="critico.errors?.['required']">
-              El critico es requerido
-            </div>
-            <div *ngIf="critico.errors?.['minlength']">
-              El critico debe ser Si o No
+        <div class="form-group row">
+          <label for="critico" class="col-form-label col-sm-2 mb-3">Critico</label>
+          <div class="col-sm-4">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.critico" name="critico"
+              #critico="ngModel" />
+            <div class="alert alert-danger" *ngIf="critico.invalid && (critico.dirty || critico.touched)">
+              <div *ngIf="critico.errors?.['required']">
+                El critico es requerido
+              </div>
+              <div *ngIf="critico.errors?.['minlength']">
+                El critico debe ser Si o No
+              </div>
             </div>
           </div>
-        </div>
-        <label for="archivo_arl" class="col-form-label col-sm-2 mb-3"
-          >Archivo Arl</label
-        >
-        <div class="col-sm-3">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.archivo_arl"
-            name="archivo_arl"
-            #archivo_arl="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="
+          <label for="archivo_arl" class="col-form-label col-sm-2 mb-3">Archivo Arl</label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.archivo_arl"
+              name="archivo_arl" #archivo_arl="ngModel" />
+            <div class="alert alert-danger" *ngIf="
               archivo_arl.invalid && (archivo_arl.dirty || archivo_arl.touched)
-            "
-          >
-            <div *ngIf="archivo_arl.errors?.['required']">
-              El archivo arl es requerido
-            </div>
-            <div *ngIf="archivo_arl.errors?.['minlength']">
-              El archivo arl debe tener al menos 4 caracteres
+            ">
+              <div *ngIf="archivo_arl.errors?.['required']">
+                El archivo arl es requerido
+              </div>
+              <div *ngIf="archivo_arl.errors?.['minlength']">
+                El archivo arl debe tener al menos 4 caracteres
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="afiliado_sgr" class="col-form-label col-sm-2 mb-3"
-          >Afiliado Sgr</label
-        >
-        <div class="col-sm-4">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.afiliado_sgr"
-            name="afiliado_sgr"
-            #afiliado_sgr="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="
+        <div class="form-group row">
+          <label for="afiliado_sgr" class="col-form-label col-sm-2 mb-3">Afiliado Sgr</label>
+          <div class="col-sm-4">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.afiliado_sgr"
+              name="afiliado_sgr" #afiliado_sgr="ngModel" />
+            <div class="alert alert-danger" *ngIf="
               afiliado_sgr.invalid &&
               (afiliado_sgr.dirty || afiliado_sgr.touched)
-            "
-          >
-            <div *ngIf="afiliado_sgr.errors?.['required']">
-              El afiliado sgr es requerido
-            </div>
-            <div *ngIf="afiliado_sgr.errors?.['minlength']">
-              El afiliado sgr debe ser Si o No
+            ">
+              <div *ngIf="afiliado_sgr.errors?.['required']">
+                El afiliado sgr es requerido
+              </div>
+              <div *ngIf="afiliado_sgr.errors?.['minlength']">
+                El afiliado sgr debe ser Si o No
+              </div>
             </div>
           </div>
-        </div>
-        <label for="implementa_sgsst" class="col-form-label col-sm-2 mb-3"
-          >Implementa Sgsst</label
-        >
-        <div class="col-sm-3">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.implementa_sgsst"
-            name="implementa_sgsst"
-            #implementa_sgsst="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            *ngIf="
+          <label for="implementa_sgsst" class="col-form-label col-sm-2 mb-3">Implementa Sgsst</label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.implementa_sgsst"
+              name="implementa_sgsst" #implementa_sgsst="ngModel" />
+            <div class="alert alert-danger" *ngIf="
               implementa_sgsst.invalid &&
               (implementa_sgsst.dirty || implementa_sgsst.touched)
-            "
-          >
-            <div *ngIf="implementa_sgsst.errors?.['required']">
-              El implementa sgsst es requerido
-            </div>
-            <div *ngIf="implementa_sgsst.errors?.['minlength']">
-              El implementa sgsst debe ser Si o No
+            ">
+              <div *ngIf="implementa_sgsst.errors?.['required']">
+                El implementa sgsst es requerido
+              </div>
+              <div *ngIf="implementa_sgsst.errors?.['minlength']">
+                El implementa sgsst debe ser Si o No
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="observaciones" class="col-form-label col-sm-2 mb-3"
-          >Observaciones</label
-        >
-        <div class="col-sm-9">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="proveedor.observaciones"
-            name="observaciones"
-            #observaciones="ngModel"
-          />
+        <div class="form-group row">
+          <label for="observaciones" class="col-form-label col-sm-2 mb-3">Observaciones</label>
+          <div class="col-sm-9">
+            <textarea nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.observaciones"
+              name="observaciones" #observaciones="ngModel"></textarea>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="observaciones" class="col-form-label col-sm-2 mb-3"></label>
-        <div class="col-sm-9 d-grid gap-2">
-          <button
-            class="btn btn-success"
-            role="button"
-            (click)="create()"
-            *ngIf="!proveedor.id; else elseBlock"
-            [disabled]="!proveedorForm.form.valid"
-          >
-            Crear
-          </button>
-          <ng-template #elseBlock>
-            <button
-              class="btn btn-success"
-              role="button"
-              (click)="update()"
-              [disabled]="!proveedorForm.form.valid"
-            >
-              Editar
+        <br>
+
+        <div class="form-group row">
+          <label for="observaciones" class="col-form-label col-sm-2 mb-3"></label>
+          <div class="col-sm-9 d-grid gap-2">
+            <button nbButton status="success" role="button" (click)="create()" *ngIf="!proveedor.id; else elseBlock"
+              [disabled]="!proveedorForm.form.valid">
+              Crear
             </button>
-          </ng-template>
+            <ng-template #elseBlock>
+              <button nbButton status="success" role="button" (click)="update()" [disabled]="!proveedorForm.form.valid">
+                Editar
+              </button>
+            </ng-template>
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
 </div>
