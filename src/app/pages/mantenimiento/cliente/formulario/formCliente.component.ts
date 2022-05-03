@@ -32,13 +32,8 @@ export class FormClienteComponent implements OnInit {
   constructor(
     private clienteService: ClienteService,
     private router: Router,
-    public modalService: ModalService,
     private activatedRoute: ActivatedRoute
   ) {}
-
-  cerrarModalNuevoCliente() {
-    this.modalService.cerrarModalNuevo();
-  }
 
   source: LocalDataSource = new LocalDataSource();
 

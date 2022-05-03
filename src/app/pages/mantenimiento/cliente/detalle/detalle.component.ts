@@ -27,7 +27,7 @@ export class DetalleComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  cerrarModalDetalle() {
+  cerrarModal() {
     this.modalService.cerrarModal();
   }
 

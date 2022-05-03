@@ -50,15 +50,6 @@ export class ClientesComponent implements OnInit {
         return clienteOriginal;
       });
     });
-
-    this.modalService.notificarNew.subscribe((cliente) => {
-      this.clientes = this.clientes.map((clienteNuevo: { id: any }) => {
-        if (cliente.id == clienteNuevo.id) {
-          clienteNuevo.id = cliente.id;
-        }
-        return clienteNuevo;
-      });
-    });
   }
 
   source: LocalDataSource = new LocalDataSource();
@@ -100,7 +91,7 @@ export class ClientesComponent implements OnInit {
       });
   }
 
-  abrirModalDetalle(cliente: Cliente) {
+  abrirModal(cliente: Cliente) {
     this.clienteSeleccionado = cliente;
     this.modalService.abrirModal();
   }
