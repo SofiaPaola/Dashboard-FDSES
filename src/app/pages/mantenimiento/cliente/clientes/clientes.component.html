@@ -1,6 +1,6 @@
 <nb-card>
 
-  <ngx-detalle-cliente *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></ngx-detalle-cliente>
+  <detalle-cliente *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></detalle-cliente>
 
   <nb-card-body>
     <h2 class="card-title" style="text-align: center">Listado de Clientes</h2>
@@ -34,7 +34,7 @@
                 | paginate: { itemsPerPage: 10, currentPage: page }
             ">
             <td>
-              <button nbButton name="ver" (click)="open(cliente)">
+              <button nbButton name="ver" (click)="abrirModal(cliente)">
                 {{ cliente.id }}
               </button>
             </td>

@@ -30,10 +30,11 @@
         <div class="form-group row">
           <label for="tipo_documento" class="col-form-label col-sm-2 mb-3">Tipo Documento</label>
           <div class="col-sm-4">
-            <nb-select [compareWith]="compararTipoDocumento" [(ngModel)]="cliente.tipo_documento"
-              name="tipo_documento" placeholder="Seleccione un Tipo Documento" fullWidth>
-              <nb-option [value]="undefined">Seleccione un Tipo Documento</nb-option>
-              <nb-option *ngFor="let tipo_documento of tipos_documentos" [value]="tipo_documento">
+            <nb-select [compareWith]="compararTipoDocumento" [(ngModel)]="cliente.tipo_documento" name="tipoDocumento"
+              placeholder="Seleccione un Tipo Documento" fullWidth>
+              <!-- <nb-option [value]="undefined">Seleccione un Tipo Documento</nb-option> -->
+              <nb-option *ngFor="let tipo_documento of tipos_documentos" [value]="tipo_documento"
+                [ngModelOptions]="{standalone: true}">
                 {{ tipo_documento.nombre }}
               </nb-option>
             </nb-select>
@@ -76,7 +77,7 @@
           <div class="col-sm-4">
             <nb-select [compareWith]="compararCiudad" [(ngModel)]="cliente.ciudad" name="ciudad"
               placeholder="Seleccione una Ciudad" fullWidth>
-              <nb-option [value]="undefined">Seleccione una Ciudad</nb-option>
+              <!-- <nb-option [value]="undefined">Seleccione una Ciudad</nb-option> -->
               <nb-option *ngFor="let ciudad of ciudades" [value]="ciudad">
                 {{ ciudad.nombre }}
               </nb-option>
@@ -147,8 +148,10 @@
           </div>
           <label for="createAt" class="col-form-label col-sm-2 mb-3">Fecha Ingreso</label>
           <div class="col-sm-3">
-            <input nbInput fullWidth [nbDatepicker]="datepicker" [(ngModel)]="cliente.fecha_ingreso">
-            <nb-datepicker #datepicker></nb-datepicker>
+            <input nbInput fullWidth matInput [matDatepicker]="miDatepicker" class="form-control"
+              [(ngModel)]="cliente.fecha_ingreso" name="fecha_ingreso" style="display: inline; width: 180px" />
+            <mat-datepicker-toggle matSuffix [for]="miDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #miDatepicker></mat-datepicker>
           </div>
         </div>
 
@@ -184,7 +187,7 @@
               Crear
             </button>
             <ng-template #elseBlock>
-              <button  nbButton status="success" role="button" (click)="update()" [disabled]="!clienteForm.form.valid">
+              <button nbButton status="success" role="button" (click)="update()" [disabled]="!clienteForm.form.valid">
                 Editar
               </button>
             </ng-template>

@@ -11,11 +11,10 @@ import { Departamento } from '../../departamento';
 import { ModalService } from '../../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ClienteService } from '../cliente.service';
-import { Cliente } from '../clientes/cliente';
+import { Cliente } from '../cliente';
 @Component({
   selector: 'ngx-formCliente',
-  templateUrl: './formCliente.component.html',
-  styleUrls: ['./formCliente.component.scss'],
+  templateUrl: './formCliente.component.html'
 })
 export class FormClienteComponent implements OnInit {
   public cliente: Cliente = new Cliente();
@@ -33,13 +32,8 @@ export class FormClienteComponent implements OnInit {
   constructor(
     private clienteService: ClienteService,
     private router: Router,
-    public modalService: ModalService,
     private activatedRoute: ActivatedRoute
   ) {}
-
-  cerrarModalNuevoCliente() {
-    this.modalService.cerrarModalNuevo();
-  }
 
   source: LocalDataSource = new LocalDataSource();
 
@@ -139,17 +133,17 @@ export class FormClienteComponent implements OnInit {
     );
   }
 
-  compararCiudad(o1: Ciudad, o2: Ciudad): boolean {
-    if (o1 === undefined && o2 === undefined) {
+  compararTipoDocumento(a1: TipoDocumento, a2: TipoDocumento) {
+    if (a1 === undefined && a2 === undefined) {
       return true;
     }
 
-    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+    return a1 === null || a2 === null || a1 === undefined || a2 === undefined
       ? false
-      : o1.id === o2.id;
+      : a1.id === a2.id;
   }
-
-  compararTipoDocumento(o1: TipoDocumento, o2: TipoDocumento): boolean {
+  
+  compararCiudad(o1: any, o2: any): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
     }

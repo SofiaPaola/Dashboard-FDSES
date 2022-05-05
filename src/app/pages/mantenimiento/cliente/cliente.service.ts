@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from './clientes/cliente';
+import { Cliente } from './cliente';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';

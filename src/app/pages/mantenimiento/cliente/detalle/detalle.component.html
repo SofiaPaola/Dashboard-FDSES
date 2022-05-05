@@ -1,24 +1,15 @@
-<!--<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
+<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
   <div style="display: block" class="modal" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title">{{ titulo }}</h3>
-          <nb-icon
-            icon="close-outline"
-            (click)="cerrarModalDetalle()"
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-          </nb-icon>
+          <h3 class="modal-title  text-dark">{{ titulo }}</h3>
         </div>
         <div class="modal-body">
           <div class="container">
             <div class="row">
               <div class="col-sm">
-                <ul *ngIf="cliente" class="list-group text-dark mb-3">
+                <ul *ngIf="cliente" class="list-group mb-3">
                   <li class="list-group-item active">{{ cliente.nombre }}</li>
                   <li class="list-group-item">
                     {{ cliente.tipo_documento.nombre }}
@@ -40,14 +31,9 @@
                   </li>
                 </ul>
               </div>
-              <div class="row">
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  [routerLink]="['/facturas/form', cliente.id]"
-                >
-                  Crear Factura
-                </button>
+              <div class="row text-dark">
+                <nb-icon icon="plus" type="button" [routerLink]="['/facturas/form', cliente.id]">
+                </nb-icon>
               </div>
               <div class="row">
                 <div class="alert alert-info my-4">
@@ -73,20 +59,12 @@
                       <td>{{ factura.createAt }}</td>
                       <td>{{ factura.total }}</td>
                       <td>
-                        <button
-                          class="btn btn-success btn-sm"
-                          type="button"
-                          [routerLink]="['/facturas', factura.id]"
-                        >
+                        <button class="btn btn-success btn-sm" type="button" [routerLink]="['/facturas', factura.id]">
                           Ver
                         </button>
                       </td>
                       <td>
-                        <button
-                          class="btn btn-danger btn-sm"
-                          type="button"
-                          (click)="delete(factura)"
-                        >
+                        <button class="btn btn-danger btn-sm" type="button" (click)="delete(factura)">
                           Eliminar
                         </button>
                       </td>
@@ -97,12 +75,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              (click)="cerrarModalDetalle()"
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
+            <button nbButton (click)="cerrarModal()" type="button" status="danger" data-bs-dismiss="modal">
               Cancelar
             </button>
           </div>
@@ -110,31 +83,4 @@
       </div>
     </div>
   </div>
-</div>-->
-
-<!--<nb-card>
-  <nb-card-header>{{ titulo }}</nb-card-header>
-  <nb-card-body *ngIf="cliente">
-   <li>{{cliente.nombre}}</li>
-  </nb-card-body>
-  <nb-card-footer>
-    <button class="cancel" nbButton status="danger" (click)="dismiss()">
-      Cancel
-    </button>
-  </nb-card-footer>
-</nb-card>-->
-
-<nb-card>
-  <nb-card-header>{{ titulo }}</nb-card-header>
-  <nb-card-body>
-    <ul *ngIf="cliente">
-      <li>{{cliente.nombre}}</li>
-      <li>hola</li>
-    </ul>
-  </nb-card-body>
-  <nb-card-footer>
-    <button nbButton status="danger" (click)="dismiss()">
-      Cancelar
-    </button>
-  </nb-card-footer>
-</nb-card>
+</div>

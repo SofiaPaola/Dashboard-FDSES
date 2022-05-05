@@ -1,104 +1,52 @@
-/*@import '../../../../@theme/styles/themes';
-
-@include nb-install-component() {
-  nb-card {
-    max-width: 600px;
-    max-height: 500px;
-  }
-}
-
-.abrir-modal {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-}
-
-.animacion {
-  animation-duration: 2s;
-  animation-fill-mode: both;
-  -webkit-animation-duration: 2s;
-  -webkit-animation-fill-mode: both;
-}
-
-.fadeIn {
-  animation-name: fadeIn;
-  -webkit-animation-name: fadeIn;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}*/
-
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/breakpoints';
-
 @import '../../../../@theme/styles/themes';
 
 @include nb-install-component() {
-  nb-card-body {
-    display: block;
 
-    button {
-      width: 100%;
-      margin-bottom: 2rem;
-      display: block;
+  nb-icon{
+    width: 50px;
+    height: 50px;
+  }
 
-      &:last-child {
-        margin-bottom: 0;
-      }
+  .abrir-modal {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+  }
+
+  .animacion {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+  }
+
+  .fadeIn {
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 
-  .result-from-dialog {
-    flex-direction: column;
-  }
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
 
-  .form-input-card {
-    nb-card-body {
-      display: block;
+    to {
+      opacity: 1;
     }
   }
 
-  @include media-breakpoint-down(lg) {
-    button {
-      padding: 0.8rem;
-    }
-  }
-
-  @include media-breakpoint-down(is) {
-    button {
-      padding: 0.75rem;
-    }
-  }
 }
-
-
-
-//@import '../../../../@theme/styles/themes';
-
-//@include nb-install-component() {
-//  nb-card {
-//    max-width: 1000px;
-//    max-height: 1000px;
-//  }
-//}

@@ -1,16 +1,15 @@
-import { Component, Input, OnInit} from '@angular/core';
-import { Cliente } from '../clientes/cliente';
+import { Component, Input, OnInit } from '@angular/core';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from '../../modal.service';
-//import { AuthService } from '../../usuarios/auth.service';
 import swal from 'sweetalert2';
-import { NbDialogRef } from '@nebular/theme';
-import { FacturaService } from '../../factura/services/factura.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { ModalService } from '../../modal.service';
+import { Cliente } from '../cliente';
 import { Factura } from '../../factura/models/factura';
+import { FacturaService } from '../../factura/services/factura.service';
 
 @Component({
-  selector: 'ngx-detalle-cliente',
+  selector: 'detalle-cliente',
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.scss']
 })
@@ -22,15 +21,13 @@ export class DetalleComponent implements OnInit {
 
   constructor(private clienteService: ClienteService, 
     private activatedRoute: ActivatedRoute,
-    //private authService:AuthService,
+    private authService:AuthService,
     public modalService: ModalService,
-    public facturaService: FacturaService,
-    protected ref: NbDialogRef<DetalleComponent>
-    ) { }
+    public facturaService: FacturaService) { }
 
   ngOnInit(): void { }
 
-  cerrarModalDetalle() {
+  cerrarModal() {
     this.modalService.cerrarModal();
   }
 
@@ -43,7 +40,7 @@ export class DetalleComponent implements OnInit {
       buttonsStyling: false
     })
     swalfire.fire({
-      title: '¿Está seguro?',
+      title: 'Está seguro?',
       text: `¿Seguro que desea eliminar la factura ${factura.descripcion}?`,
       icon: 'warning',
       showCancelButton: true,
@@ -58,7 +55,7 @@ export class DetalleComponent implements OnInit {
 
         this.facturaService.delete(factura.id).subscribe(
           response => {
-            this.cliente.facturas = this.cliente.facturas.filter((f: Factura) => f !== factura)
+            this.cliente.facturas = this.cliente.facturas.filter(f => f !== factura)
             swal.fire(
               'Factura Eliminado',
               `Factura ${factura.descripcion} eliminado con éxito.`,
@@ -68,10 +65,6 @@ export class DetalleComponent implements OnInit {
         )
       }
     });
-  }
-
-  dismiss() {
-    this.ref.close();
   }
 
 }
