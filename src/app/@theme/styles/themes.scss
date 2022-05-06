@@ -59,23 +59,23 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
     select-min-width: 6rem,
 
     color-basic-100: white, //letra de tema
-    color-basic-200: #3666ec, //tabla
-    color-basic-300: #0057c2, //boton id
+    color-basic-200: #0049b7, //tabla
+    color-basic-300: #0053cf, //boton id
     color-basic-400: #0041a8, //scroball
-    color-basic-500: #002885, //borde del boton id despues de abrir
+    color-basic-500: #003f9e, //borde del boton id despues de abrir
     color-basic-600: white, //iconos
-    color-basic-700: #2b66d3, //fondo card
+    color-basic-700: #0050c8, //fondo card
     color-basic-800: white, //letra
-    color-basic-900: #002885, //fondo
+    color-basic-900: #003f9e, //fondo
     background-basic-color-1: color-basic-700, //llama el fondo del card
     background-basic-color-2: color-basic-200, //llama el fondo de tabla
     background-basic-color-3: color-basic-900, //llama el fondo
     background-basic-color-4: color-basic-400, //llama el scroball
-    border-basic-color-1: color-basic-500,
-    border-basic-color-2: color-basic-500,
+    border-basic-color-1: color-basic-100,
+    border-basic-color-2: color-basic-100,
     border-basic-color-3: color-basic-900, //borde tabla
     border-basic-color-4: color-basic-400, //borde card
-    border-basic-color-5: color-basic-500,
+    border-basic-color-5: color-basic-100,
   ), corporate, corporate);
 
 $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
