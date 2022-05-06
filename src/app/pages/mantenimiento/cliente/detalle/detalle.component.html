@@ -32,10 +32,10 @@
                 </ul>
               </div>
               <div class="row text-dark">
-                <nb-icon icon="plus" type="button" [routerLink]="['/facturas/form', cliente.id]">
+                <nb-icon *ngIf="authService.hasRole('ROLE_ADMIN')" icon="plus" type="button" [routerLink]="['/facturas/form', cliente.id]">
                 </nb-icon>
               </div>
-              <div class="row">
+              <div *ngIf="authService.hasRole('ROLE_ADMIN')" class="row">
                 <div class="alert alert-info my-4">
                   No hay facturas asignadas para el cliente
                   {{ cliente.nombre }}

@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { Usuario } from 'src/app/auth/usuario';
 
 export interface User {
   name: string;
@@ -6,7 +7,7 @@ export interface User {
 }
 
 export interface Contacts {
-  user: User;
+  usuario: Usuario;
   type: string;
 }
 

@@ -1,4 +1,9 @@
-import { ModuleWithProviders, NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   NbActionsModule,
@@ -15,11 +20,7 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
-
-import {
-  FooterComponent,
-  HeaderComponent
-} from './components';
+import { FooterComponent, HeaderComponent } from './components';
 import {
   CapitalizePipe,
   PluralPipe,
@@ -27,9 +28,7 @@ import {
   TimingPipe,
   NumberWithCommasPipe,
 } from './pipes';
-import {
-  OneColumnLayoutComponent,
-} from './layouts';
+import { OneColumnLayoutComponent } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
@@ -49,11 +48,7 @@ const NB_MODULES = [
   NbIconModule,
   NbEvaIconsModule,
 ];
-const COMPONENTS = [
-  HeaderComponent,
-  FooterComponent,
-  OneColumnLayoutComponent,
-];
+const COMPONENTS = [HeaderComponent, FooterComponent, OneColumnLayoutComponent];
 const PIPES = [
   CapitalizePipe,
   PluralPipe,
@@ -66,7 +61,7 @@ const PIPES = [
   imports: [CommonModule, ...NB_MODULES],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {

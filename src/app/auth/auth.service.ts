@@ -7,7 +7,6 @@ import { Usuario } from './usuario';
   providedIn: 'root'
 })
 export class AuthService {
-
   private _usuario!: Usuario;
   private _token!: string;
 
@@ -95,4 +94,8 @@ export class AuthService {
     sessionStorage.removeItem('usuario');
   }
 
+}
+
+export abstract class UsuarioData {
+  abstract getUsers(): Observable<Usuario[]>;
 }
