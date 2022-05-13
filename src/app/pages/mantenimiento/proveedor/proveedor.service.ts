@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -13,7 +13,13 @@ import { Proveedor } from './proveedores/proveedor';
 export class ProveedorService {
   private urlEndPoint: string = 'http://localhost:8080/api/proveedores';
 
+  private _notificarUpload = new EventEmitter<any>();
+
   constructor(private http: HttpClient, private router: Router) {}
+  
+  get notificarUpload(): EventEmitter<any> {
+    return this._notificarUpload;
+  }
 
   getTipoDocumento(): Observable<TipoDocumento[]> {
     return this.http.get<TipoDocumento[]>(
@@ -104,4 +110,17 @@ export class ProveedorService {
       })
     );
   }
+
+  subirArchivo(archivo: File, id: any): Observable<HttpEvent<{}>> {
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
+  }
+
 }

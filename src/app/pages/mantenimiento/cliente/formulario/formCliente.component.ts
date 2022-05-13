@@ -22,7 +22,7 @@ export class FormClienteComponent implements OnInit {
   ciudades!: Ciudad[];
   tipos_documentos!: TipoDocumento[];
   departamentos!: Departamento[];
-  titulo: string = 'Crear Cliente';
+  titulo: string = 'Crear / Editar Cliente';
 
   //autocompleteControl = new FormControl();
   //ciudadesFiltrados: Observable<Ciudad[]>;

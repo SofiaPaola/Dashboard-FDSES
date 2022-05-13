@@ -19,7 +19,7 @@ export class FormVendedorComponent implements OnInit {
 
   ciudades!: Ciudad[];
   tipos_documentos!: TipoDocumento[];
-  titulo: string = 'Crear Vendedor';
+  titulo: string = 'Crear / Editar Vendedor';
 
   //autocompleteControl = new FormControl();
   //ciudadesFiltrados: Observable<Ciudad[]>;

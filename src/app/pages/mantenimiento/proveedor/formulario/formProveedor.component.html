@@ -6,7 +6,7 @@
 
 <div class="row">
   <nb-card>
-    <nb-card-header>{{ titulo }}</nb-card-header>
+    <nb-card-header><nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/mantenimiento/proveedores']"></nb-icon>{{ titulo }}</nb-card-header>
     <nb-card-body>
       <form #proveedorForm="ngForm">
         <div class="form-group row">
@@ -70,7 +70,7 @@
         <div class="form-group row">
           <label for="ciudad" class="col-form-label col-sm-2 mb-3">Ciudad</label>
           <div class="col-sm-4">
-            <nb-select [compareWith]="compararCiudad" [(ngModel)]="proveedor.ciudad"  name="ciudad"
+            <nb-select [compareWith]="compararCiudad" [(ngModel)]="proveedor.ciudad" name="ciudad"
               placeholder="Seleccione una Ciudad" fullWidth>
               <!-- <nb-option [value]="undefined">Seleccione una Ciudad</nb-option> -->
               <nb-option *ngFor="let ciudad of ciudades" [value]="ciudad">
@@ -137,33 +137,6 @@
         </div>
 
         <div class="form-group row">
-          <label for="activo" class="col-form-label col-sm-2 mb-3">
-            Activo
-          </label>
-          <div class="col-sm-4">
-            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.activo" name="activo"
-              #activo="ngModel" />
-            <div class="alert alert-danger" *ngIf="activo.invalid && (activo.dirty || activo.touched)">
-              <div *ngIf="activo.errors?.['required']">
-                El activo es requerido
-              </div>
-              <div *ngIf="activo.errors?.['minlength']">
-                El activo debe ser 1(Si) o 0(No)
-              </div>
-            </div>
-          </div>
-          <label for="fecha_ingreso" class="col-form-label col-sm-2 mb-3">
-            Fecha Ingreso
-          </label>
-          <div class="col-sm-3">
-            <input nbInput fullWidth matInput [matDatepicker]="miDatepicker" class="form-control"
-              [(ngModel)]="proveedor.fecha_ingreso" name="fecha_ingreso" style="display: inline; width: 180px" />
-            <mat-datepicker-toggle matSuffix [for]="miDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #miDatepicker></mat-datepicker>
-          </div>
-        </div>
-
-        <div class="form-group row">
           <label for="email" class="col-form-label col-sm-2 mb-3">Email</label>
           <div class="col-sm-9">
             <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.email" name="email"
@@ -175,6 +148,22 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="critico" class="col-form-label col-sm-2 mb-3">Critico</label>
+          <div class="col-sm-9">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.critico" name="critico"
+              #critico="ngModel" />
+            <div class="alert alert-danger" *ngIf="critico.invalid && (critico.dirty || critico.touched)">
+              <div *ngIf="critico.errors?.['required']">
+                El critico es requerido
+              </div>
+              <div *ngIf="critico.errors?.['minlength']">
+                El critico debe ser Si o No
+              </div>
+            </div>
+          </div>          
         </div>
 
         <div class="form-group row">
@@ -193,42 +182,30 @@
               </div>
             </div>
           </div>
-          <label for="disponibilidad" class="col-form-label col-sm-2 mb-3">Disponibilidad</label>
+          <label for="fecha_ingreso" class="col-form-label col-sm-2 mb-3">
+            Fecha Ingreso
+          </label>
           <div class="col-sm-3">
-            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.disponibilidad"
-              name="disponibilidad" #disponibilidad="ngModel" />
-            <div class="alert alert-danger" *ngIf="
-              disponibilidad.invalid &&
-              (disponibilidad.dirty || disponibilidad.touched)
-            ">
-              <div *ngIf="disponibilidad.errors?.['required']">
-                El disponibilidad es requerido
-              </div>
-              <div *ngIf="disponibilidad.errors?.['minlength']">
-                El disponibilidad debe ser 1(Si) o 0(No)
-              </div>
-            </div>
+            <input nbInput fullWidth matInput [matDatepicker]="miDatepicker" class="form-control"
+              [(ngModel)]="proveedor.fecha_ingreso" name="fecha_ingreso" style="display: inline; width: 180px" />
+            <mat-datepicker-toggle matSuffix [for]="miDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #miDatepicker></mat-datepicker>
           </div>
         </div>
 
         <div class="form-group row">
-          <label for="critico" class="col-form-label col-sm-2 mb-3">Critico</label>
-          <div class="col-sm-4">
-            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.critico" name="critico"
-              #critico="ngModel" />
-            <div class="alert alert-danger" *ngIf="critico.invalid && (critico.dirty || critico.touched)">
-              <div *ngIf="critico.errors?.['required']">
-                El critico es requerido
-              </div>
-              <div *ngIf="critico.errors?.['minlength']">
-                El critico debe ser Si o No
+          <label for="archivo_arl" class="col-form-label col-sm-2 mb-3">Archivo Arl</label>
+          <div class="col-sm-9">
+            <div class="input-group mb-3">
+              <div class="input-group">
+                <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.archivo_arl"
+                  name="archivo_arl" #archivo_arl="ngModel" (change)="seleccionarArchivo($event)" type="file"
+                  class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload">
+                <button (click)="subirArchivo()" nbButton status="success" type="button"
+                  id="inputGroupFileAddon04">Subir</button>
               </div>
             </div>
-          </div>
-          <label for="archivo_arl" class="col-form-label col-sm-2 mb-3">Archivo Arl</label>
-          <div class="col-sm-3">
-            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.archivo_arl"
-              name="archivo_arl" #archivo_arl="ngModel" />
             <div class="alert alert-danger" *ngIf="
               archivo_arl.invalid && (archivo_arl.dirty || archivo_arl.touched)
             ">
