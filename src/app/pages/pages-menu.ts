@@ -23,6 +23,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Compras',
+    icon: 'shopping-bag-outline',
+    link: ''
+  },
+  {
     title: 'Laboratorio',
     icon: 'info-outline',
     link: '/pages/laboratorio',
