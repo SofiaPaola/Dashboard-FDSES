@@ -107,7 +107,7 @@ export class FormProveedorComponent implements OnInit {
     this.archivoSeleccionada = event.target.files[0];
     this.progreso = 0;
     console.log(this.archivoSeleccionada);
-    if (this.archivoSeleccionada.type.indexOf('application/pdf') < 0) {
+    if (this.archivoSeleccionada.type.indexOf('application/vnd.openxmlformats-officedocument.wordprocessingml.document') < 0) {
       swal.fire('Error seleccionar archivo: ', 'El archivo debe ser del tipo pdf o docx', 'error');
       this.archivoSeleccionada == null;
     }
@@ -116,7 +116,7 @@ export class FormProveedorComponent implements OnInit {
   subirArchivo() {
 
     if (!this.archivoSeleccionada) {
-      swal.fire('Error Upload: ', 'Debe seleccionar una foto', 'error');
+      swal.fire('Error Upload: ', 'Debe seleccionar un documento', 'error');
     } else {
       this.proveedorService.subirArchivo(this.archivoSeleccionada, this.proveedor.id)
         .subscribe(event => {

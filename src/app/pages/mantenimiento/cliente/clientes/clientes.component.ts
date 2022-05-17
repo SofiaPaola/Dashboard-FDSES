@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
 import { tap } from 'rxjs/operators';
@@ -6,8 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { ModalService } from '../../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
-import { DetalleComponent } from '../detalle/detalle.component';
-import { NbDialogService } from '@nebular/theme';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -26,7 +24,6 @@ export class ClientesComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public authService: AuthService,
     public modalService: ModalService,
-    private dialogService: NbDialogService
   ) {}
 
   ngOnInit(): void {

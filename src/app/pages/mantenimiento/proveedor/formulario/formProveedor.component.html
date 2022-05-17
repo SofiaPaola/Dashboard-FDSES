@@ -6,7 +6,9 @@
 
 <div class="row">
   <nb-card>
-    <nb-card-header><nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/mantenimiento/proveedores']"></nb-icon>{{ titulo }}</nb-card-header>
+    <nb-card-header>
+      <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/mantenimiento/proveedores']"></nb-icon>{{ titulo }}
+    </nb-card-header>
     <nb-card-body>
       <form #proveedorForm="ngForm">
         <div class="form-group row">
@@ -68,18 +70,8 @@
         </div>
 
         <div class="form-group row">
-          <label for="ciudad" class="col-form-label col-sm-2 mb-3">Ciudad</label>
-          <div class="col-sm-4">
-            <nb-select [compareWith]="compararCiudad" [(ngModel)]="proveedor.ciudad" name="ciudad"
-              placeholder="Seleccione una Ciudad" fullWidth>
-              <!-- <nb-option [value]="undefined">Seleccione una Ciudad</nb-option> -->
-              <nb-option *ngFor="let ciudad of ciudades" [value]="ciudad">
-                {{ ciudad.nombre }}
-              </nb-option>
-            </nb-select>
-          </div>
           <label for="cargo" class="col-form-label col-sm-2 mb-3">Cargo</label>
-          <div class="col-sm-3">
+          <div class="col-sm-9">
             <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.cargo" name="cargo"
               #cargo="ngModel" />
             <div class="alert alert-danger" *ngIf="cargo.invalid && (cargo.dirty || cargo.touched)">
@@ -151,19 +143,27 @@
         </div>
 
         <div class="form-group row">
-          <label for="critico" class="col-form-label col-sm-2 mb-3">Critico</label>
-          <div class="col-sm-9">
-            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.critico" name="critico"
-              #critico="ngModel" />
-            <div class="alert alert-danger" *ngIf="critico.invalid && (critico.dirty || critico.touched)">
-              <div *ngIf="critico.errors?.['required']">
-                El critico es requerido
-              </div>
-              <div *ngIf="critico.errors?.['minlength']">
-                El critico debe ser Si o No
+          <label for="ciudad" class="col-form-label col-sm-2 mb-3">Ciudad</label>
+          <div class="col-sm-4">
+            <nb-select [compareWith]="compararCiudad" [(ngModel)]="proveedor.ciudad" name="ciudad"
+              placeholder="Seleccione una Ciudad" fullWidth>
+              <!-- <nb-option [value]="undefined">Seleccione una Ciudad</nb-option> -->
+              <nb-option *ngFor="let ciudad of ciudades" [value]="ciudad">
+                {{ ciudad.nombre }}
+              </nb-option>
+            </nb-select>
+          </div>
+          <label for="cargo" class="col-form-label col-sm-2 mb-3">Cargo</label>
+          <div class="col-sm-3">
+            <input nbInput fullWidth type="text" class="form-control" [(ngModel)]="proveedor.cargo" name="cargo"
+              #cargo="ngModel" />
+            <div class="alert alert-danger" *ngIf="cargo.invalid && (cargo.dirty || cargo.touched)">
+              <div *ngIf="cargo.errors?.['required']">El cargo es requerido</div>
+              <div *ngIf="cargo.errors?.['minlength']">
+                El cargo debe tener al menos 4 caracteres
               </div>
             </div>
-          </div>          
+          </div>
         </div>
 
         <div class="form-group row">
