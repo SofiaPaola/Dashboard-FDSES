@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Proveedor } from './proveedor';
+import { Proveedor } from '../proveedor';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
@@ -15,6 +15,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class ProveedoresComponent implements OnInit {
   proveedores: any = Proveedor;
+
+  filterpost = "";
 
   public page!: number;
   paginador: any;

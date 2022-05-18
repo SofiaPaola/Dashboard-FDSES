@@ -5,7 +5,6 @@ import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { ModalService } from '../../modal.service';
-import { LocalDataSource } from 'ng2-smart-table';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -19,12 +18,21 @@ export class ClientesComponent implements OnInit {
   clienteSeleccionado!: Cliente;
   nuevoCliente!: Cliente;
 
+  filterpost = "";
+
   constructor(
     private clienteService: ClienteService,
     private activatedRoute: ActivatedRoute,
     public authService: AuthService,
     public modalService: ModalService,
-  ) {}
+    // private service: SmartTableData
+  ) {
+    // this.source = new LocalDataSource();
+
+    // this.clienteService.getClientes().forEach((data: any[]) => {
+    //   this.source.load(data);
+    // });
+  }
 
   ngOnInit(): void {
     this.clienteService
@@ -49,7 +57,54 @@ export class ClientesComponent implements OnInit {
     });
   }
 
-  source: LocalDataSource = new LocalDataSource();
+  // settings = {
+  //   add: {
+  //     addButtonContent: '<nb-icon  icon="plus-outline"></nb-icon>',
+  //     createButtonContent: '<nb-icon  icon="checkmark-outline"></nb-icon>',
+  //     cancelButtonContent: '<nb-icon  icon="close-outline"></nb-icon>',
+  //   },
+  //   edit: {
+  //     editButtonContent: '<nb-icon  icon="edit-outline"></nb-icon>',
+  //     saveButtonContent: '<nb-icon  icon="checkmark-outline"></nb-icon>',
+  //     cancelButtonContent: '<nb-icon  icon="close-outline"></nb-icon>',
+  //   },
+  //   delete: {
+  //     deleteButtonContent: '<nb-icon  icon="trash-2-outline"></nb-icon>',
+  //     confirmDelete: true,
+  //   },
+  //   columns: {
+  //     id: {
+  //       title: 'ID',
+  //       type: 'number',
+  //     },
+  //     nombre: {
+  //       title: 'Nombre',
+  //       type: 'string',
+  //     },
+  //     docuemnto: {
+  //       title: 'Docuemnto',
+  //       type: 'string',
+  //     },
+  //     email: {
+  //       title: 'Email',
+  //       type: 'string',
+  //     },
+  //     telefono: {
+  //       title: 'Telefono',
+  //       type: 'string',
+  //     },
+  //     celular: {
+  //       title: 'Celular',
+  //       type: 'string',
+  //     },
+  //     direccion: {
+  //       title: 'Direccion',
+  //       type: 'string',
+  //     },
+  //   },
+  // };
+
+  // source: LocalDataSource = new LocalDataSource();
 
   delete(cliente: Cliente): void {
     const swalfire = swal.mixin({
@@ -92,5 +147,4 @@ export class ClientesComponent implements OnInit {
     this.clienteSeleccionado = cliente;
     this.modalService.abrirModal();
   }
-
 }

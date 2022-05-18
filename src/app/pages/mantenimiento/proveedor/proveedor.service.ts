@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Ciudad } from '../ciudad';
 import { TipoDocumento } from '../tipo_documento';
-import { Proveedor } from './proveedores/proveedor';
+import { Proveedor } from './proveedor';
 
 @Injectable({
   providedIn: 'root',

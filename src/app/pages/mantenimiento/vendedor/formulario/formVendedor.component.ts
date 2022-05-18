@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Ciudad } from '../../ciudad';
 import { TipoDocumento } from '../../tipo_documento';
 import { VendedorService } from '../vendedor.service';
-import { Vendedor } from '../vendedores/vendedor';
+import { Vendedor } from '../vendedor';
 /*import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';

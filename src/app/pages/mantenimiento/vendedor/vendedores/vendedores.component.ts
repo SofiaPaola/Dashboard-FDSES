@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Vendedor } from './vendedor';
+import { Vendedor } from '../vendedor';
 import { VendedorService } from '../vendedor.service';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,8 @@ export class VendedoresComponent implements OnInit {
   
   vendedores: any = Vendedor;
   public page!: number;
+
+  filterpost = "";
 
   vendedorSeleccionado!: Vendedor;
 

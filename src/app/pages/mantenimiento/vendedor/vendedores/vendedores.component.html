@@ -2,6 +2,8 @@
   <detalles-vendedor *ngIf="vendedorSeleccionado" [vendedor]="vendedorSeleccionado"></detalles-vendedor>
   <nb-card-body>
     <h2 class="card-title" style="text-align: center">Listado de Vendedores</h2>
+    <input nbInput fieldSize="small" type="text" class="forms-control" placeholder="Buscar..." [(ngModel)]="filterpost"
+      name="filterpost" />
     <div class="my-2 text-left">
       <nb-icon *ngIf="authService.hasRole('ROLE_ADMIN')" icon="plus-outline" type="button"
         [routerLink]="['./formVendedor']"></nb-icon>
@@ -29,6 +31,7 @@
           <tr *ngFor="
               let vendedor of vendedores
                 | paginate: { itemsPerPage: 10, currentPage: page }
+                | filtrar: filterpost
             ">
             <td>
               <button nbButton name="ver" (click)="abrirModal(vendedor)">

@@ -36,6 +36,7 @@ import { VendedorService } from './vendedor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
 import { TokenInterceptor } from 'src/app/auth/interceptors/token.interceptor';
+import { FilterPipe } from './pipes/filter.pipe';
 
 registerLocaleData(localeES, 'es');
 
@@ -72,7 +73,7 @@ registerLocaleData(localeES, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  declarations: [VendedoresComponent, FormVendedorComponent, DetallesComponent],
+  declarations: [VendedoresComponent, FormVendedorComponent, DetallesComponent, FilterPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class VendedorModule {}

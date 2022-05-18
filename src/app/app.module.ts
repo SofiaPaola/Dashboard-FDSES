@@ -28,7 +28,6 @@ import { ThemeModule } from './@theme/theme.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatInputModule } from '@angular/material/input';
-import { AngularEmojisModule } from 'angular-emojis';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -36,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { NbAuthModule } from '@nebular/auth';
+import { ClienteModule } from './pages/mantenimiento/cliente/cliente.module';
 
 registerLocaleData(localeES, 'es');
 
@@ -65,8 +65,8 @@ registerLocaleData(localeES, 'es');
     MatInputModule,
     NbSelectModule,
     MatFormFieldModule,
-    AngularEmojisModule,
     NgxPaginationModule,
+    ClienteModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

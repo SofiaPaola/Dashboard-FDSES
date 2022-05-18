@@ -5,6 +5,8 @@
     <h2 class="card-title" style="text-align: center">
       Listado de Proveedores
     </h2>
+    <input nbInput fieldSize="small" type="text" class="forms-control" placeholder="Buscar..." [(ngModel)]="filterpost"
+      name="filterpost" />
     <div class="my-2 text-left">
       <nb-icon *ngIf="authService.hasRole('ROLE_ADMIN')" icon="plus-outline" type="button"
         [routerLink]="['./formProveedor']"></nb-icon>
@@ -32,6 +34,7 @@
           <tr *ngFor="
               let proveedor of proveedores
                 | paginate: { itemsPerPage: 8, currentPage: page }
+                | filtrar: filterpost
             ">
             <td>
               <button nbButton name="ver" (click)="abrirModal(proveedor)">
