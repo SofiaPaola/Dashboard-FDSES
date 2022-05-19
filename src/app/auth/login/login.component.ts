@@ -36,7 +36,7 @@ export class LoginComponent {
         this.authService.guardarUsuario(response.access_token);
         this.authService.guardarToken(response.access_token);
         let usuario = this.authService.usuario.nombre;
-        this.router.navigate(['/clientes']);
+        this.router.navigate(['./pages']);
         swal.fire(
           'Login',
           `Hola ${usuario}, has iniciado sesion con exito!`,

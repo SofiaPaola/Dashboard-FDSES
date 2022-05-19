@@ -18,6 +18,7 @@ import {
   NbInputModule,
   NbOptionModule,
   NbDatepickerModule,
+  NbFormFieldModule,
 } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -68,6 +69,7 @@ registerLocaleData(localeES, 'es');
     MatFormFieldModule,
     NgxPaginationModule,
     ClienteRoutingModule,
+    NbFormFieldModule,
     //Ng2SmartTableModule
   ],
   providers: [

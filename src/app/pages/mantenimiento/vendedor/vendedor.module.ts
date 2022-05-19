@@ -17,6 +17,7 @@ import {
   NbUserModule,
   NbInputModule,
   NbOptionModule,
+  NbFormFieldModule,
 } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -66,6 +67,7 @@ registerLocaleData(localeES, 'es');
     MatFormFieldModule,
     NgxPaginationModule,
     VendedorRoutingModule,
+    NbFormFieldModule,
   ],
   providers: [
     VendedorService,
