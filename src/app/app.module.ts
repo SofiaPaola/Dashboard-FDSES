@@ -22,6 +22,7 @@ import {
   NbCardModule,
   NbListModule,
   NbChatModule,
+  NbUserModule,
 } from '@nebular/theme';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -35,7 +36,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { NbAuthModule } from '@nebular/auth';
-import { ClienteModule } from './pages/mantenimiento/cliente/cliente.module';
 
 registerLocaleData(localeES, 'es');
 
@@ -66,7 +66,7 @@ registerLocaleData(localeES, 'es');
     NbSelectModule,
     MatFormFieldModule,
     NgxPaginationModule,
-    ClienteModule
+    NbUserModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

@@ -110,15 +110,12 @@ export class FormProveedorComponent implements OnInit {
     this.archivoSeleccionada = event.target.files[0];
     console.log(this.archivoSeleccionada);
     if (
-      this.archivoSeleccionada.type.indexOf('application/pdf') < 0
-      ||
-      this.archivoSeleccionada.type.indexOf(
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-      ) < 0
+      this.archivoSeleccionada.type.indexOf('application/pdf') < 0 //||
+      //this.archivoSeleccionada.type.indexOf('application/msword') < 0
     ) {
       swal.fire(
         'Error seleccionar archivo: ',
-        'El archivo debe ser del tipo pdf o docx',
+        'El archivo debe ser del tipo pdf',
         'error'
       );
       this.archivoSeleccionada == null;
