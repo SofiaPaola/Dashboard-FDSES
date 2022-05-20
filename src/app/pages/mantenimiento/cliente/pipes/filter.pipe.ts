@@ -10,9 +10,6 @@ export class FilterPipe implements PipeTransform {
     for(const cliente of value){
       if(cliente.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1){
          resultposts.push(cliente);
-      } else {
-        (cliente.docuemto.indexOf(arg) > -1)
-        resultposts.push(cliente);
       }
     };
     return resultposts;
