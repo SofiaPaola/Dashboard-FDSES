@@ -6,18 +6,11 @@ import {
 } from '@angular/core';
 import {
   NbCardModule,
-  NbListModule,
-  NbDialogModule,
-  NbActionsModule,
   NbButtonModule,
   NbIconModule,
-  NbRadioModule,
   NbSelectModule,
-  NbTabsetModule,
-  NbUserModule,
   NbInputModule,
   NbOptionModule,
-  NbSelectComponent,
   NbFormFieldModule,
 } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
@@ -48,13 +41,7 @@ registerLocaleData(localeES, 'es');
     ThemeModule,
     NbCardModule,
     NbButtonModule,
-    NbTabsetModule,
-    NbActionsModule,
-    NbRadioModule,
     NbSelectModule,
-    NbDialogModule,
-    NbUserModule,
-    NbListModule,
     NbIconModule,
     NbInputModule,
     NbOptionModule,
