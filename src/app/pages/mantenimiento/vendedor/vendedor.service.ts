@@ -11,7 +11,6 @@ import { Vendedor } from './vendedor';
   providedIn: 'root',
 })
 export class VendedorService {
-  
   private urlEndPoint: string = 'http://localhost:8080/api/vendedores';
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -67,7 +66,7 @@ export class VendedorService {
   create(vendedor: Vendedor): Observable<Vendedor> {
     return this.http.post(this.urlEndPoint, vendedor).pipe(
       map((response: any) => response.cliente as Vendedor),
-      catchError(e => {
+      catchError((e) => {
         if (e.status == 400) {
           return throwError(e);
         }
@@ -75,8 +74,7 @@ export class VendedorService {
           console.error(e.error.mensaje);
         }
         return throwError(e);
-      }
-      )
+      })
     );
   }
 

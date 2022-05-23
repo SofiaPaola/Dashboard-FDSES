@@ -7,7 +7,9 @@
 
 <div class="row">
   <nb-card>
-    <nb-card-header><nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/mantenimiento/vendedores']"></nb-icon>{{ titulo }}</nb-card-header>
+    <nb-card-header>
+      <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/mantenimiento/vendedores']"></nb-icon>{{ titulo }}
+    </nb-card-header>
     <nb-card-body>
       <form #vendedorForm="ngForm">
         <div class="form-group row">

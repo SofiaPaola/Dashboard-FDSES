@@ -8,13 +8,12 @@ import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';*/
 import { Departamento } from '../../departamento';
-import { ModalService } from '../../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cliente';
 @Component({
   selector: 'ngx-formCliente',
-  templateUrl: './formCliente.component.html'
+  templateUrl: './formCliente.component.html',
 })
 export class FormClienteComponent implements OnInit {
   public cliente: Cliente = new Cliente();
@@ -142,7 +141,7 @@ export class FormClienteComponent implements OnInit {
       ? false
       : a1.id === a2.id;
   }
-  
+
   compararCiudad(o1: any, o2: any): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;

@@ -8,24 +8,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Clientes',
         icon: 'people-outline',
-        link: '/pages/mantenimiento/clientes',       
+        link: '/pages/mantenimiento/clientes',
       },
       {
         title: 'Proveedores',
         icon: 'car-outline',
-        link: '/pages/mantenimiento/proveedores'
+        link: '/pages/mantenimiento/proveedores',
       },
       {
         title: 'Vendedores',
         icon: 'shopping-cart-outline',
-        link: '/pages/mantenimiento/vendedores'
-      }
-    ]
+        link: '/pages/mantenimiento/vendedores',
+      },
+    ],
   },
   {
     title: 'Compras',
     icon: 'shopping-bag-outline',
-    link: ''
+    link: '/pagaes/compra',
   },
   {
     title: 'Laboratorio',

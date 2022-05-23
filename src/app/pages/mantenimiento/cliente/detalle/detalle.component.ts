@@ -11,61 +11,60 @@ import { FacturaService } from '../../factura/services/factura.service';
 @Component({
   selector: 'detalle-cliente',
   templateUrl: './detalle.component.html',
-  styleUrls: ['./detalle.component.scss']
+  styleUrls: ['./detalle.component.scss'],
 })
 export class DetalleComponent implements OnInit {
-
   @Input() cliente!: Cliente;
-  titulo: string = "Detalle del Cliente";
-  
+  titulo: string = 'Detalle del Cliente';
 
-  constructor(private clienteService: ClienteService, 
+  constructor(
+    private clienteService: ClienteService,
     private activatedRoute: ActivatedRoute,
-    private authService:AuthService,
+    private authService: AuthService,
     public modalService: ModalService,
-    public facturaService: FacturaService) { }
+    public facturaService: FacturaService
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   cerrarModal() {
     this.modalService.cerrarModal();
   }
 
-  delete(factura: Factura): void{
+  delete(factura: Factura): void {
     const swalfire = swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+        cancelButton: 'btn btn-danger',
       },
-      buttonsStyling: false
-    })
-    swalfire.fire({
-      title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar la factura ${factura.descripcion}?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No, cancelar',
       buttonsStyling: false,
-      reverseButtons: true
-    }).then((result) => {
-      if (result.value) {
-
-        this.facturaService.delete(factura.id).subscribe(
-          response => {
-            this.cliente.facturas = this.cliente.facturas.filter(f => f !== factura)
+    });
+    swalfire
+      .fire({
+        title: 'Está seguro?',
+        text: `¿Seguro que desea eliminar la factura ${factura.descripcion}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar',
+        cancelButtonText: 'No, cancelar',
+        buttonsStyling: false,
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.value) {
+          this.facturaService.delete(factura.id).subscribe((response) => {
+            this.cliente.facturas = this.cliente.facturas.filter(
+              (f) => f !== factura
+            );
             swal.fire(
               'Factura Eliminado',
               `Factura ${factura.descripcion} eliminado con éxito.`,
               'success'
-            )
-          }
-        )
-      }
-    });
+            );
+          });
+        }
+      });
   }
-
 }
-

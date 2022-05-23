@@ -66,7 +66,7 @@ registerLocaleData(localeES, 'es');
     ProveedoresComponent,
     DetallesComponents,
     FormProveedorComponent,
-    FilterPipe
+    FilterPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

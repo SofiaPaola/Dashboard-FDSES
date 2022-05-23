@@ -8,18 +8,18 @@ import { FormsModule } from '@angular/forms';
 import { NbCardModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { MantenimientoComponent } from './mantenimiento.component';
-import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
 
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { CompraRoutingModule } from './compra-routing.module';
+import { CompraComponent } from './compra.component';
 
 registerLocaleData(localeES, 'es');
 @NgModule({
-  imports: [FormsModule, ThemeModule, NbCardModule, MantenimientoRoutingModule],
-  declarations: [MantenimientoComponent],
+  imports: [FormsModule, ThemeModule, NbCardModule, CompraRoutingModule],
+  declarations: [CompraComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'es' }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  exports: [MantenimientoRoutingModule],
+  exports: [CompraRoutingModule],
 })
-export class MantenimientoModule {}
+export class CompraModule {}

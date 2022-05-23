@@ -62,7 +62,12 @@ registerLocaleData(localeES, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  declarations: [ClientesComponent, FormClienteComponent, DetalleComponent, FilterPipe],
+  declarations: [
+    ClientesComponent,
+    FormClienteComponent,
+    DetalleComponent,
+    FilterPipe,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class ClienteModule {}

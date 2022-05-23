@@ -16,7 +16,7 @@ export class ProveedorService {
   private _notificarUpload = new EventEmitter<any>();
 
   constructor(private http: HttpClient, private router: Router) {}
-  
+
   get notificarUpload(): EventEmitter<any> {
     return this._notificarUpload;
   }
@@ -113,14 +113,18 @@ export class ProveedorService {
 
   subirArchivo(archivo: File, id: any): Observable<HttpEvent<{}>> {
     let formData = new FormData();
-    formData.append("archivo", archivo);
-    formData.append("id", id);
+    formData.append('archivo', archivo);
+    formData.append('id', id);
 
-    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
-      reportProgress: true
-    });
+    const req = new HttpRequest(
+      'POST',
+      `${this.urlEndPoint}/upload`,
+      formData,
+      {
+        reportProgress: true,
+      }
+    );
 
     return this.http.request(req);
   }
-
 }

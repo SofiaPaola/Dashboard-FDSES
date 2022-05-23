@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+} from '@angular/common/http';
 import swal from 'sweetalert2';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -8,15 +13,15 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
-      catchError(e => {
+      catchError((e) => {
         if (e.status == 401) {
-
           if (this.authService.isAuthenticated()) {
             this.authService.logout();
           }
@@ -24,10 +29,14 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         if (e.status == 403) {
-          swal.fire('Acceso denegado', `Hola ${this.authService.usuario.nombre} no tienes acceso a este recurso!`, 'warning');
+          swal.fire(
+            'Acceso denegado',
+            `Hola ${this.authService.usuario.nombre} no tienes acceso a este recurso!`,
+            'warning'
+          );
           this.router.navigate(['/clientes']);
           this.router.navigate(['/proveedores']);
-          this.router.navigate(['/vendedores'])
+          this.router.navigate(['/vendedores']);
         }
         return throwError(e);
       })

@@ -18,17 +18,16 @@ export class ClientesComponent implements OnInit {
   clienteSeleccionado!: Cliente;
   nuevoCliente!: Cliente;
 
-  filterpost = "";
+  filterpost = '';
 
   constructor(
     private clienteService: ClienteService,
     private activatedRoute: ActivatedRoute,
     public authService: AuthService,
-    public modalService: ModalService,
-    // private service: SmartTableData
-  ) {
+    public modalService: ModalService
+  ) // private service: SmartTableData
+  {
     // this.source = new LocalDataSource();
-
     // this.clienteService.getClientes().forEach((data: any[]) => {
     //   this.source.load(data);
     // });

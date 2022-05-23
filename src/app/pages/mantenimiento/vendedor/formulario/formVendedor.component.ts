@@ -128,7 +128,9 @@ export class FormVendedorComponent implements OnInit {
       return true;
     }
 
-    return v1 === null || v2 === null || v1 === undefined || v2 === undefined ? false : v1.id === v2.id;
+    return v1 === null || v2 === null || v1 === undefined || v2 === undefined
+      ? false
+      : v1.id === v2.id;
   }
 
   compararTipoDocumento(v1: TipoDocumento, v2: TipoDocumento): boolean {
@@ -136,6 +138,8 @@ export class FormVendedorComponent implements OnInit {
       return true;
     }
 
-    return v1 === null || v2 === null || v1 === undefined || v2 === undefined ? false : v1.id === v2.id;
+    return v1 === null || v2 === null || v1 === undefined || v2 === undefined
+      ? false
+      : v1.id === v2.id;
   }
 }
