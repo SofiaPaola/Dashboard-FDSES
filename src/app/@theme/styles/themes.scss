@@ -67,11 +67,13 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
     color-basic-700: #0050c8, //fondo card
     color-basic-800: white, //letra
     color-basic-900: #003f9e, //fondo
+    color-basic-1000: black,
+    color-basic-1100: #002d70,
     background-basic-color-1: color-basic-700, //llama el fondo del card
     background-basic-color-2: color-basic-200, //llama el fondo de tabla
     background-basic-color-3: color-basic-900, //llama el fondo
-    background-basic-color-4: color-basic-400, //llama el scroball
-    border-basic-color-1: color-basic-100,
+    background-basic-color-4: color-basic-1100, //llama el scroball
+    border-basic-color-1: color-basic-1000,
     border-basic-color-2: color-basic-100,
     border-basic-color-3: color-basic-900, //borde tabla
     border-basic-color-4: color-basic-400, //borde card
