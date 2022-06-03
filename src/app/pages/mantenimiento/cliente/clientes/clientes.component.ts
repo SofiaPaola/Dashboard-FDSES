@@ -4,7 +4,7 @@ import { ClienteService } from '../cliente.service';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
-import { ModalService } from '../../modal.service';
+import { ModalService } from '../../../modal.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({

@@ -8,23 +8,23 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
-import { CompraComponent } from './compra.component';
+import { SolicitudDetalleCompraComponent } from './solicitudCompraDetalle/solicitudDetalleCompra.component';
+import { FormDetalleComponent } from './formulario/formDetalle.component';
 
 registerLocaleData(localeES, 'es');
 
 const routes: Routes = [
   {
     path: '',
-    component: CompraComponent,
-    children: [
-      {
-        path: 'solicitudDetalleCompra',
-        loadChildren: () =>
-          import('./compraDetalleSolicitud/solicitudDetalleCompra.module').then(
-            (m) => m.SolicitudDetalleCompraModule
-          ),
-      },
-    ],
+    component: SolicitudDetalleCompraComponent,
+  },
+  {
+    path: 'formDetalle',
+    component: FormDetalleComponent,
+  },
+  {
+    path: 'formDetalle/:id',
+    component: FormDetalleComponent,
   },
 ];
 
@@ -34,4 +34,4 @@ const routes: Routes = [
   providers: [{ provide: LOCALE_ID, useValue: 'es' }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
-export class CompraRoutingModule {}
+export class SolicitudDetalleCompraRoutingModule {}

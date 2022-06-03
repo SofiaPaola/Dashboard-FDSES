@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProveedorService } from '../proveedor.service';
-import { ModalService } from '../../modal.service';
+import { ModalService } from '../../../modal.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({

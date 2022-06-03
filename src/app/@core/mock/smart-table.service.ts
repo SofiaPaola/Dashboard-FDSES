@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from 'src/app/pages/mantenimiento/cliente/cliente';
 import { SmartTableData } from '../data/smart-table';
 
 @Injectable()
@@ -427,13 +426,8 @@ export class SmartTableService extends SmartTableData {
     'age': 16,
   }];
 
-  clientes: any = Cliente;
-
   getData() {
     return this.data;
   }
 
-  getClientes(): Cliente[] {
-    return this.clientes;
-  }
 }

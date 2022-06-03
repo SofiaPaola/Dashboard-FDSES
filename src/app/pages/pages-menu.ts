@@ -25,7 +25,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Compras',
     icon: 'shopping-bag-outline',
-    link: '/pagaes/compra',
+    children: [
+      {
+        title: 'Detalle De Solicitud Compra',
+        link: '/pages/compra/solicitudDetalleCompra'
+      },
+    ]
   },
   {
     title: 'Laboratorio',

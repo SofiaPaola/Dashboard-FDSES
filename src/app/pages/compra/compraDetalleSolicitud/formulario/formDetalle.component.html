@@ -1,0 +1,47 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+
+<div class="row">
+  <nb-card>
+    <nb-card-header>
+      <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/compra/solicitudDetalleCompra']"></nb-icon>{{ titulo }}
+    </nb-card-header>
+    <nb-card-body>
+      <form #detalleForm="ngForm">
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-2 mb-3">
+            Nombre Usuario
+          </label>
+          <div class="col-sm-9">
+            <input nbInput fullWidth type="text" class="form-control" value="{{solicitudDetalleCompra.id}}" name="nombre"
+             disabled />
+            
+          </div>
+        </div>
+
+        
+
+        <br>
+
+        <div class="form-group row">
+          <label for="observaciones" class="col-form-label col-sm-2 mb-3"></label>
+          <div class="col-sm-9 d-grid gap-2">
+            <button nbButton status="success" role="button" (click)="create()" 
+              [disabled]="!detalleForm.form.valid">
+              Crear
+            </button>
+            <ng-template #elseBlock>
+              <button nbButton status="success" role="button" (click)="update()" [disabled]="!clienteForm.form.valid">
+                Editar
+              </button>
+            </ng-template>
+          </div>
+        </div>
+
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>
