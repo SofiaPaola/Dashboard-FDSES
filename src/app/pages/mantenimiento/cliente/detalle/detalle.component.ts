@@ -3,7 +3,7 @@ import { ClienteService } from '../cliente.service';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ModalService } from '../../modal.service';
+import { ModalService } from '../../../modal.service';
 import { Cliente } from '../cliente';
 import { Factura } from '../../factura/models/factura';
 import { FacturaService } from '../../factura/services/factura.service';

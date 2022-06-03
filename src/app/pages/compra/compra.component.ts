@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngx-compra',
-  template: ` <nb-card><p>hola</p></nb-card> `,
+  template: ` <router-outlet></router-outlet> `,
 })
 export class CompraComponent {}

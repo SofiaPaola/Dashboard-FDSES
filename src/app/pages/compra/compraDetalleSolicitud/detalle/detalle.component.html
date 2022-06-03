@@ -1,0 +1,57 @@
+<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
+  <div style="display: block" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-dark">{{ titulo }}</h3>
+        </div>
+        <div class="modal-body">
+          <!-- <div class="row test-dark">
+            <nb-icon icon="plus" type="button" [routerLink]="['./formDetalle']">
+            </nb-icon>
+          </div> -->
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <ul *ngIf="solicitudDetalleCompra" class="list-group mb-3">
+                  <li class="list-group-item active">
+                    {{ solicitudDetalleCompra.id }}
+                  </li>
+                  <li class="list-group-item">
+                    {{ solicitudDetalleCompra.id }}
+                    codigo elemento y nombre
+                  </li>
+                  <li class="list-group-item">
+                    {{ solicitudDetalleCompra.id }}
+                    estado de solicitud
+                  </li>
+                  <li class="list-group-item">
+                    {{ solicitudDetalleCompra.id }}
+                    centro costos
+                  </li>
+                  <li class="list-group-item">
+                    {{ solicitudDetalleCompra.id }}
+                    unidad medida
+                  </li>
+                  <li class="list-group-item">
+                    {{ solicitudDetalleCompra.id }}
+                    usuario
+                  </li>
+                  <li class="list-group-item">
+                    {{ solicitudDetalleCompra.id }}
+                    fecha registro
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button nbButton (click)="cerrarModal()" type="button" status="danger" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

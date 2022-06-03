@@ -34,8 +34,6 @@ export class FormClienteComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  source: LocalDataSource = new LocalDataSource();
-
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: any) => {
       let id = +params.get('id');
@@ -142,7 +140,7 @@ export class FormClienteComponent implements OnInit {
       : a1.id === a2.id;
   }
 
-  compararCiudad(o1: any, o2: any): boolean {
+  compararCiudad(o1: Ciudad, o2: Ciudad): boolean {
     if (o1 === undefined && o2 === undefined) {
       return true;
     }

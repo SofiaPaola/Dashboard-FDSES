@@ -1,0 +1,48 @@
+<nb-card>
+  <detalle-compra *ngIf="detalleSeleccionado" [solicitudDetalleCompra]="detalleSeleccionado">
+  </detalle-compra>
+  <nb-card-body>
+    <h2 class="card-title" style="text-align: center">Detalle Solicitud Compra</h2>
+    <div class="my-2 text-left">
+      <nb-icon icon="plus" type="button" [routerLink]="['./formDetalle']">
+      </nb-icon>
+    </div>
+    <div *ngIf="solicitudDetalleCompras.length == 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <ng2-smart-table>
+      <table class="table" *ngIf="solicitudDetalleCompras.length > 0">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <!-- <th>Id Elmento</th>
+            <th>Id Solicitud Compra</th> -->
+            <th>Proveedor Sugerido</th>
+            <th>Especificaciones Tecnicas</th>
+            <!-- <th>Id Estado</th> -->
+            <th>Cantidad</th>
+            <th>Fecha Nesecidad</th>
+            <th>Programador</th>
+            <!-- <th>Unidad Medida</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let solicitudDetalleCompra of solicitudDetalleCompras | paginate: { itemsPerPage: 10, currentPage: page }">
+            <th><button nbButton name="ver" (click)="abrirModal(solicitudDetalleCompra)">{{ solicitudDetalleCompra.id }}</button></th>
+            <!-- <th>{{ solicitudDetalleCompra.elemento }}</th>
+            <th>{{ solicitudDetalleCompra.solicitud_compra }}</th> -->
+            <th>{{ solicitudDetalleCompra.proveedor_sugerido }}</th>
+            <th>{{ solicitudDetalleCompra.especificaciones_tecnicas }}</th>
+            <th>{{ solicitudDetalleCompra.cantidad }}</th>
+            <th>{{ solicitudDetalleCompra.fecha_necesidad }}</th>
+            <th>{{ solicitudDetalleCompra.programado }}</th>
+            <!-- <th>{{ solicitudDetalleCompra.unidad }}</th> -->
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

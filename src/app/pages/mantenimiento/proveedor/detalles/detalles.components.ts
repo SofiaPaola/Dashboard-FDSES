@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProveedorService } from '../proveedor.service';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from '../../modal.service';
+import { ModalService } from '../../../modal.service';
 import { Proveedor } from '../proveedor';
 
 @Component({
