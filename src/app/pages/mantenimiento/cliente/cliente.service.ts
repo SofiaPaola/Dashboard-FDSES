@@ -13,13 +13,14 @@ import { Departamento } from '../departamento';
   providedIn: 'root',
 })
 export class ClienteService {
-
   private urlEndPoint: string = 'http://localhost:8080/api/clientes';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   getTipoDocumento(): Observable<TipoDocumento[]> {
-    return this.http.get<TipoDocumento[]>(this.urlEndPoint + '/tipos_documentos');
+    return this.http.get<TipoDocumento[]>(
+      this.urlEndPoint + '/tipos_documentos'
+    );
   }
 
   getCiudades(): Observable<Ciudad[]> {

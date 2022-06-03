@@ -4,6 +4,11 @@
 
   <nb-card-body>
     <h2 class="card-title" style="text-align: center">Listado de Clientes</h2>
+    <nb-form-field>
+      <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+      <input type="text" class="forms-control" nbInput fieldSize="small" placeholder="Buscar..."
+        [(ngModel)]="filterpost" name="filterpost">
+    </nb-form-field>
     <div class="my-2 text-left">
       <nb-icon *ngIf="authService.hasRole('ROLE_ADMIN')" icon="plus-outline" type="button"
         [routerLink]="['./formCliente']">
@@ -12,7 +17,8 @@
     <div *ngIf="clientes?.length == 0" class="alert alert-info">
       No hay registros en la base de datos!
     </div>
-    <ng2-smart-table [source]="source">
+    <ng2-smart-table>
+      <!-- [settings]="settings" [source]="source" -->
       <table class="table" *ngIf="clientes?.length > 0">
         <thead>
           <tr>
@@ -23,7 +29,7 @@
             <th>Telefono</th>
             <th>Celular</th>
             <th>Direccion</th>
-            <th *ngIf="authService.hasRole('ROLE_ADMIN')">Crear Factura</th>
+            <!-- <th *ngIf="authService.hasRole('ROLE_ADMIN')">Crear Factura</th> -->
             <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
             <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
           </tr>
@@ -31,7 +37,7 @@
         <tbody>
           <tr *ngFor="
               let cliente of clientes
-                | paginate: { itemsPerPage: 10, currentPage: page }
+                | paginate: { itemsPerPage: 10, currentPage: page } | filtrar: filterpost
             ">
             <td>
               <button nbButton name="ver" (click)="abrirModal(cliente)">
@@ -44,11 +50,11 @@
             <td>{{ cliente.telefono }}</td>
             <td>{{ cliente.celular }}</td>
             <td>{{ cliente.direccion }}</td>
-            <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <!-- <td *ngIf="authService.hasRole('ROLE_ADMIN')">
               <nb-icon icon="file-add-outline" type="button" name="" [routerLink]="['/facturas/form', cliente.id]"
                 class="factura">
               </nb-icon>
-            </td>
+            </td> -->
             <td *ngIf="authService.hasRole('ROLE_ADMIN')">
               <nb-icon icon="edit-2-outline" type="button" name="editar" [routerLink]="['./formCliente', cliente.id]"
                 class="editar">

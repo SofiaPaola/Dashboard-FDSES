@@ -6,18 +6,12 @@ import {
 } from '@angular/core';
 import {
   NbCardModule,
-  NbListModule,
-  NbDialogModule,
-  NbActionsModule,
   NbButtonModule,
   NbIconModule,
-  NbRadioModule,
   NbSelectModule,
-  NbTabsetModule,
-  NbUserModule,
   NbInputModule,
   NbOptionModule,
-  NbSelectComponent,
+  NbFormFieldModule,
 } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -37,6 +31,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProveedorService } from './proveedor.service';
 import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
 import { TokenInterceptor } from 'src/app/auth/interceptors/token.interceptor';
+import { FilterPipe } from './pipes/filter.pipe';
 
 registerLocaleData(localeES, 'es');
 
@@ -46,13 +41,7 @@ registerLocaleData(localeES, 'es');
     ThemeModule,
     NbCardModule,
     NbButtonModule,
-    NbTabsetModule,
-    NbActionsModule,
-    NbRadioModule,
     NbSelectModule,
-    NbDialogModule,
-    NbUserModule,
-    NbListModule,
     NbIconModule,
     NbInputModule,
     NbOptionModule,
@@ -65,6 +54,7 @@ registerLocaleData(localeES, 'es');
     MatFormFieldModule,
     NgxPaginationModule,
     ProveedorRoutingModule,
+    NbFormFieldModule,
   ],
   providers: [
     ProveedorService,
@@ -76,6 +66,7 @@ registerLocaleData(localeES, 'es');
     ProveedoresComponent,
     DetallesComponents,
     FormProveedorComponent,
+    FilterPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

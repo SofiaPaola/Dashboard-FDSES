@@ -8,4 +8,3 @@ export class Usuario {
   //fecha_activacion_final: string;
   roles: string[] = [];
 }
-

@@ -24,11 +24,13 @@ const routes: Routes = [
       },
       {
         path: 'proveedores',
-        loadChildren: () => import('./proveedor/proveedor.module').then((m) => m.ProveedorModule)
+        loadChildren: () =>
+          import('./proveedor/proveedor.module').then((m) => m.ProveedorModule),
       },
       {
         path: 'vendedores',
-        loadChildren: () => import('./vendedor/vendedor.module').then((m) => m.VendedorModule)
+        loadChildren: () =>
+          import('./vendedor/vendedor.module').then((m) => m.VendedorModule),
       },
     ],
   },

@@ -25,6 +25,11 @@ const routes: Routes = [
             (m) => m.MantenimientoModule
           ),
       },
+      {
+        path: 'compra',
+        loadChildren: () =>
+          import('./compra/compra.module').then((m) => m.CompraModule),
+      },
     ],
   },
 ];

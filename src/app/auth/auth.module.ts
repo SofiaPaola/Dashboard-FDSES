@@ -1,13 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NbAuthComponent } from '@nebular/auth';
-import { 
+import {
   NbAlertModule,
   NbButtonModule,
   NbCheckboxModule,
-  NbInputModule
+  NbInputModule,
 } from '@nebular/theme';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -23,10 +27,7 @@ import { LoginComponent } from './login/login.component';
     NbCheckboxModule,
     AuthRoutingModule,
   ],
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [LoginComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
-export class AuthModule {
-}
+export class AuthModule {}

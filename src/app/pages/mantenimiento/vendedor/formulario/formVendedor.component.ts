@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Ciudad } from '../../ciudad';
 import { TipoDocumento } from '../../tipo_documento';
 import { VendedorService } from '../vendedor.service';
-import { Vendedor } from '../vendedores/vendedor';
+import { Vendedor } from '../vendedor';
 /*import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class FormVendedorComponent implements OnInit {
 
   ciudades!: Ciudad[];
   tipos_documentos!: TipoDocumento[];
-  titulo: string = 'Crear Vendedor';
+  titulo: string = 'Crear / Editar Vendedor';
 
   //autocompleteControl = new FormControl();
   //ciudadesFiltrados: Observable<Ciudad[]>;
@@ -128,7 +128,9 @@ export class FormVendedorComponent implements OnInit {
       return true;
     }
 
-    return v1 === null || v2 === null || v1 === undefined || v2 === undefined ? false : v1.id === v2.id;
+    return v1 === null || v2 === null || v1 === undefined || v2 === undefined
+      ? false
+      : v1.id === v2.id;
   }
 
   compararTipoDocumento(v1: TipoDocumento, v2: TipoDocumento): boolean {
@@ -136,6 +138,8 @@ export class FormVendedorComponent implements OnInit {
       return true;
     }
 
-    return v1 === null || v2 === null || v1 === undefined || v2 === undefined ? false : v1.id === v2.id;
+    return v1 === null || v2 === null || v1 === undefined || v2 === undefined
+      ? false
+      : v1.id === v2.id;
   }
 }

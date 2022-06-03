@@ -6,17 +6,12 @@ import {
 } from '@angular/core';
 import {
   NbCardModule,
-  NbListModule,
-  NbDialogModule,
-  NbActionsModule,
   NbButtonModule,
-  NbIconModule,
-  NbRadioModule,
   NbSelectModule,
-  NbTabsetModule,
-  NbUserModule,
+  NbIconModule,
   NbInputModule,
   NbOptionModule,
+  NbFormFieldModule,
 } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -36,27 +31,20 @@ import { VendedorService } from './vendedor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
 import { TokenInterceptor } from 'src/app/auth/interceptors/token.interceptor';
+import { FilterPipe } from './pipes/filter.pipe';
 
 registerLocaleData(localeES, 'es');
 
 @NgModule({
   imports: [
+    NbIconModule,
     FormsModule,
     ThemeModule,
     NbCardModule,
     NbButtonModule,
-    NbTabsetModule,
-    NbActionsModule,
-    NbRadioModule,
     NbSelectModule,
-    NbDialogModule,
-    NbUserModule,
-    NbListModule,
-    NbIconModule,
     NbInputModule,
-    NbSelectModule,
     NbOptionModule,
-    NbButtonModule,
     MatDatepickerModule,
     MatMomentDateModule,
     ReactiveFormsModule,
@@ -65,6 +53,7 @@ registerLocaleData(localeES, 'es');
     MatFormFieldModule,
     NgxPaginationModule,
     VendedorRoutingModule,
+    NbFormFieldModule,
   ],
   providers: [
     VendedorService,
@@ -72,7 +61,12 @@ registerLocaleData(localeES, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  declarations: [VendedoresComponent, FormVendedorComponent, DetallesComponent],
+  declarations: [
+    VendedoresComponent,
+    FormVendedorComponent,
+    DetallesComponent,
+    FilterPipe,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class VendedorModule {}

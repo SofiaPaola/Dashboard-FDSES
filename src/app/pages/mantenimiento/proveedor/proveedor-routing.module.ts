@@ -23,12 +23,14 @@ const routes: Routes = [
   {
     path: 'formProveedor',
     component: FormProveedorComponent,
-    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'ROLE_ADMIN' },
   },
   {
     path: 'formProveedor/:id',
     component: FormProveedorComponent,
-    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'ROLE_ADMIN' },
   },
   { path: '', redirectTo: 'proveedor', pathMatch: 'full' },
   { path: '**', redirectTo: 'proveedor' },

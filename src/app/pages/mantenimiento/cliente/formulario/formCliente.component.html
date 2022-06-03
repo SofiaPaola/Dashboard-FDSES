@@ -6,7 +6,9 @@
 
 <div class="row">
   <nb-card>
-    <nb-card-header>{{ titulo }}</nb-card-header>
+    <nb-card-header>
+      <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/mantenimiento/clientes']"></nb-icon>{{ titulo }}
+    </nb-card-header>
     <nb-card-body>
       <form #clienteForm="ngForm">
         <div class="form-group row">

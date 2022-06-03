@@ -6,18 +6,12 @@ import {
 } from '@angular/core';
 import {
   NbCardModule,
-  NbListModule,
-  NbDialogModule,
-  NbActionsModule,
   NbButtonModule,
   NbIconModule,
-  NbRadioModule,
   NbSelectModule,
-  NbTabsetModule,
-  NbUserModule,
   NbInputModule,
   NbOptionModule,
-  NbDatepickerModule,
+  NbFormFieldModule,
 } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -37,6 +31,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ClienteService } from './cliente.service';
 import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
 import { TokenInterceptor } from 'src/app/auth/interceptors/token.interceptor';
+import { FilterPipe } from './pipes/filter.pipe';
 
 registerLocaleData(localeES, 'es');
 
@@ -45,28 +40,21 @@ registerLocaleData(localeES, 'es');
     FormsModule,
     ThemeModule,
     NbCardModule,
-    NbButtonModule,
-    NbTabsetModule,
-    NbActionsModule,
-    NbRadioModule,
-    NbSelectModule,
-    NbDialogModule,
-    NbUserModule,
-    NbListModule,
     NbIconModule,
     NbInputModule,
-    NbSelectModule,
-    NbDatepickerModule.forRoot(),
-    NbOptionModule,
     NbButtonModule,
     MatDatepickerModule,
     MatMomentDateModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    NbSelectModule,
     MatInputModule,
+    NbOptionModule,
     MatFormFieldModule,
     NgxPaginationModule,
     ClienteRoutingModule,
+    NbFormFieldModule,
+    //Ng2SmartTableModule
   ],
   providers: [
     ClienteService,
@@ -74,7 +62,12 @@ registerLocaleData(localeES, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  declarations: [ClientesComponent, FormClienteComponent, DetalleComponent],
+  declarations: [
+    ClientesComponent,
+    FormClienteComponent,
+    DetalleComponent,
+    FilterPipe,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class ClienteModule {}

@@ -13,12 +13,17 @@
 
 <div class="header-container">
   <nb-actions size="small">
-    <nb-action class="control-item" icon="email-outline"></nb-action>
     <nb-action class="control-item">
-      <nb-action *ngIf="!authService.isAuthenticated()" icon="log-in-outline" (click)='login()'>
-      </nb-action>
-      <nb-action *ngIf="authService.isAuthenticated()" icon="log-out-outline" (click)='logout()'>
-      </nb-action>
+      <p *ngIf="!authService.isAuthenticated()">
+        <nb-action *ngIf="!authService.isAuthenticated()" icon="log-in-outline" (click)='login()'>
+        </nb-action>
+        Iniciar Sesion
+      </p>
+      <p *ngIf="authService.isAuthenticated()">
+        <nb-action *ngIf="authService.isAuthenticated()" icon="log-out-outline" (click)='logout()'>
+        </nb-action>
+        Cerrar Sesion
+      </p>
     </nb-action>
   </nb-actions>
 </div>

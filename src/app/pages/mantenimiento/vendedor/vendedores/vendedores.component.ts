@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Vendedor } from './vendedor';
+import { Vendedor } from '../vendedor';
 import { VendedorService } from '../vendedor.service';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -8,16 +8,16 @@ import { ModalService } from '../../modal.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { AuthService } from 'src/app/auth/auth.service';
 
-
 @Component({
   selector: 'app-vendedores',
   templateUrl: './vendedores.component.html',
-  styleUrls: ['./vendedores.component.scss']
+  styleUrls: ['./vendedores.component.scss'],
 })
 export class VendedoresComponent implements OnInit {
-  
   vendedores: any = Vendedor;
   public page!: number;
+
+  filterpost = '';
 
   vendedorSeleccionado!: Vendedor;
 
@@ -29,23 +29,25 @@ export class VendedoresComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.vendedorService.getVendedores()
+    this.vendedorService
+      .getVendedores()
       .pipe(
-        tap(vendedores => {
+        tap((vendedores) => {
           console.log('VendedoresComponent: tap 3');
-          vendedores.forEach(vendedor => {
+          vendedores.forEach((vendedor) => {
             console.log(vendedor.nombre);
-          })
+          });
         })
-      ).subscribe(vendedores => this.vendedores = vendedores);
+      )
+      .subscribe((vendedores) => (this.vendedores = vendedores));
 
-    this.modalService.notificarUpload.subscribe(vendedor => {
-      this.vendedores = this.vendedores.map((vendedorOriginal: { id: any; }) => {
+    this.modalService.notificarUpload.subscribe((vendedor) => {
+      this.vendedores = this.vendedores.map((vendedorOriginal: { id: any }) => {
         if (vendedor.id == vendedorOriginal.id) {
           vendedorOriginal.id = vendedor.id;
         }
         return vendedorOriginal;
-      })
+      });
     });
   }
 
@@ -75,7 +77,9 @@ export class VendedoresComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           this.vendedorService.delete(vendedor.id).subscribe((response) => {
-            this.vendedores = this.vendedores.filter((ven: Vendedor) => ven !== vendedor);
+            this.vendedores = this.vendedores.filter(
+              (ven: Vendedor) => ven !== vendedor
+            );
             swal.fire(
               'Vendedor Eliminado',
               `Vendedor ${vendedor.nombre} eliminado con éxito.`,
@@ -90,5 +94,4 @@ export class VendedoresComponent implements OnInit {
     this.vendedorSeleccionado = vendedor;
     this.modalService.abrirModal();
   }
-
 }
