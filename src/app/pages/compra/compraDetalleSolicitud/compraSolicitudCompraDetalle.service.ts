@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { Unidad } from '../unidad';
 import { CompraSolicitudCompra } from './solicitud_compra';
 import { CompraElemento } from '../elemento';
 import { CompraDetalleSolicitudCompra } from './detalle_solicitud_compra';
+import { CentroCosto } from '../centro_costo';
+import { Unidad } from '../unidad';
+import { Estado } from '../estado';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +19,14 @@ export class CompraSolicitudCompraDetalleService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  filtrarElemento(term: string): Observable<CompraElemento[]> {
+    return this.http.get<CompraElemento[]>(
+      `${this.urlEndPoint}/filtrar-elemento/${term}`
+    );
+  }
+
   getElemento(): Observable<CompraElemento[]> {
-    return this.http.get<CompraElemento[]>(this.urlEndPoint + '/compraElemento');
+    return this.http.get<CompraElemento[]>(this.urlEndPoint + '/elemento');
   }
 
   getUnidad(): Observable<Unidad[]> {
@@ -27,8 +35,16 @@ export class CompraSolicitudCompraDetalleService {
 
   getCompraSolicitudCompra(): Observable<CompraSolicitudCompra[]> {
     return this.http.get<CompraSolicitudCompra[]>(
-      this.urlEndPoint + '/compraSolicitud'
+      this.urlEndPoint + '/solicitud'
     );
+  }
+
+  getCentroCosto(): Observable<CentroCosto[]> {
+    return this.http.get<CentroCosto[]>(this.urlEndPoint + '/costos');
+  }
+
+  getEstado(): Observable<Estado[]> {
+    return this.http.get<Estado[]>(this.urlEndPoint + '/compraEstado');
   }
 
   getSolicitudDetalleCompras(): Observable<CompraDetalleSolicitudCompra[]> {
@@ -60,20 +76,9 @@ export class CompraSolicitudCompraDetalleService {
   create(
     solicitudDetalleCompra: CompraDetalleSolicitudCompra
   ): Observable<CompraDetalleSolicitudCompra> {
-    return this.http.post(this.urlEndPoint, solicitudDetalleCompra).pipe(
-      map(
-        (response: any) =>
-          response.solicitudDetalleCompra as CompraDetalleSolicitudCompra
-      ),
-      catchError((e) => {
-        if (e.status == 400) {
-          return throwError(e);
-        }
-        if (e.error.mensaje) {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
+    return this.http.post<CompraDetalleSolicitudCompra>(
+      this.urlEndPoint,
+      solicitudDetalleCompra
     );
   }
 
@@ -114,15 +119,7 @@ export class CompraSolicitudCompraDetalleService {
       );
   }
 
-  delete(id: number):Observable<CompraDetalleSolicitudCompra> {
-    return this.http.delete<CompraDetalleSolicitudCompra>(`${this.urlEndPoint}/${id}`).pipe(
-      catchError((e) => {
-        if (e.error.mensaje) {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
-    );
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.urlEndPoint}/${id}`);
   }
-
 }

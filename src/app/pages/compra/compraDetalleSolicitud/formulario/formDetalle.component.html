@@ -1,47 +1,119 @@
-<ul class="alert alert-danger" *ngIf="errores?.length > 0">
-  <li *ngFor="let err of errores">
-    {{ err }}
-  </li>
-</ul>
-
 <div class="row">
   <nb-card>
+
     <nb-card-header>
-      <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/compra/solicitudDetalleCompra']"></nb-icon>{{ titulo }}
+      <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/compra/solicitudDetalleCompra']"></nb-icon>
+      {{ titulo }}
     </nb-card-header>
+    
     <nb-card-body>
+
       <form #detalleForm="ngForm">
         <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-2 mb-3">
-            Nombre Usuario
-          </label>
-          <div class="col-sm-9">
-            <input nbInput fullWidth type="text" class="form-control" value="{{solicitudDetalleCompra.id}}" name="nombre"
-             disabled />
-            
+          <label class="col-form-label col-sm-2 mb-3">Nombre Usuario</label>
+          <div class="col-sm-9" *ngIf="detalleCompra.solicitud_compra">
+            <input nbInput fullWidth type="text" class="form-control" name="nombre" #nombre="ngModel"
+              value="{{solicitud_compra.usuario.nombre}}" disabled>
           </div>
         </div>
 
-        
+        <div class="form-group row">
+          <nb-form-field>
+            <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+            <input nbInput fullWidth type="text" placeholder="Añadir Elemento" aria-label="Elementos" matInput
+              [formControl]="autocompleteControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre"
+              (optionSelected)="seleccionarElemento($event)">
+              <mat-option *ngFor="let elemento of elementosFiltrados | async" [value]="elemento">
+                {{elemento.nombre}}
+              </mat-option>
+            </mat-autocomplete>
+          </nb-form-field>
+          <div class="alert alert-danger col-sm-20" *ngIf="autocompleteControl.invalid && detalleForm.submitted">
+            El detalle de la solicitud de compra no puede estar vacia.
+          </div>
+        </div>
+
+        <div class="alert alert-info my-4" *ngIf="detalleCompra.items.length == 0">
+          No hay lineas asignadas para el detalle solicitud de compra. Debe agragar por al menos un elemento
+        </div>
 
         <br>
 
+        <ng2-smart-table>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <!--<th>Solicitud Detalle Compra</th> -->
+                <th>Cod. Elemento</th>
+                <th>Elemento</th>
+                <th>Cantidad</th>
+                <th>Especificaciones Tecnicas</th>
+                <th>Proveedor Sugerido</th>
+                <th>Programado</th>
+                <th>Fecha Necesidad</th>
+                <!-- <th>Centro Costo</th> -->
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of detalleCompra.items">
+                <td>{{item.elemento.id}}</td>
+                <td>{{item.elemento.codigo}}</td>
+                <td>{{item.elemento.nombre}}</td>
+                <td><input nbInput fullWidth type="number" value="{{item.cantidad}}" class="form-control col-sm-4"
+                    (change)="actualizarCantidad(item.elemento.id, $event)">
+                </td>
+                <td>
+                  <textarea nbInput type="text" class="form-control"
+                    [(ngModel)]="solicitudDetalleCompra.especificaciones_tecnicas" name="especificaciones_tecnicas"
+                    #especificaciones_tecnicas="ngModel"></textarea>
+                </td>
+                <td>
+                  <input nbInput type="text" class="form-control"
+                    [(ngModel)]="solicitudDetalleCompra.proveedor_sugerido" required name="proveedor_sugerido"
+                    #proveedor_sugerido="ngModel" />
+                  <div class="alert alert-danger"
+                    *ngIf="proveedor_sugerido.invalid && proveedor_sugerido.touched || proveedor_sugerido.invalid && detalleForm.submitted">
+                    El proveedor sugerido es obligatoria.
+                  </div>
+                </td>
+                <td>
+                  <input nbInput type="text" class="form-control" [(ngModel)]="solicitudDetalleCompra.programado" required
+                    name="programado" #programado="ngModel" />
+                  <div class="alert alert-danger"
+                    *ngIf="programado.invalid && programado.touched || programado.invalid && detalleForm.submitted">
+                    El programado debe ser Si o No
+                  </div>
+                </td>
+                <td>
+                  <input nbInput [matDatepicker]="miDatepicker" required class="form-control"
+                    [(ngModel)]="solicitudDetalleCompra.fecha_necesidad" name="fecha_necesidad" />
+                  <mat-datepicker-toggle matSuffix [for]="miDatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #miDatepicker></mat-datepicker>
+                </td>
+                <td>
+                  <nb-icon icon="trash-outline" type="button" name="eliminar"
+                    (click)="eliminarItemElemento(item.elemento.id)" class="eliminar">
+                  </nb-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng2-smart-table>
+
         <div class="form-group row">
-          <label for="observaciones" class="col-form-label col-sm-2 mb-3"></label>
-          <div class="col-sm-9 d-grid gap-2">
-            <button nbButton status="success" role="button" (click)="create()" 
-              [disabled]="!detalleForm.form.valid">
-              Crear
-            </button>
-            <ng-template #elseBlock>
-              <button nbButton status="success" role="button" (click)="update()" [disabled]="!clienteForm.form.valid">
-                Editar
-              </button>
-            </ng-template>
+          <div class="col-sm-6">
+            <input type="submit" nbButton status="success" value="Crear Detalle" role="button"
+              (click)="create(detalleForm)">
           </div>
         </div>
 
       </form>
+
     </nb-card-body>
+
   </nb-card>
+  
 </div>

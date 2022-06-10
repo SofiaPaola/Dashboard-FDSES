@@ -130,14 +130,14 @@ export class FormClienteComponent implements OnInit {
     );
   }
 
-  compararTipoDocumento(a1: TipoDocumento, a2: TipoDocumento) {
-    if (a1 === undefined && a2 === undefined) {
+  compararTipoDocumento(o1: TipoDocumento, o2: TipoDocumento) {
+    if (o1 === undefined && o2 === undefined) {
       return true;
     }
 
-    return a1 === null || a2 === null || a1 === undefined || a2 === undefined
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
       ? false
-      : a1.id === a2.id;
+      : o1.id === o2.id;
   }
 
   compararCiudad(o1: Ciudad, o2: Ciudad): boolean {
