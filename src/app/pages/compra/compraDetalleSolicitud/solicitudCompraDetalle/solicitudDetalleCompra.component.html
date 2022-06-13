@@ -4,7 +4,7 @@
   <nb-card-body>
     <h2 class="card-title" style="text-align: center">Detalle Solicitud Compra</h2>
     <div class="my-2 text-left">
-      <nb-icon icon="plus" type="button" [routerLink]="['./formDetalle']">
+      <nb-icon icon="plus" type="button" *ngIf="authService.hasRole('ROLE_ADMIN')" [routerLink]="['./formDetalle']">
       </nb-icon>
     </div>
     <div *ngIf="solicitudDetalleCompras.length == 0" class="alert alert-info">

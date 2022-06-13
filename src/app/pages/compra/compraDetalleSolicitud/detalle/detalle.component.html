@@ -3,13 +3,9 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title text-dark">{{ titulo }}</h3>
+          <h3 class="modal-title text-dark">{{titulo}}</h3> <!--  poner id de solitud compra -->
         </div>
         <div class="modal-body">
-          <!-- <div class="row test-dark">
-            <nb-icon icon="plus" type="button" [routerLink]="['./formDetalle']">
-            </nb-icon>
-          </div> -->
           <div class="container">
             <div class="row">
               <div class="col-sm">
@@ -18,7 +14,7 @@
                     {{ solicitudDetalleCompra.id }}
                   </li>
                   <li class="list-group-item">
-                    {{ solicitudDetalleCompra.id }}
+                    {{ solicitudDetalleCompra.elemento.codigo }}
                     codigo elemento y nombre
                   </li>
                   <li class="list-group-item">

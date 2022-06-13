@@ -12,7 +12,7 @@ import { CompraDetalleSolicitudCompra } from '../detalle_solicitud_compra';
 })
 export class DetalleComponent implements OnInit {
   @Input() solicitudDetalleCompra!: CompraDetalleSolicitudCompra;
-  titulo: string = 'Solicitud Compra';
+  titulo: string = 'Solicitud Compra:';
 
   constructor(
     private detalleCompraService: CompraSolicitudCompraDetalleService,

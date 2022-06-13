@@ -3,74 +3,150 @@ import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompraSolicitudCompraDetalleService } from '../compraSolicitudCompraDetalle.service';
 import { CompraDetalleSolicitudCompra } from '../detalle_solicitud_compra';
-
+import { CentroCosto } from '../../centro_costo';
+import { CompraElemento } from '../../elemento';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { flatMap, map } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ItemElemento } from '../../item_elemento';
+import { routes } from '../../../../app-routing.module';
 @Component({
   selector: 'ngx-formCliente',
   templateUrl: './formDetalle.component.html',
+  styleUrls: ['./formDetalle.component.scss'],
 })
 export class FormDetalleComponent implements OnInit {
-  public solicitudDetalleCompra: CompraDetalleSolicitudCompra =
+  titulo: string = 'Nuevo detalle de solicitud de compra';
+  detalleCompra: CompraDetalleSolicitudCompra =
     new CompraDetalleSolicitudCompra();
 
-  titulo: string = 'Crear / Editar Detalle Solicitud de Compra';
-
-  errores!: string[] | any;
+  centro_costos!: CentroCosto[];
+  autocompleteControl = new FormControl();
+  elementosFiltrados!: Observable<CompraElemento[]>;
 
   constructor(
     private detalleCompraService: CompraSolicitudCompraDetalleService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
-  ngOnInit() {
-    this.activatedRoute.paramMap.subscribe((params: any) => {
-      let id = +params.get('id');
-      if (id) {
-        this.detalleCompraService
-          .getSolicitudDetalleCompra(id)
-          .subscribe(
-            (solicitudDetalleCompra) =>
-              (this.solicitudDetalleCompra = solicitudDetalleCompra)
-          );
+  ngOnInit(): void {
+    // this.activatedRoute.paramMap.subscribe((params) => {
+    //   let solicitudId = +params.get('solicitudId');
+    //   this.detalleCompraService
+    //     .getSolicitudDetalleCompra(solicitudId)
+    //     .subscribe(
+    //       (solicitud_compra) =>
+    //         (this.detalleCompra.solicitud_compra = solicitud_compra)
+    //     );
+    // });
+
+    this.elementosFiltrados = this.autocompleteControl.valueChanges.pipe(
+      map((value) => (typeof value === 'string' ? value : value.nombre)),
+      flatMap((value) => (value ? this._filter(value) : []))
+    );
+  }
+
+  private _filter(value: string): Observable<CompraElemento[]> {
+    const filterValue = value.toLowerCase();
+
+    return this.detalleCompraService.filtrarElemento(filterValue);
+  }
+
+  mostrarNombre(elemnto?: CompraElemento): string | undefined {
+    return elemnto ? elemnto.nombre : undefined;
+  }
+
+  seleccionarElemento(event: MatAutocompleteSelectedEvent): void {
+    let elemento = event.option.value as CompraElemento;
+    console.log(elemento);
+
+    if (this.existeItem(elemento.id)) {
+      this.incrementaCantidad(elemento.id);
+    } else {
+      let nuevoItem = new ItemElemento();
+      nuevoItem.elemento = elemento;
+      this.detalleCompra.items.push(nuevoItem);
+    }
+
+    this.autocompleteControl.setValue('');
+    event.option.focus();
+    event.option.deselect();
+  }
+
+  actualizarCantidad(id: number, event: any): void {
+    let cantidad: number = event.target.value as number;
+
+    if (cantidad == 0) {
+      return this.eliminarItemElemento(id);
+    }
+
+    this.detalleCompra.items = this.detalleCompra.items.map(
+      (item: ItemElemento) => {
+        if (id === item.elemento.id) {
+          item.cantidad = cantidad;
+        }
+        return item;
+      }
+    );
+  }
+
+  existeItem(id: number): boolean {
+    let existe = false;
+    this.detalleCompra.items.forEach((item: ItemElemento) => {
+      if (id === item.elemento.id) {
+        existe = true;
       }
     });
+    return existe;
   }
 
-  create(): void {
-    console.log(this.solicitudDetalleCompra);
-    this.detalleCompraService.create(this.solicitudDetalleCompra).subscribe(
-      (solicitudDetalleCompra) => {
-        this.router.navigate(['/pages/compra/solicitudDetalleCompra']);
-        swal.fire(
-          'Nueva Solicitud de compra',
-          `El cliente ${solicitudDetalleCompra.id} ha sido creado con éxito`,
-          'success'
-        );
-      },
-      (err) => {
-        this.errores = err.error.errors as string[];
-        console.error('Código del error desde el backend: ' + err.status);
-        console.error(err.error.errors);
+  incrementaCantidad(id: number): void {
+    this.detalleCompra.items = this.detalleCompra.items.map(
+      (item: ItemElemento) => {
+        if (id === item.elemento.id) {
+          ++item.cantidad;
+        }
+        return item;
       }
     );
   }
 
-  update(): void {
-    console.log(this.solicitudDetalleCompra);
-    this.detalleCompraService.update(this.solicitudDetalleCompra).subscribe(
-      (json) => {
-        this.router.navigate(['/pages/compra/solicitudDetalleCompra']);
-        swal.fire(
-          'Solicitud de compra actualizada',
-          `${json.mensaje}: ${json.solicitudDetalleCompra.id}`,
-          'success'
-        );
-      },
-      (err) => {
-        this.errores = err.error.errors as string[];
-        console.error('Código del error desde el backend: ' + err.status);
-        console.error(err.error.errors);
-      }
+  eliminarItemElemento(id: number): void {
+    this.detalleCompra.items = this.detalleCompra.items.filter(
+      (item: ItemElemento) => id !== item.elemento.id
     );
+  }
+
+  create(detalleForm: { form: { valid: any } }): void {
+    console.log(this.detalleCompra);
+
+    if (this.detalleCompra.items.length == 0) {
+      this.autocompleteControl.setErrors({ invalid: true });
+    }
+
+    if (detalleForm.form.valid && this.detalleCompra.items.length > 0) {
+      this.detalleCompraService
+        .create(this.detalleCompra)
+        .subscribe((detalleCompra) => {
+          swal.fire(
+            this.titulo,
+            `Detalle De Solicitud ${this.detalleCompra.id} fue creada con exito`,
+            'success'
+          );
+          this.router.navigate(['/solicitudDetalleCompra']);
+        });
+    }
+  }
+
+  comparaCentroCosto(o1: CentroCosto, o2: CentroCosto): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.id === o2.id;
   }
 }
