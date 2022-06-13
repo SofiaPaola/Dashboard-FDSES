@@ -24,20 +24,22 @@
             <th>Fecha Nesecidad</th>
             <th>Programador</th>
             <!-- <th>Unidad Medida</th> -->
+            <th>Ver Detalle</th>
           </tr>
         </thead>
         <tbody>
           <tr
             *ngFor="let solicitudDetalleCompra of solicitudDetalleCompras | paginate: { itemsPerPage: 10, currentPage: page }">
-            <th><button nbButton name="ver" (click)="abrirModal(solicitudDetalleCompra)">{{ solicitudDetalleCompra.id }}</button></th>
-            <!-- <th>{{ solicitudDetalleCompra.elemento }}</th>
-            <th>{{ solicitudDetalleCompra.solicitud_compra }}</th> -->
-            <th>{{ solicitudDetalleCompra.proveedor_sugerido }}</th>
-            <th>{{ solicitudDetalleCompra.especificaciones_tecnicas }}</th>
-            <th>{{ solicitudDetalleCompra.cantidad }}</th>
-            <th>{{ solicitudDetalleCompra.fecha_necesidad }}</th>
-            <th>{{ solicitudDetalleCompra.programado }}</th>
+            <td><button nbButton name="ver" (click)="abrirModal(solicitudDetalleCompra)">{{ solicitudDetalleCompra.id }}</button></td>
+            <!-- <td>{{ solicitudDetalleCompra.elemento }}</td>
+            <td>{{ solicitudDetalleCompra.solicitud_compra }}</td> -->
+            <td>{{ solicitudDetalleCompra.proveedor_sugerido }}</td>
+            <td>{{ solicitudDetalleCompra.especificaciones_tecnicas }}</td>
+            <td>{{ solicitudDetalleCompra.cantidad }}</td>
+            <td>{{ solicitudDetalleCompra.fecha_necesidad }}</td>
+            <td>{{ solicitudDetalleCompra.programado }}</td>
             <!-- <th>{{ solicitudDetalleCompra.unidad }}</th> -->
+            
           </tr>
         </tbody>
       </table>

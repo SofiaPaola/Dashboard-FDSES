@@ -9,8 +9,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { ItemElemento } from '../../item_elemento';
-import { routes } from '../../../../app-routing.module';
+import { ItemDetalleSolicitudCompra } from '../item_detalle_solicitud_compra';
 @Component({
   selector: 'ngx-formCliente',
   templateUrl: './formDetalle.component.html',
@@ -24,6 +23,7 @@ export class FormDetalleComponent implements OnInit {
   centro_costos!: CentroCosto[];
   autocompleteControl = new FormControl();
   elementosFiltrados!: Observable<CompraElemento[]>;
+  errores!: string[];
 
   constructor(
     private detalleCompraService: CompraSolicitudCompraDetalleService,
@@ -65,7 +65,7 @@ export class FormDetalleComponent implements OnInit {
     if (this.existeItem(elemento.id)) {
       this.incrementaCantidad(elemento.id);
     } else {
-      let nuevoItem = new ItemElemento();
+      let nuevoItem = new ItemDetalleSolicitudCompra();
       nuevoItem.elemento = elemento;
       this.detalleCompra.items.push(nuevoItem);
     }
@@ -79,11 +79,11 @@ export class FormDetalleComponent implements OnInit {
     let cantidad: number = event.target.value as number;
 
     if (cantidad == 0) {
-      return this.eliminarItemElemento(id);
+      return this.eliminarItemDetalle(id);
     }
 
     this.detalleCompra.items = this.detalleCompra.items.map(
-      (item: ItemElemento) => {
+      (item: ItemDetalleSolicitudCompra) => {
         if (id === item.elemento.id) {
           item.cantidad = cantidad;
         }
@@ -94,7 +94,7 @@ export class FormDetalleComponent implements OnInit {
 
   existeItem(id: number): boolean {
     let existe = false;
-    this.detalleCompra.items.forEach((item: ItemElemento) => {
+    this.detalleCompra.items.forEach((item: ItemDetalleSolicitudCompra) => {
       if (id === item.elemento.id) {
         existe = true;
       }
@@ -104,7 +104,7 @@ export class FormDetalleComponent implements OnInit {
 
   incrementaCantidad(id: number): void {
     this.detalleCompra.items = this.detalleCompra.items.map(
-      (item: ItemElemento) => {
+      (item: ItemDetalleSolicitudCompra) => {
         if (id === item.elemento.id) {
           ++item.cantidad;
         }
@@ -113,31 +113,47 @@ export class FormDetalleComponent implements OnInit {
     );
   }
 
-  eliminarItemElemento(id: number): void {
+  eliminarItemDetalle(id: number): void {
     this.detalleCompra.items = this.detalleCompra.items.filter(
-      (item: ItemElemento) => id !== item.elemento.id
+      (item: ItemDetalleSolicitudCompra) => id !== item.elemento.id
     );
   }
 
-  create(detalleForm: { form: { valid: any } }): void {
+  // create(detalleForm: { form: { valid: any } }): void {
+  //   console.log(this.detalleCompra);
+
+  //   if (this.detalleCompra.items.length == 0) {
+  //     this.autocompleteControl.setErrors({ invalid: true });
+  //   }
+
+  //   if (detalleForm.form.valid && this.detalleCompra.items.length > 0) {
+  //     this.detalleCompraService
+  //       .create(this.detalleCompra)
+  //       .subscribe((detalleCompra) => {
+  //         swal.fire(
+  //           this.titulo,
+  //           `Detalle De Solicitud ${this.detalleCompra.id} fue creada con exito`,
+  //           'success'
+  //         );
+  //         this.router.navigate(['/solicitudDetalleCompra']);
+  //       });
+  //   }
+  // }
+
+  create(): void {
     console.log(this.detalleCompra);
-
-    if (this.detalleCompra.items.length == 0) {
-      this.autocompleteControl.setErrors({ invalid: true });
-    }
-
-    if (detalleForm.form.valid && this.detalleCompra.items.length > 0) {
-      this.detalleCompraService
-        .create(this.detalleCompra)
-        .subscribe((detalleCompra) => {
-          swal.fire(
-            this.titulo,
-            `Detalle De Solicitud ${this.detalleCompra.id} fue creada con exito`,
-            'success'
-          );
-          this.router.navigate(['/solicitudDetalleCompra']);
-        });
-    }
+    this.detalleCompraService.create(this.detalleCompra)
+      .subscribe(
+        detalleCompra => {
+          this.router.navigate(['/pages/compra/solicitudDetalleCompra']);
+          swal.fire('Nueva Solicitud detalle Compra', `El detalle compra ${detalleCompra.id} ha sido creado con éxito`, 'success');
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+          console.error('Código del error desde el backend: ' + err.status);
+          console.error(err.error.errors);
+        }
+      );
   }
 
   comparaCentroCosto(o1: CentroCosto, o2: CentroCosto): boolean {
