@@ -14,7 +14,7 @@ export class Proveedor {
   fecha_ingreso!: string;
   ciudad!: Ciudad;
   tipo_documento!: TipoDocumento;
-  activo!: number;
+  activo!: string;
   contratista!: string;
   disponibilidad!: number;
   critico!: string;
