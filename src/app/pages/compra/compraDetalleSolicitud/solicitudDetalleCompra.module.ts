@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from '../../../@theme/theme.module';
-import { NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbOptionModule, NbSelectModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbOptionModule, NbSelectModule } from '@nebular/theme';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { SolicitudDetalleCompraRoutingModule } from './solicitudDetalleCompra-routing.module';
@@ -37,6 +37,7 @@ registerLocaleData(localeES, 'es');
     ReactiveFormsModule,
     MatAutocompleteModule,
     NbFormFieldModule,
+    NbLayoutModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

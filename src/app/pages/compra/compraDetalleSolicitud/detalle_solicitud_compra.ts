@@ -8,16 +8,16 @@ import { ItemDetalleSolicitudCompra } from './item_detalle_solicitud_compra';
 
 export class CompraDetalleSolicitudCompra {
   id!: number;
-  solicitud!: CompraSolicitudCompra;
+  solicitudes!: CompraSolicitudCompra;
   proveedor_sugerido!: string;
   especificaciones_tecnicas!: string;
   estados!: Estado;
-  elemento!: CompraElemento;
+  cantidad!: string;
+  elementos!: CompraElemento;
   fecha_necesidad!: string;
-  centro_costo!: CentroCosto;
+  centros_costo!: CentroCosto;
   programado!: string;
-  usuario!: Usuario;
-  unidad!: Unidad;
+  unidades!: Unidad;
   items: Array<ItemDetalleSolicitudCompra> = [];
 }
 

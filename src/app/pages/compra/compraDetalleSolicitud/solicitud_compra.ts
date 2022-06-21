@@ -3,7 +3,7 @@ import { Estado } from '../estado';
 
 export class CompraSolicitudCompra {
   id!: number;
-  usuario!: Usuario;
-  estado!: Estado;
-  fecha_registro!: string;
+  usuarios!: Usuario;
+  //estados!: Estado;
+  //fecha_registro!: string;
 }

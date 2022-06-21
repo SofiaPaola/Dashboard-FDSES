@@ -12,6 +12,7 @@ import { SolicitudDetalleCompraComponent } from './solicitudCompraDetalle/solici
 import { FormDetalleComponent } from './formulario/formDetalle.component';
 import { RoleGuard } from 'src/app/auth/guards/role.guard';
 import { AuthGuard } from 'src/app/auth/guards/auth.guard';
+import { DetalleComponent } from './detalle/detalle.component';
 
 registerLocaleData(localeES, 'es');
 
@@ -31,6 +32,10 @@ const routes: Routes = [
     component: FormDetalleComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'ROLE_ADMIN' },
+  },
+  {
+    path: 'detalle/:id',
+    component: DetalleComponent
   },
   { path: '', redirectTo: 'solicitudDetalleCompra', pathMatch: 'full' },
   { path: '**', redirectTo: 'solicitudDetalleCompra' },

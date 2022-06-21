@@ -1,137 +1,131 @@
-<div class="row">
-  <nb-card>
+<nb-card>
 
-    <nb-card-header>
-      <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/compra/solicitudDetalleCompra']"></nb-icon>
-      {{ titulo }}
-    </nb-card-header>
-    
-    <nb-card-body>
+  <nb-card-header>
+    <nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/compra/solicitudDetalleCompra']"></nb-icon>
+    {{ titulo }}
+  </nb-card-header>
 
-      <form #detalleForm="ngForm">
-        <div class="form-group row">
-          <label class="col-form-label col-sm-2 mb-3">Nombre Usuario</label>
-          <div class="col-sm-9" *ngIf="detalleCompra.solicitud">
+  <nb-card-body>
+    <div>
 
-            <input nbInput fullWidth type="text" class="form-control" name="nombre" #nombre="ngModel"
-            value="{{solicitud.usuario.nombre}}" disabled>
+    </div>
+    <form #detalleForm="ngForm">
 
-            <!-- [(ngModel)]="detalleCompra.solicitud" disabled> -->
-          </div>
+      <div class="form-group row" *ngIf="detalleCompra.solicitudes">
+        <label class="col-sm-2 col-form-label">Nombre Usuario</label>
+        <div class="col-sm-6 my-1">
+          <input nbInput fullWidth type="text" class="form-control"
+            value="{{detalleCompra.solicitudes.usuarios.nombre}}" name="usuario" disabled>
+          <!-- value="{{detalleCompra.solicitudes.usuarios.nombre}}" -->
         </div>
+      </div>
 
-        <div class="form-group row">
-          <label class="col-form-label col-sm-2 mb-3">Centro Costo</label>
-          <div class="col-sm-9">
-            <input nbInput fullWidth type="text" class="form-control" name="nombre" #nombre="ngModel"
-            [(ngModel)]="detalleCompra.centro_costo" disabled>
-          </div>
+      <div class="form-group row" *ngIf="detalleCompra.centros_costo">
+        <label class="col-form-label col-sm-2 mb-3">Centro Costo</label>
+        <div class="col-sm-9">
+          <input nbInput fullWidth type="text" class="form-control" name="nombre" #nombre="ngModel"
+            [(ngModel)]="detalleCompra.centros_costo.nombre" disabled>
         </div>
+      </div>
 
-        <div class="form-group row">
-          <nb-form-field>
-            <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-            <input nbInput fullWidth type="text" placeholder="Añadir Elemento" aria-label="Elementos" matInput
-              [formControl]="autocompleteControl" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre"
-              (optionSelected)="seleccionarElemento($event)">
-              <mat-option *ngFor="let elemento of elementosFiltrados | async" [value]="elemento">
-                {{elemento.nombre}}
-              </mat-option>
-            </mat-autocomplete>
-          </nb-form-field>
-          <div class="alert alert-danger col-sm-20" *ngIf="autocompleteControl.invalid && detalleForm.submitted">
-            El detalle de la solicitud de compra no puede estar vacia.
-          </div>
+      <div class="form-group row">
+        <nb-form-field>
+          <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+          <input nbInput fullWidth type="text" placeholder="Añadir Elemento" aria-label="Elementos" matInput
+            [formControl]="autocompleteControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre"
+            (optionSelected)="seleccionarElemento($event)">
+            <mat-option *ngFor="let elemento of elementosFiltrados | async" [value]="elemento">
+              {{elemento.nombre}}
+            </mat-option>
+          </mat-autocomplete>
+        </nb-form-field>
+        <div class="alert alert-danger col-sm-20" *ngIf="autocompleteControl.invalid && detalleForm.submitted">
+          El detalle de la solicitud de compra no puede estar vacia.
         </div>
+      </div>
 
-        <div class="alert alert-info my-4" *ngIf="detalleCompra.items.length == 0">
-          No hay lineas asignadas para el detalle solicitud de compra. Debe agragar por al menos un elemento
-        </div>
+      <div class="alert alert-info my-4" *ngIf="detalleCompra.items.length == 0">
+        No hay lineas asignadas para el detalle solicitud de compra. Debe agragar por al menos un elemento
+      </div>
 
-        <br>
+      <br>
 
-        <ng2-smart-table>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <!--<th>Solicitud Detalle Compra</th> -->
-                <th>Cod. Elemento</th>
-                <th>Elemento</th>
-                <th>Cantidad</th>
-                <th>Especificaciones Tecnicas</th>
-                <th>Proveedor Sugerido</th>
-                <th>Programado</th>
-                <th>Fecha Necesidad</th>
-                <!-- <th>Centro Costo</th> -->
-                <th>Eliminar</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of detalleCompra.items">
-                <td>{{item.elemento.id}}</td>
-                <td>{{item.elemento.codigo}}</td>
-                <td>{{item.elemento.nombre}}</td>
-                <td><input nbInput fullWidth type="number" value="{{item.cantidad}}" class="form-control col-sm-4"
-                    (change)="actualizarCantidad(item.elemento.id, $event)">
-                </td>
-                <td>
-                  <textarea nbInput type="text" class="form-control"
-                    [(ngModel)]="detalleCompra.especificaciones_tecnicas" name="especificaciones_tecnicas"
-                    #especificaciones_tecnicas="ngModel"></textarea>
-                </td>
-                <td>
-                  <input nbInput type="text" class="form-control"
-                    [(ngModel)]="detalleCompra.proveedor_sugerido" required name="proveedor_sugerido"
-                    #proveedor_sugerido="ngModel" />
-                  <div class="alert alert-danger"
-                    *ngIf="proveedor_sugerido.invalid && proveedor_sugerido.touched || proveedor_sugerido.invalid && detalleForm.submitted">
-                    El proveedor sugerido es obligatorio.
-                  </div>
-                </td>
-                <td>
-                  <input nbInput type="text" class="form-control" [(ngModel)]="detalleCompra.programado" required
-                    name="programado" #programado="ngModel" />
-                  <div class="alert alert-danger"
-                    *ngIf="programado.invalid && programado.touched || programado.invalid && detalleForm.submitted">
-                    El programado debe ser Si o No
-                  </div>
-                </td>
-                <td>
-                  <input nbInput [matDatepicker]="miDatepicker" required class="form-control"
-                    [(ngModel)]="detalleCompra.fecha_necesidad" name="fecha_necesidad" />
-                  <mat-datepicker-toggle matSuffix [for]="miDatepicker"></mat-datepicker-toggle>
-                  <mat-datepicker #miDatepicker></mat-datepicker>
-                </td>
-                <td>
-                  <nb-icon icon="trash-outline" type="button" name="eliminar"
-                    (click)="eliminarItemElemento(item.elemento.id)" class="eliminar">
-                  </nb-icon>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </ng2-smart-table>
+      <ng2-smart-table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Cod. Elemento</th>
+              <th>Elemento</th>
+              <th>Cantidad</th>
+              <th>Especificaciones Tecnicas</th>
+              <th>Proveedor Sugerido</th>
+              <th>Programado</th>
+              <th>Fecha Necesidad</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of detalleCompra.items">
+              <td>{{item.elemento.id}}</td>
+              <td>{{item.elemento.codigo}}</td>
+              <td>{{item.elemento.nombre}}</td>
+              <td><input nbInput fullWidth type="number" value="{{item.cantidad}}" class="form-control col-sm-4"
+                  (change)="actualizarCantidad(item.elemento.id, $event)">
+              </td>
+              <td>
+                <textarea nbInput type="text" class="form-control" [(ngModel)]="detalleCompra.especificaciones_tecnicas"
+                  name="especificaciones_tecnicas" #especificaciones_tecnicas="ngModel"></textarea>
+              </td>
+              <td>
+                <input nbInput type="text" class="form-control" [(ngModel)]="detalleCompra.proveedor_sugerido" required
+                  name="proveedor_sugerido" #proveedor_sugerido="ngModel" />
+                <div class="alert alert-danger"
+                  *ngIf="proveedor_sugerido.invalid && proveedor_sugerido.touched || proveedor_sugerido.invalid && detalleForm.submitted">
+                  El proveedor sugerido es obligatorio.
+                </div>
+              </td>
+              <td>
+                <input nbInput type="text" class="form-control" [(ngModel)]="detalleCompra.programado" required
+                  name="programado" #programado="ngModel" />
+                <div class="alert alert-danger"
+                  *ngIf="programado.invalid && programado.touched || programado.invalid && detalleForm.submitted">
+                  El programado debe ser Si o No
+                </div>
+              </td>
+              <td>
+                <input nbInput [matDatepicker]="miDatepicker" required class="form-control"
+                  [(ngModel)]="detalleCompra.fecha_necesidad" name="fecha_necesidad" />
+                <mat-datepicker-toggle matSuffix [for]="miDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #miDatepicker></mat-datepicker>
+              </td>
+              <td>
+                <nb-icon icon="trash-outline" type="button" name="eliminar"
+                  (click)="eliminarItemElemento(item.elemento.id)" class="eliminar">
+                </nb-icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng2-smart-table>
 
-        <div class="form-group row">
-          <div class="col-sm-9 d-grid gap-2">
-            <button nbButton status="success" role="button" (click)="create()" *ngIf="!detalleCompra.id; else elseBlock"
-              [disabled]="!detalleForm.form.valid">
-              Crear
+      <div class="form-group row">
+        <div class="col-sm-9 d-grid gap-2">
+          <button nbButton status="success" role="button" (click)="create()" *ngIf="!detalleCompra.id; else elseBlock"
+            [disabled]="!detalleForm.form.valid">
+            Crear
+          </button>
+          <ng-template #elseBlock>
+            <button nbButton status="success" role="button" (click)="update()" [disabled]="!detalleForm.form.valid">
+              Editar
             </button>
-            <ng-template #elseBlock>
-              <button nbButton status="success" role="button" (click)="update()" [disabled]="!detalleForm.form.valid">
-                Editar
-              </button>
-            </ng-template>
-          </div>
+          </ng-template>
         </div>
+      </div>
 
-      </form>
+    </form>
 
-    </nb-card-body>
+  </nb-card-body>
 
-  </nb-card>
-  
-</div>
+</nb-card>

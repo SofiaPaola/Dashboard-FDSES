@@ -1,9 +1,9 @@
-<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
+<!-- <div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
   <div style="display: block" class="modal" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title text-dark">{{titulo}}: {{solicitudDetalleCompra.solicitud.id}}</h3> <!--  poner id de solitud compra -->
+          <h3 class="modal-title text-dark">{{titulo}}: {{solicitudDetalleCompra.solicitudes.id}}</h3> <!--  poner id de solitud compra --
         </div>
         <div class="modal-body">
           <div class="container">
@@ -14,29 +14,25 @@
                     {{ solicitudDetalleCompra.id }}
                   </li>
                   <li class="list-group-item">
-                    {{ solicitudDetalleCompra.elemento.codigo }}
-                    codigo elemento y nombre
+                    Codigo: {{ solicitudDetalleCompra.elementos.codigo }}
+                    Elemento: {{ solicitudDetalleCompra.elementos.nombre }}
                   </li>
                   <li class="list-group-item">
-                    {{ solicitudDetalleCompra.id }}
-                    estado de solicitud
+                    Estado: {{ solicitudDetalleCompra.solicitudes.estados.estado }}
                   </li>
                   <li class="list-group-item">
-                    {{ solicitudDetalleCompra.id }}
-                    centro costos
+                    Centro Costos: {{ solicitudDetalleCompra.centros_costo.nombre }}                    
                   </li>
                   <li class="list-group-item">
-                    {{ solicitudDetalleCompra.id }}
-                    unidad medida
+                    Unoidad Medida: {{ solicitudDetalleCompra.unidades.unidad_medida }}
                   </li>
                   <li class="list-group-item">
-                    {{ solicitudDetalleCompra.id }}
-                    usuario
+                    Nombre Usuario: {{ solicitudDetalleCompra.solicitudes.usuario.nombre }}
                   </li>
-                  <li class="list-group-item">
+                  <!-- <li class="list-group-item">
                     {{ solicitudDetalleCompra.id }}
                     fecha registro
-                  </li>
+                  </li> --
                 </ul>
               </div>
             </div>
@@ -50,4 +46,55 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
+<nb-card>
+  <nb-card-header><nb-icon icon="arrow-ios-back-outline" [routerLink]="['/pages/compra/solicitudDetalleCompra']"></nb-icon></nb-card-header>
+  <nb-card-body *ngIf="solicitudDetalleCompra">
+    <h2 class="card-title" style="text-align: center">{{titulo}}</h2>
+
+    <ul class="list-group my-2">
+      <li class="list-group-item list-group-item-primary">Nombre del Usuario</li>
+      <li class="list-group-item">{{solicitudDetalleCompra.solicitudes.usuarios.nombre}}</li>
+    </ul>
+
+    <ul class="list-group my-2">
+      <li class="list-group-item list-group-item-primary">Datos de Solicitud Detalle de Compra</li>
+      <li class="list-group-item">Id. Solicitud Detalle: {{solicitudDetalleCompra.solicitudes.id}}</li>
+      <li class="list-group-item">Id. Detalle Solicitud Compra: {{solicitudDetalleCompra.id}}</li>
+      <li class="list-group-item">Centro de Costos: {{solicitudDetalleCompra.centros_costo.nombre}}</li>
+      <li class="list-group-item">Estado: {{solicitudDetalleCompra.estados.estado}}</li>
+    </ul>
+
+    <ng2-smart-table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Cod. Elemento</th>
+            <th>Elemento</th>
+            <th>Cantidad</th>
+            <th>Especificaciones Tecnicas</th>
+            <th>Proveedor Sugerido</th>
+            <th>Programado</th>
+            <th>Fecha Necesidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="solicitudDetalleCompra">
+            <td>{{solicitudDetalleCompra.id}}</td>
+            <td>{{solicitudDetalleCompra.elementos.codigo}}</td>
+            <td>{{solicitudDetalleCompra.elementos.nombre}}</td>
+            <td>{{solicitudDetalleCompra.cantidad}}</td>
+            <td>{{solicitudDetalleCompra.especificaciones_tecnicas}}</td>
+            <td>{{solicitudDetalleCompra.proveedor_sugerido}}</td>
+            <td>{{solicitudDetalleCompra.programado}}</td>
+            <td>{{solicitudDetalleCompra.fecha_necesidad}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng2-smart-table>
+
+  </nb-card-body>
+</nb-card>

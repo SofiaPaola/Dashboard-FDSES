@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ModalService } from 'src/app/pages/modal.service';
 import { CompraSolicitudCompraDetalleService } from '../compraSolicitudCompraDetalle.service';
 import { CompraDetalleSolicitudCompra } from '../detalle_solicitud_compra';
+import { CompraSolicitudCompra } from '../solicitud_compra';
 
 @Component({
   selector: 'detalle-compra',
@@ -11,7 +12,8 @@ import { CompraDetalleSolicitudCompra } from '../detalle_solicitud_compra';
   styleUrls: ['./detalle.component.scss'],
 })
 export class DetalleComponent implements OnInit {
-  @Input() solicitudDetalleCompra!: CompraDetalleSolicitudCompra;
+  
+  solicitudDetalleCompra!: CompraDetalleSolicitudCompra;
   titulo: string = 'Solicitud Compra';
 
   constructor(
@@ -21,10 +23,20 @@ export class DetalleComponent implements OnInit {
     public modalService: ModalService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // console.log(this.solicitudDetalleCompra);
+    
+    this.activatedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id')!;
+      this.detalleCompraService.getSolicitudDetalleCompra(id).subscribe(solicitudDetalleCompra => this.solicitudDetalleCompra = solicitudDetalleCompra);
+    })
 
-  cerrarModal() {
-    this.modalService.cerrarModal();
   }
+
+  // cerrarModal() {
+  //   this.modalService.cerrarModal();
+  // }
+
+
 
 }

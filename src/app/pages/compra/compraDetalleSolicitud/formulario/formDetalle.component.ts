@@ -3,27 +3,28 @@ import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompraSolicitudCompraDetalleService } from '../compraSolicitudCompraDetalle.service';
 import { CompraDetalleSolicitudCompra } from '../detalle_solicitud_compra';
-import { CentroCosto } from '../../centro_costo';
 import { CompraElemento } from '../../elemento';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ItemDetalleSolicitudCompra } from '../item_detalle_solicitud_compra';
+import { CompraSolicitudCompra } from '../solicitud_compra';
 @Component({
   selector: 'ngx-formCliente',
   templateUrl: './formDetalle.component.html',
   styleUrls: ['./formDetalle.component.scss'],
 })
 export class FormDetalleComponent implements OnInit {
-  titulo: string = 'Nuevo detalle de solicitud de compra';
+  
+  titulo: string = 'Nuevo Detalle de Solicitud de Compra';
   detalleCompra: CompraDetalleSolicitudCompra =
     new CompraDetalleSolicitudCompra();
 
-  centro_costos!: CentroCosto[];
   autocompleteControl = new FormControl();
   elementosFiltrados!: Observable<CompraElemento[]>;
   errores!: string[];
+  solicitudes!: CompraSolicitudCompra[];
 
   constructor(
     private detalleCompraService: CompraSolicitudCompraDetalleService,
@@ -32,20 +33,35 @@ export class FormDetalleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.activatedRoute.paramMap.subscribe((params) => {
-    //   let solicitudId = +params.get('solicitudId');
+    // this.activatedRoute.paramMap.subscribe(params => {
+    //   let solicitudesId = +params.get('solicitudesId')!;
     //   this.detalleCompraService
-    //     .getSolicitudDetalleCompra(solicitudId)
+    //     .getSolicitudDetalleCompra(solicitudesId)
     //     .subscribe(
-    //       (solicitud_compra) =>
-    //         (this.detalleCompra.solicitud_compra = solicitud_compra)
+    //       (solicitudes) =>
+    //         (this.detalleCompra.solicitudes = solicitudes)
     //     );
     // });
+
+    // console.log(this.detalleCompra);
+
+    this.activatedRoute.paramMap.subscribe((params) => {
+      let id = +params.get('id')!;
+      if (id) {
+        this.detalleCompraService
+          .getSolicitudDetalleCompra(id)
+          .subscribe((detalleCompra) => (this.detalleCompra = detalleCompra));
+      }
+    });
 
     this.elementosFiltrados = this.autocompleteControl.valueChanges.pipe(
       map((value) => (typeof value === 'string' ? value : value.nombre)),
       flatMap((value) => (value ? this._filter(value) : []))
     );
+
+    this.detalleCompraService
+      .getCompraSolicitudCompra()
+      .subscribe((solicitudes) => (this.solicitudes = solicitudes));
   }
 
   private _filter(value: string): Observable<CompraElemento[]> {
@@ -142,27 +158,20 @@ export class FormDetalleComponent implements OnInit {
 
   create(): void {
     console.log(this.detalleCompra);
-    this.detalleCompraService.create(this.detalleCompra)
-      .subscribe(
-        detalleCompra => {
-          this.router.navigate(['/pages/compra/solicitudDetalleCompra']);
-          swal.fire('Nueva Solicitud detalle Compra', `El detalle compra ${detalleCompra.id} ha sido creado con éxito`, 'success');
-        },
-        err => {
-          this.errores = err.error.errors as string[];
-          console.error('Código del error desde el backend: ' + err.status);
-          console.error(err.error.errors);
-        }
-      );
-  }
-
-  comparaCentroCosto(o1: CentroCosto, o2: CentroCosto): boolean {
-    if (o1 === undefined && o2 === undefined) {
-      return true;
-    }
-
-    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
-      ? false
-      : o1.id === o2.id;
+    this.detalleCompraService.create(this.detalleCompra).subscribe(
+      (detalleCompra) => {
+        this.router.navigate(['/pages/compra/solicitudDetalleCompra']);
+        swal.fire(
+          'Nueva Solicitud detalle Compra',
+          `El detalle compra ${detalleCompra.id} ha sido creado con éxito`,
+          'success'
+        );
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.error('Código del error desde el backend: ' + err.status);
+        console.error(err.error.errors);
+      }
+    );
   }
 }

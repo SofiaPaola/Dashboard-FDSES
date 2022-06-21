@@ -76,21 +76,25 @@ export class CompraSolicitudCompraDetalleService {
   create(
     solicitudDetalleCompra: CompraDetalleSolicitudCompra
   ): Observable<CompraDetalleSolicitudCompra> {
-    return this.http.post(this.urlEndPoint, solicitudDetalleCompra).pipe(
-      map(
-        (response: any) =>
-          response.solicitudDetalleCompra as CompraDetalleSolicitudCompra
-      ),
-      catchError((e) => {
-        if (e.status == 400) {
-          return throwError(e);
-        }
-        if (e.error.mensaje) {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
+    return this.http.post<CompraDetalleSolicitudCompra>(
+      this.urlEndPoint,
+      solicitudDetalleCompra
     );
+    //.pipe(
+    //   map(
+    //     (response: any) =>
+    //       response.solicitudDetalleCompra as CompraDetalleSolicitudCompra
+    //   ),
+    //   catchError((e) => {
+    //     if (e.status == 400) {
+    //       return throwError(e);
+    //     }
+    //     if (e.error.mensaje) {
+    //       console.error(e.error.mensaje);
+    //     }
+    //     return throwError(e);
+    //   })
+    // );
   }
 
   getSolicitudDetalleCompra(
@@ -98,15 +102,15 @@ export class CompraSolicitudCompraDetalleService {
   ): Observable<CompraDetalleSolicitudCompra> {
     return this.http
       .get<CompraDetalleSolicitudCompra>(`${this.urlEndPoint}/${id}`)
-      .pipe(
-        catchError((e) => {
-          if (e.status != 401 && e.error.mensaje) {
-            this.router.navigate(['/solicitudDetalleCompra']);
-            console.error(e.error.mensaje);
-          }
-          return throwError(e);
-        })
-      );
+      // .pipe(
+      //   catchError((e) => {
+      //     if (e.status != 401 && e.error.mensaje) {
+      //       this.router.navigate(['/pages/compra/solicitudDetalleCompra']);
+      //       console.error(e.error.mensaje);
+      //     }
+      //     return throwError(e);
+      //   })
+      // );
   }
 
   update(

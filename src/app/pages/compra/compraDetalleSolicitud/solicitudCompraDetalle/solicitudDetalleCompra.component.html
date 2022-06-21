@@ -30,15 +30,13 @@
         <tbody>
           <tr
             *ngFor="let solicitudDetalleCompra of solicitudDetalleCompras | paginate: { itemsPerPage: 10, currentPage: page }">
-            <td><button nbButton name="ver" (click)="abrirModal(solicitudDetalleCompra)">{{ solicitudDetalleCompra.id }}</button></td>
-            <!-- <td>{{ solicitudDetalleCompra.elemento }}</td>
-            <td>{{ solicitudDetalleCompra.solicitud_compra }}</td> -->
+            <td>{{ solicitudDetalleCompra.id }}</td>
             <td>{{ solicitudDetalleCompra.proveedor_sugerido }}</td>
             <td>{{ solicitudDetalleCompra.especificaciones_tecnicas }}</td>
             <td>{{ solicitudDetalleCompra.cantidad }}</td>
             <td>{{ solicitudDetalleCompra.fecha_necesidad }}</td>
             <td>{{ solicitudDetalleCompra.programado }}</td>
-            <!-- <th>{{ solicitudDetalleCompra.unidad }}</th> -->
+            <td><button nbButton [routerLink]="['./detalle', solicitudDetalleCompra.id]">Ver</button></td>
             
           </tr>
         </tbody>
